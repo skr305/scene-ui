@@ -3,7 +3,9 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-
+scene-ui/node_modules/
+node_modules/
+*/node_modules/
 # Other files and folders
 .settings/
 
