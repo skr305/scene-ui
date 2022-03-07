@@ -1,10 +1,8 @@
-import DEMO_MARK from './demo-mark';
-import { stdWriteFileCover } from './util/std-write';
+import BootGen from './core/mid/boot';
 
-console.log( DEMO_MARK );
 console.log( "IN-boot-demo run" );
 const boot = async () => {
-    const result = await stdWriteFileCover( "std-demo-write.txt", "我是一只大土狗" );
+    const result = await BootGen( './model.json' );
     console.log( result );
 };
 boot();
