@@ -1,0 +1,3 @@
+enum XLS_ERROR_CODE_SET {
+    FORMAT_ERROR = 0
+};

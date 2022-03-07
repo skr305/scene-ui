@@ -1,0 +1,14 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "123456",
+    "database": "blog-2022",
+    "synchronize": true,
+    "entities": ["dist/server/src/entity/*.js"],
+    "cli": {
+      "entitiesDir": "src/entity"
+    },
+    "cache": true
+  }
