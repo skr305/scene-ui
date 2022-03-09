@@ -2,12 +2,16 @@
 import buttonVue from './components/button/button.vue';
 
 function print(){
-    alert(2)
+    alert('parent')
 }
 </script>
 
 <template>
-  <buttonVue size="default" type="default" @click="print()"></buttonVue>
+  <buttonVue size="default" type="default" icon='setting' @click="print()">
+    <!-- <template v-slot:icon>
+      <img src="./assets/setting.svg">
+    </template> -->
+  </buttonVue>
 </template>
 
 <style>
