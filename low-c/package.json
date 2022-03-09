@@ -2,8 +2,10 @@
   "scripts": {
     "rd": "tsc && node ./dist/boot-d.js",
     "rs": "tsc && node ./dist/boot-s.js",
+    "rp": "tsc && node ./dist/boot-p.js",
     "rdw": "nodemon --watch ./src -e ts,xld --exec npm run rd",
-    "rsw": "nodemon --watch ./src -e ts --exec npm run rs"
+    "rsw": "nodemon --watch ./src -e ts --exec npm run rs",
+    "rpw": "nodemon --watch ./src -e ts --exec npm run rp"
   },
   "dependencies": {
     "@types/moment": "^2.13.0",

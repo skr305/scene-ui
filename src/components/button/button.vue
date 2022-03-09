@@ -54,7 +54,6 @@ const attrs = useAttrs()
 const iconPath = computed(()=>createPath(props.icon))
 // 获取根节点 必须放在全局作用域中，不能放在onMount中:模板引用只有在组件渲染完成后生效
 const root = ref<HTMLInputElement | null>(null);
-
 // 点击事件
 const handleClick = (evt: MouseEvent) => {
   emit('click', evt)// 触发父组件的原生click
@@ -67,7 +66,6 @@ onMounted(()=>{
         // 拼接上设置icon的类名
         root.value?.setAttribute('class',oldClassName+' scene-button-icon')
     }
-    
 })
 
 </script>

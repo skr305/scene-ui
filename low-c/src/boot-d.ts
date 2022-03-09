@@ -5,4 +5,5 @@ const boot = async () => {
     const result = await BootGen( './model.json' );
     console.log( result );
 };
+
 boot();
