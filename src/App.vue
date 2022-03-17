@@ -3,8 +3,17 @@ import { reactive, watch } from 'vue';
 import buttonVue from './components/button/button.vue';
 import paymentInputVue from './components/payment/payment-input.vue';
 
+import {ref} from 'vue'
+import sButton from './components/button/button.vue';
+import sRadio from './components/radio/radio.vue'
+
+const booleanTrue = ref(true)
+const booleanFalse = ref(false)
+const str = ref('option 1')
+const num1 = ref(8)
+const num2 = ref(9)
 function print(){
-    alert(2)
+    alert('parent')
 }
 const data = reactive( { value: "", pwd: "" } );
 watch( data, () => {
@@ -16,6 +25,14 @@ watch( data, () => {
   <buttonVue size="default" type="default" @click="print()"></buttonVue>
   <paymentInputVue v-model="data.pwd"/>
   <scene-payment-input/>
+
+  <s-button size="default" :disabled="booleanTrue" type="default" icon='map' @click="print()">
+    <!-- <template v-slot:icon>
+      <img src="./assets/setting.svg">
+    </template> -->
+  </s-button>
+  <s-radio :model-value="num1" :name="str" :label="str" :disabled="false" :border="true" size="default"></s-radio>
+  <s-radio :model-value="num2" :name="str" :label="str" :disabled="booleanTrue" :border="false" size="default"></s-radio>
 </template>
 
 <style>

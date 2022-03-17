@@ -10,6 +10,7 @@ export type DbOutposeTypeMidType = {
     dbType: string;
     outposeName: string;
 };
+
 export const MODEL_LONG_STRING_NAME = "longstring";
 export const MODEL_STRING_NAME = "string";
 export const MODEL_LONG_INT_NAME = "longint";
