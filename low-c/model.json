@@ -1,5 +1,6 @@
 {
-    "AppName": "student",
+    "$AutoDownloadDeps": false,
+    "AppName": "Student",
     "ErrorCode": {
         "Suc": 0,
         "BadRequest": 1
@@ -8,7 +9,7 @@
         "$Cover": true,
         "$Database": "2022student",
         "tables": {
-            "User": {
+            "Student": {
                 "usernick": "string",
                 "pwd": "string",
                 "userID": {

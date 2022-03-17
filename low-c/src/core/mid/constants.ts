@@ -45,5 +45,11 @@ export const MODEL_OUTPOSE_MAPS = {
     [MODEL_LONG_INT_NAME]: LONG_INT_OUTPOSE,
     [MODEL_LONG_STRING_NAME]: LONG_STRING_OUTPOSE
 };
+export const MODEL_TYPES_MAPS = {
+    [MODEL_INT_NAME]: "number",
+    [MODEL_STRING_NAME]: "string",
+    [MODEL_LONG_INT_NAME]: "number",
+    [MODEL_LONG_STRING_NAME]: "string"
+};
 // all available type
 export type DbAvailableSectionOutpose = "longstring" | "longint" | "int" | "string";

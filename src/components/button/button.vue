@@ -18,7 +18,7 @@
 
 
 <script lang="ts" setup>
-import {ref, onMounted, useAttrs} from 'vue'
+import {ref, onMounted, useAttrs, reactive} from 'vue';
 
 type buttonSize = 'default' | 'small' | 'large'
 type buttonType = 'default' | 'round' | 'text'
@@ -30,11 +30,12 @@ interface buttonProps{
     nativeType?:buttonNativeType
 }
 
+// 
 const props = withDefaults(defineProps<buttonProps>(), {
     size: 'default',
     type: 'default',
     disabled: false,
-})
+});
 
 const emit = defineEmits({
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
@@ -42,7 +43,7 @@ const emit = defineEmits({
 
 // 原生click
 const handleClick = (evt: MouseEvent) => {
-  emit('click', evt)
+  emit('click', evt);
 }
 </script>
 <script lang="ts">

@@ -32,13 +32,14 @@ export type OperationBlock = {
     Router ?: OpeationRouterCell;
 };
 // the type of the config
+export type ErrorMapBlock = { [ MEAN: string ]: number };
 /**
  * 可以被接受的config对象
  */
 export type MidConfigType = {
     AppName: string;
     // the error code enum generator
-    ErrorCode?: { [ MEAN: string ]: number };
+    ErrorCode?: ErrorMapBlock;
     Model?: ModelConfigType
     Operation?: OperationBlock;
 };

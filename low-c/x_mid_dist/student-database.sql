@@ -3,7 +3,7 @@ drop database `2022student`;
 create database `2022student`;
 use `2022student`;
     
-create table `User` (
+create table `Student` (
      
     usernick varchar(300) not null ,
       
