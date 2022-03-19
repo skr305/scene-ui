@@ -1,7 +1,7 @@
 // 菜单拖拽功能
 import {events} from "@/packages/events";
 
-export function useMenuDragger(containerRef,data){
+export function useMenuDragger(containerRef, data) {
     let currentComponent = null;
     const dragenter = (e) => {
         e.dataTransfer.dropEffect = 'move';
@@ -17,17 +17,19 @@ export function useMenuDragger(containerRef,data){
         // console.log(currentComponent);
 
         let blocks = data.value.blocks; // 内部已经渲染的组件
-        data.value = {...data.value,blocks:[
+        data.value = {
+            ...data.value, blocks: [
                 ...blocks,
                 {
-                    top:e.offsetY,
-                    left:e.offsetX,
-                    zIndex:1,
-                    key:currentComponent.key,
-                    alignCenter:true, // 实现松手的时候鼠标可以居中
+                    top: e.offsetY,
+                    left: e.offsetX,
+                    zIndex: 1,
+                    key: currentComponent.key,
+                    alignCenter: true, // 实现松手的时候鼠标可以居中
                     focus: false    // 没有选定的状态
                 }
-            ]}
+            ]
+        }
         currentComponent = null;
     }
     const dragstart = (e, component) => {
@@ -42,14 +44,14 @@ export function useMenuDragger(containerRef,data){
         currentComponent = component;
         events.emit('start');
     }
-    const dragend = (e)=>{
+    const dragend = (e) => {
         containerRef.value.removeEventListener('dragenter', dragenter)
         containerRef.value.removeEventListener('dragover', dragover)
         containerRef.value.removeEventListener('dragleave', dragleave)
         containerRef.value.removeEventListener('drop', drop)
         events.emit('end');
     }
-    return{
+    return {
         dragstart,
         dragend
     }

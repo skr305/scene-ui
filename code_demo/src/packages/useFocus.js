@@ -43,6 +43,10 @@ export function useFocus(data, callback) {
         // console.log(typeof (data.value.blocks[selectIndex.value]))
         callback(e)
     }
+
+
+    window.addEventListener("blockMousedown", blockMousedown, { passive: false});
+
     return {
         blockMousedown,
         containerMousedown,

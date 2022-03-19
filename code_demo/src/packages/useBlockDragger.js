@@ -67,7 +67,7 @@ export function useBlockDragger(focusData, lastSelectBlock) {
             events.emit('start');
         }
 
-        let left = moveX -  dragState.startX + dragState.startLeft;
+        let left = moveX - dragState.startX + dragState.startLeft;
 
         // console.log(moveX)
         // console.log(dragState.startX)
