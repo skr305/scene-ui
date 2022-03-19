@@ -4,7 +4,7 @@ import { ComponentConstants } from '../../core/constants';
 import { reactive, watch, nextTick } from 'vue';
 
 export interface PaymentInputProps {
-    color ?: ComponentConstants.StandardPaymentInputColor;
+    color ?: ComponentConstants.StandardColor;
     disabled ?: boolean;
     modelValue ?: string;
     numberOnly ?: boolean;
@@ -13,7 +13,7 @@ export interface PaymentInputProps {
 };
 export type PaymentInputSets = [ string, string, string, string, string, string ];
 const props = withDefaults( defineProps<PaymentInputProps>(), {
-    color: "blue",
+    color: ComponentConstants.DefaultColor,
     disabled: false,
     modelValue: "",
     numberOnly: true
