@@ -36,7 +36,6 @@ export default defineComponent({
         // icon插槽
         const icon = slots.icon;
 
-<<<<<<< HEAD
         onMounted(()=>{   
             if(icon){
                 // 获取根节点button的类名
@@ -45,34 +44,6 @@ export default defineComponent({
                 root.value?.setAttribute('class',oldClassName+' scene-button-icon')
             }
         })
-=======
-type buttonSize = 'default' | 'small' | 'large'
-type buttonType = 'default' | 'round' | 'text'
-type buttonNativeType = 'button' | 'reset' | 'submit'
-interface buttonProps{
-    size: buttonSize,               // 按钮的尺寸
-    type: buttonType,               // 按钮类型
-    disabled?: boolean,             // 是否禁用
-    nativeType?:buttonNativeType,   // 原生button属性
-    icon?:string | undefined,       // 图标名称 unbefined表示未定义
-}
-
-// 
-const props = withDefaults(defineProps<buttonProps>(), {
-    size: 'default',
-    type: 'default',
-    disabled: false,
-    nativeType: 'button',
-    icon: undefined,
-})
-
-const emit = defineEmits({
-  click: (evt: MouseEvent) => evt instanceof MouseEvent,//父组件onClick的验证函数 保证是鼠标事件触发
-})
-
-const slot = useSlots()
-const attrs = useAttrs()
->>>>>>> 5c6d6e139c3c6ea5751a6769d143e183a1f764f1
 
         return{
             root,

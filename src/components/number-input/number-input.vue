@@ -37,10 +37,6 @@ export default defineComponent({
 
     const instance = getCurrentInstance(); //访问内部组件实例
 
-    onMounted(()=>{
-        console.log(input.value?.value)
-    })
-
     // 保存改变时的新值与旧值，旧值只有在用户输入时才保存
     const data = reactive<{
         currentValue: number,
@@ -52,31 +48,27 @@ export default defineComponent({
 
     // 输入事件，用于保存用户输入的值
     const handleInput = (event: InputEvent) => {
+        // console.log('input')
         if(event.data){
-            let inputVal = parseInt(event.data)// 尝试将输入的值转为Number
+            let inputVal = parseInt(event.data) // 尝试将输入的值转为Number
             data.userInput  = isNaN(inputVal)? 0 : inputVal
             console.log('input: ',data.userInput);
         }
         else{
-            data.userInput = null
+            data.userInput = 0                  // 用户输入的值为空，自动设为默认值0
         }
         // 同时也会触发handleInputChange函数
     }
 
     // 用户手动输入时，触发外层绑定的Change事件
     const handleInputChange = (event: Event) => {
+        // console.log('change');
         const newVal = data.userInput
         if ((isNumber(newVal) && !Number.isNaN(newVal)) && newVal !== null) {
             setCurrentValue(newVal)
         }
         data.userInput = null
     }
-    // watch(
-    //     ()=>props.modelValue,
-    //     (val,preVal) => {
-    //         // console.log('watch: ',val,preVal)
-    //     }
-    // )
 
     //改变当前绑定的值的方法,newVal为新的值，在点击-或+按钮时 以及用户手动输入时触发
     //连续两次出错我应该如何重新渲染页面？ 外层v-model绑定的值没有修改 没法触发渲染
@@ -92,7 +84,7 @@ export default defineComponent({
             newVal = 0                                                      // 输入的不是数字，改为默认值
         }
         data.userInput = null
-        console.log('update',newVal,oldVal);
+        // console.log('update',newVal,oldVal);
         emit('update:modelValue', newVal)   // 更改外层的v-model绑定的值，modelValue是readonly常量，修改其值需要触发update
         emit('change', newVal, oldVal)      // 触发change事件，传入新值与旧值
         data.currentValue = newVal          // 更新data.currentvalue
@@ -116,7 +108,6 @@ export default defineComponent({
         emit('blur', event)
     }
     
-
     return{
         input,
         increase,

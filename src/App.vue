@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue';
+import { reactive, watch, ref } from 'vue';
 import buttonVue from './components/button/button.vue';
 import paymentInputVue from './components/payment/payment-input.vue';
 
-import {ref} from 'vue'
 import sButton from './components/button/button.vue';
 import sRadio from './components/radio/radio.vue'
 import scrollbar from './components/scrollbar/scrollbar.vue'
