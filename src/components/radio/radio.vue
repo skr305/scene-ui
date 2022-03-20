@@ -6,70 +6,61 @@
             `scene-radio-border-${border}`
     ]" 
   >
-          <input
+        <input
             type="radio" 
             :name="name" 
             :value="modelValue" 
             :disabled="disabled"
             @change="handleChange"
-          />
-          <label>
-              <slot>{{label}}</slot>
-          </label>
+        />
+        <label>
+            {{label}}
+        </label>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { toRefs, nextTick } from 'vue'
-import {isString ,isNumber, isBoolean} from '../../utils/typeAssert'
-type radioType = 'default' | 'large' | 'small'
-interface radioProps{
-    modelValue: string | number | boolean,  //单选框绑定的值
-    label?: string,                         //单选框的文本
-    disabled?: boolean,                     //是否禁用单选框
-    border?: boolean,                       //是否显示边框
-    size?: radioType,                        //Radio 的尺寸
-    name: string                            //原生的name属性
-}
+<script lang='ts'>
+import {defineComponent} from 'vue'
+import {radioProps, radioEmits} from './radio'
 
-const props = withDefaults(defineProps<radioProps>(),{
-    modelValue: undefined,      
-    label: 'option',      
-    disabled: false,        
-    border: false,          
-    size: 'default',        
-    name: undefined
+export default defineComponent({
+  name:'scene-radio',
+  props:radioProps,
+  emits:radioEmits,
+  setup(props,{emit,attrs,slots,expose}){
+    // 组件原生的change事件回调函数
+    const handleChange = (evt: MouseEvent)=>{
+        if(props.modelValue === undefined)
+          emit('change','undefined')
+        else
+          emit('change',props.modelValue)
+    }
+
+    return {
+      handleChange
+    }
+  }
 })
-// 触发父组件的事件
-const emit = defineEmits({
-    // onchange函数的验证函数
-    change: (val: string | number | boolean) => isString(val) || isNumber(val) || isBoolean(val),
-})
-// 组件原生的change事件回调函数
-const handleChange = (evt: MouseEvent)=>{
-    console.log(
-        props.modelValue+'\n'+
-        props.label+'\n'+
-        props.disabled+'\n'+
-        props.border+'\n'+
-        props.size+'\n'+
-        props.name+'\n'
-    )
-    emit('change',props.modelValue)
-}
 </script>
-
-<script lang="ts">
-export default {
-  name: "scene-radio",
-};
-</script>
-
 
 <style scoped>
 .scene-radio-default{
     width: 100px;
     height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.scene-radio-small{
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.scene-radio-large{
+    width: 120px;
+    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;

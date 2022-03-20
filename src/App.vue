@@ -1,26 +1,41 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import sButton from './components/button/button.vue';
+import {reactive, ref} from 'vue'
+import sButton from './components/button/button.vue'
 import sRadio from './components/radio/radio.vue'
+import scrollbar from './components/scrollbar/scrollbar.vue'
+import sNumberInput from './components/number-input/number-input.vue'
+
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
-const str = ref('option 1')
+const str = ref('input')
 const num1 = ref(8)
 const num2 = ref(9)
-function print(){
-    alert('parent')
+const arr = reactive([1,2,3,4,5,6,7,8,9])
+
+const print = (...args: any[])=>{
+  console.log(...args)
 }
+
 </script>
 
 <template>
-  <s-button size="default" :disabled="booleanTrue" type="default" icon='map' @click="print()">
-    <!-- <template v-slot:icon>
-      <img src="./assets/setting.svg">
-    </template> -->
+  <s-button size="default" :disabled="booleanFalse" type="default" @click="print">
+    <template v-slot:icon>
+      <img src="/setting.svg">
+    </template>
   </s-button>
-  <s-radio :model-value="num1" :name="str" :label="str" :disabled="false" :border="true" size="default"></s-radio>
-  <s-radio :model-value="num2" :name="str" :label="str" :disabled="booleanTrue" :border="false" size="default"></s-radio>
+  <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="large"></s-radio>
+  <s-radio v-model="num2" name="contact" label="email" :disabled="false" size="small"></s-radio>
+  <!-- <scrollbar id='scroll'>
+    <div v-for="(item,index) in arr" :key="index">
+      <s-button size="default" type="default" icon='map' @click="print()">
+        item
+      </s-button>
+    </div>
+  </scrollbar> -->
+  <s-number-input v-model='num1' name='count' :max="10" :min="-2" />
+  <!-- <s-number-input v-model='num1' name='count' :max="10" :min="-2" @blur="print" @focus="print" @change="print" /> -->
 </template>
 
 <style>
@@ -31,5 +46,9 @@ function print(){
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#scroll{
+  width: 100px;
+  height:100px;
 }
 </style>
