@@ -15,7 +15,7 @@ export default defineComponent({
     props: {
         modelValue: {type: Object}
     },
-    components:{
+    components: {
         Grid,
     },
     emits: ['update:modelValue'],
@@ -85,9 +85,8 @@ export default defineComponent({
                         <div>{component.preview()}</div>
                     </div>
                 ))}
-
-
             </div>
+
             <div class="editor-top">
                 {buttons.map((btn, index) => {
                     return <div class="editor-top-button" onClick={btn.handler}>
@@ -114,7 +113,7 @@ export default defineComponent({
                         onMousedown={containerMousedown}
                     >
                         {/*网格线*/}
-                        <Grid />
+                        <Grid/>
                         {
                             (data.value.blocks.map((block, index) => (
                                 <EditorBlock

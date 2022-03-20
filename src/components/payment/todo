@@ -1,0 +1,5 @@
+# 怎么去写一个基于ts-setup语法包的内容呢
+# 可以参考一下: defineProps 和 WithDefault 注入的这种情况
+# 说起来 如果是这样的话那么data该怎么定义呢
+# 其实还行 大概就是直接了当的声明之吧
+# setUp的声明method也是这种 直接声明就是

@@ -1,5 +1,11 @@
 // 画布中组件的渲染
 import {computed, defineComponent, inject, onMounted, onUpdated, ref} from "vue";
+import {buttonFirstDraw} from "@/draw/buttonFirstDraw";
+import {buttonLastDraw} from "@/draw/buttonLastDraw";
+import {textFirstDraw} from "@/draw/textFirstDraw";
+import {textLastDraw} from "@/draw/textLastDraw";
+import {inputFirstDraw} from "@/draw/inputFirstDraw";
+import {inputLastDraw} from "@/draw/inputLastDraw";
 
 export default defineComponent({
     props: {
@@ -29,21 +35,22 @@ export default defineComponent({
                 props.block.alignCenter = false;
             }
             // console.log(props.block)
-            props.block.width = offsetWidth;
-            props.block.height = offsetHeight;
+            props.block.width = offsetWidth + 5;
+            props.block.height = offsetHeight + 5;
+            // console.log(props.block.key)
 
-
-            let style = props.data.value.style; // 内部已经渲染的组件
-            props.data.value = {
-                ...props.data.value, style: [
-                    ...style,
-                    {
-                        width: offsetWidth,
-                        height: offsetHeight
-                    }
-                ]
+            if (props.block.key === "button") {
+                buttonFirstDraw(blockRef, props.data, offsetWidth, offsetHeight);
+            } else if (props.block.key === "text") {
+                textFirstDraw(blockRef, props.data, offsetWidth, offsetHeight);
+                // console.log(props.data.value)
+            } else if (props.block.key === "input") {
+                inputFirstDraw(blockRef, props.data)
+                // console.log(props.data.value)
             }
-            blockRef.value.children[0].style.width = offsetWidth;
+
+            // console.log(blockRef.value.style.width)
+            // console.log(blockRef.value.children[0].innerHTML)
         })
 
 
@@ -53,11 +60,12 @@ export default defineComponent({
 
             if (props.block.focus === true) {
                 props.data.value.blocks.forEach((block, id) => {
-                    if (block.focus === true) {
-                        blockRef.value.children[0].style.width = `${props.data.value.style[id].width}px`;
-                        props.block.width = props.data.value.style[id].width
-                        blockRef.value.children[0].style.height = `${props.data.value.style[id].height}px`;
-                        props.block.height = props.data.value.style[id].height
+                    if (block.focus === true && block.key === "button") {
+                        buttonLastDraw(blockRef, props.block, props.data, id)
+                    } else if (block.focus === true && block.key === "text") {
+                        textLastDraw(blockRef, props.block, props.data, id)
+                    } else if (block.focus === true && block.key === "input") {
+                        inputLastDraw(blockRef, block, props.data, id)
                     }
                 })
             }

@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import {reactive, ref} from 'vue'
-import sButton from './components/button/button.vue'
+import { reactive, watch } from 'vue';
+import buttonVue from './components/button/button.vue';
+import paymentInputVue from './components/payment/payment-input.vue';
+
+import {ref} from 'vue'
+import sButton from './components/button/button.vue';
 import sRadio from './components/radio/radio.vue'
 import scrollbar from './components/scrollbar/scrollbar.vue'
 import sNumberInput from './components/number-input/number-input.vue'
@@ -16,7 +20,10 @@ const arr = reactive([1,2,3,4,5,6,7,8,9])
 const print = (...args: any[])=>{
   console.log(...args)
 }
-
+const data = reactive( { value: "", pwd: "" } );
+watch( data, () => {
+  console.log( data );
+} );
 </script>
 
 <template>
@@ -25,6 +32,9 @@ const print = (...args: any[])=>{
       <img src="/setting.svg">
     </template>
   </s-button>
+
+  <paymentInputVue v-model="data.pwd"/>
+  <scene-payment-input/>
   <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="large"></s-radio>
   <s-radio v-model="num2" name="contact" label="email" :disabled="false" size="small"></s-radio>
   <!-- <scrollbar id='scroll'>

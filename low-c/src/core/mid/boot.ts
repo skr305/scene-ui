@@ -3,6 +3,8 @@ import jsonReader from '../../util/json-reader';
 import { MidConfigType } from './type';
 import modelGenerator from './gen/model-generator';
 import { stdMkdir, stdWriteFileCover } from '../../util/std-write';
+import errorCodeGenerator from './gen/error-code-generator';
+import generateEntityToDir from './gen/wrp/generate-entity-to-dir';
 export enum MidGeneratorStatus {
     SUC = 0,
     BAD_PATH = 1,
@@ -31,9 +33,18 @@ export const BootGen = async ( path: string, options: MidGOptions = DEFAULT_MIDG
         const APP_NAME = configBody.AppName;
         // write the model in place
         const MODEL_SQL_OUTPATH = `${OUT_DIR}/${APP_NAME}-database.sql`;
-        if( configBody.Model ) {
+        const ERROR_CODE_OUTPATH = `${OUT_DIR}/${APP_NAME}-error-code.ts`;
+        const ENTITY_OUTPUT_DIR = `${OUT_DIR}/entity`;
+        await stdMkdir( ENTITY_OUTPUT_DIR );
+        if( configBody.Model ) { 
             await stdWriteFileCover( MODEL_SQL_OUTPATH, await modelGenerator( configBody.Model ) );
+            // generate the entity
+            await generateEntityToDir( configBody.Model, ENTITY_OUTPUT_DIR );
+        }
+        if( configBody.ErrorCode ) {
+            await stdWriteFileCover( ERROR_CODE_OUTPATH, await errorCodeGenerator( configBody.ErrorCode ) );
         } 
+
     } catch( error ) {
         if( error instanceof BaseError ) {
             return MidGeneratorStatus.APP_ERROR;

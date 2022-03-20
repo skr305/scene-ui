@@ -1,7 +1,8 @@
 import {computed, defineComponent, inject} from "vue";
-
-import {ElForm, ElFormItem, ElInput, ElInputNumber} from 'element-plus'
-import {parseWidth} from "element-plus/es/components/table/src/util";
+import ButtonProperty from "../property/buttonProperty"
+import TextProperty from "../property/textProperty"
+import InputProperty from "../property/inputProperty"
+import {ElForm, ElFormItem, ElInput, ElInputNumber, ElColorPicker} from 'element-plus'
 
 export default defineComponent({
     props: {
@@ -11,7 +12,11 @@ export default defineComponent({
         ElInput,
         ElForm,
         ElFormItem,
-        ElInputNumber
+        ElInputNumber,
+        ElColorPicker,
+        ButtonProperty,
+        TextProperty,
+        InputProperty
     },
 
     // emits: ['update:modelValue'],
@@ -25,6 +30,7 @@ export default defineComponent({
             }
         })
         return () => {
+            let Message;
 
             // 设置计算属性，用来实现组件和属性栏之间的数据绑定
             const attrs_style = computed(() => {
@@ -37,50 +43,30 @@ export default defineComponent({
                     attrs_style.value.block = data.value.blocks[id];
                     // console.log(typeof(attrs_style.value.block.left))
                     attrs_style.value.attribute = data.value.style[id];
+                    // console.log(attrs_style.value.attribute.color)
                 }
             })
-            // console.log(JSON.stringify(attrs_style.value.block))
+
             // console.log(JSON.stringify(attrs_style.value.attribute))
             let visual = false;
             if (attrs_style.value.block != null) {
                 visual = true;
+
+                if (attrs_style.value.block.key === "button") {
+                    Message = (<ButtonProperty v-model={attrs_style.value}></ButtonProperty>)
+                } else if (attrs_style.value.block.key === "text") {
+                    Message = (<TextProperty v-model={attrs_style.value}></TextProperty>)
+                } else if (attrs_style.value.block.key === "input") {
+                    Message = (<InputProperty v-model={attrs_style.value}></InputProperty>)
+                }
             }
+
+
             return <div>
                 {
-                    visual ? (<el-form label-position="top">
-                        <el-form-item label="X 坐标">
-                            <el-input-number
-                                style="width: 100%"
-                                // controls-position="right"
-                                step={1}
-                                v-model={attrs_style.value.block.left}>
-                            </el-input-number>
-                        </el-form-item>
-                        <el-form-item label="Y 坐标">
-                            <el-input-number
-                                style="width: 100%"
-                                // controls-position="right"
-                                step={1}
-                                v-model={attrs_style.value.block.top}>
-                            </el-input-number>
-                        </el-form-item>
-                        <el-form-item label="宽">
-                            <el-input-number
-                                style="width: 100%"
-                                // controls-position="right"
-                                step={1}
-                                v-model={attrs_style.value.attribute.width}>
-                            </el-input-number>
-                        </el-form-item>
-                        <el-form-item label="高">
-                            <el-input-number
-                                style="width: 100%"
-                                // controls-position="right"
-                                step={1}
-                                v-model={attrs_style.value.attribute.height}>
-                            </el-input-number>
-                        </el-form-item>
-                    </el-form>) : (<div>
+                    visual ? (
+                        Message
+                    ) : (<div>
                         <h3 align="center">请选择组件</h3>
                         <br/><br/>
                         <el-form label-position="top">

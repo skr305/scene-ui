@@ -1,0 +1,1 @@
+console.log( `${ JSON.stringify( {a: 2, b: 3} ) }` );
