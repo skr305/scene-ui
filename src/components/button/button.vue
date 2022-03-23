@@ -63,7 +63,7 @@ export default defineComponent({
     height: 40px;
     border-radius: 5px;
     font-size: 14px;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;

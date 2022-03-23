@@ -1,5 +1,5 @@
-import { componentSizes } from "../../utils/constant"
-import { isNumber } from "../../utils/typeAssert"
+import { componentSizes } from "../../core/constants/constant"
+import { isNumber } from "../../core/utils/typeAssert"
 
 export const numberInputProps = {
     step: {
@@ -35,7 +35,7 @@ export const numberInputProps = {
 
 
 export const numberInputEmits = {
-    change: (prev: number, cur: number) => isNumber(prev) && isNumber(cur),
+    change: (cur: number,prev: number) => isNumber(prev) && isNumber(cur),
     blur: (e: FocusEvent) => e instanceof FocusEvent,
     focus: (e: FocusEvent) => e instanceof FocusEvent,
     input: (val: number) => isNumber(val),

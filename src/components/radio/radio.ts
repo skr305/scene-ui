@@ -1,5 +1,5 @@
-import { componentSizes } from "../../utils/constant"
-import {isString ,isNumber, isBoolean} from '../../utils/typeAssert'
+import { componentSizes } from "../../core/constants/constant"
+import {isString ,isNumber, isBoolean} from '../../core/utils/typeAssert'
 
 export const radioProps = {
     modelValue:{//单选框绑定的值
