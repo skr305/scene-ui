@@ -8,6 +8,8 @@ import sRadio from './components/radio/radio.vue'
 import scrollbar from './components/scrollbar/scrollbar.vue'
 import sNumberInput from './components/number-input/number-input.vue'
 import sLink from './components/link/link.vue'
+import sSelect from './components/select/select.vue'
+
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -15,7 +17,16 @@ const str = ref('input')
 const num1 = ref(8)
 const num2 = ref(9)
 const arr = reactive([1,2,3,4,5,6,7,8,9])
+const options = ref([
+  'option1',
+  'option2',
+  'option3',
+  'option4',
+  'option5'
+])
+
 const baidu = ref('https://www.baidu.com')
+const emptyStr = ref('')
 
 const print = (...args: any[])=>{
   console.log(...args)
@@ -117,6 +128,17 @@ watch( data, () => {
     <s-link :href="baidu" type="danger">danger</s-link>
     <s-link :href="baidu" type="info">info</s-link>
   </div>
+
+  
+  <div>
+    <s-select v-model="emptyStr" :multiple="booleanTrue" :multiple-limit="2" :name="str" :options="options" :disabledOptions="[false,true,false,false,false]" @change="print">
+      <template v-slot="slotProps">
+        <span>
+          {{slotProps.index}}-----{{slotProps.option}}
+        </span>
+      </template>
+    </s-select>
+  </div>
 </template>
 
 <style>
@@ -130,7 +152,7 @@ watch( data, () => {
 }
 #scroll{
   width: 100px;
-  height:100px;
+  min-height:100px;
 }
 .scene-link{
   margin:0 5px;

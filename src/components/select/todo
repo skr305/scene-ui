@@ -1,0 +1,28 @@
+单选：
+基本HTML结构
+箭头的旋转用CSS实现 1
+作用域插槽实现插入HTML模板 1
+如何实现淡入淡出？
+1. display none -> display:block    没有动画 无法点击
+2  opacity=0 -> opacity=1 + translateY  有动画 可点击
+3  opacity=0 visiavility=hidden -> opacity=1 visiability=visible + translateY  有动画 无法点击
+选中样式保存
+disabled项实现
+
+
+多选：
+基本HTML结构
+存储多选结果
+多选样式保存
+展示多选结果
+
+注意：
+typescript 非空断言
+blur与click的顺序问题 
+div无法blur问题
+
+
+
+
+
+
