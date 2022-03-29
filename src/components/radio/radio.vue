@@ -47,21 +47,21 @@ export default defineComponent({
 .scene-radio-default{
     width: 100px;
     height: 50px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 }
 .scene-radio-small{
     width: 80px;
     height: 40px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 }
 .scene-radio-large{
     width: 120px;
     height: 55px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 }

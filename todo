@@ -15,3 +15,8 @@ HTMLElement 节点:
   // 是否自闭合
   "selfClosing": false,
 }
+
+
+加一个useNameSpace
+sass
+buildProps

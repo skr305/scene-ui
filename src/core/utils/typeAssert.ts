@@ -9,3 +9,11 @@ export function isNumber(value: any): boolean{
 export function isBoolean(value: any): boolean{
     return typeof value === 'boolean'?true:false
 }
+
+export function isBooleanArray(arr: boolean[]): boolean{
+    arr.forEach((item)=>{
+        if(typeof item !== 'boolean')
+            return false
+    })
+    return true
+}

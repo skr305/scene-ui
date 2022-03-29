@@ -1,4 +1,4 @@
-import { componentSizes } from "../../utils/constant"
+import { componentSizes } from "../../core/constants/constant"
 
 export const buttonProps = {
     type:{// 按钮类型
