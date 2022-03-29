@@ -11,6 +11,7 @@ export default defineComponent({
     props: {
         data: {type: Object},
         block: {type: Object},
+        idx: Number
     },
     setup(props) {
 
@@ -73,7 +74,7 @@ export default defineComponent({
             // 获取render函数
             const RenderComponent = component.render();
             return <div class="editor-block" style={blockStyles.value} ref={blockRef}>
-                {RenderComponent}
+                <RenderComponent v-bind:style={data.value.style[props.idx]}/>
             </div>
         }
     }

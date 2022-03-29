@@ -33,7 +33,7 @@ const drawPrimayKeySentence = ( primarys: Array< string >, needComma: boolean = 
 const modelGenerator = ( config: ModelConfigType ):string => {
     const BASE_NAME = config[MODEL_DATABASE_KEY];
     let GENED = `
-${ config?.$Cover ? `drop database \`${BASE_NAME}\`;` : "" }
+${ config?.$Cover ? `drop database if exists \`${BASE_NAME}\`;` : "" }
 create database \`${BASE_NAME}\`;
 use \`${BASE_NAME}\`;
     `;

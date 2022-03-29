@@ -22,7 +22,7 @@
     "Operation": {
         "$BaseURL": [ "./", "localhost:8080/" ],
         "Router": {
-            "/auth": {
+            "/unauth": {
                 "login": {
                     "Response": {
                         "done": "boolean"

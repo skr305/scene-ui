@@ -13,6 +13,7 @@ import Grid from "../utils/Grid"
 
 export default defineComponent({
     props: {
+        // mark
         modelValue: {type: Object}
     },
     components: {
@@ -29,6 +30,7 @@ export default defineComponent({
                 ctx.emit('update:modelValue', deepcopy(newValue))
             }
         })
+    
 
         // 设置计算属性，用来改变和渲染画布的大小
         const containerStyles = computed(() => ({
@@ -120,6 +122,7 @@ export default defineComponent({
                                     class={block.focus ? 'editor-block-focus' : ''}
                                     block={block}
                                     data={data}
+                                    idx={index}
                                     onMousedown={(e) => blockMousedown(e, block, index)}
                                 ></EditorBlock>
                             )))
