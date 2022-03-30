@@ -2,11 +2,15 @@
 import { reactive, watch, ref } from 'vue';
 import buttonVue from './components/button/button.vue';
 import paymentInputVue from './components/payment/s-payment-input.vue';
+import sInput from './components/input/s-input.vue'
 
 import sButton from './components/button/button.vue';
 import sRadio from './components/radio/radio.vue'
 import scrollbar from './components/scrollbar/scrollbar.vue'
 import sNumberInput from './components/number-input/number-input.vue'
+import sLink from './components/link/link.vue'
+import sSelect from './components/select/select.vue'
+import sScrollbar from './components/scrollbar/scrollbar.vue'
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -37,11 +41,15 @@ watch( text, () => {
 
   console.log( "on text change", text.value );
 } )
+
 </script>
 
 <template>
   <div>
-    <s-button size="default" :disabled="booleanFalse" type="default" @click="print">
+    <s-input v-model="emptyStr"></s-input>
+  </div>
+  <div>
+    <s-button size="default" theme="red" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
         <img src="/setting.svg">
       </template>
@@ -51,99 +59,37 @@ watch( text, () => {
     <paymentInputVue v-model="data.pwd"/>
   </div>
   <div>
-    <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="large"></s-radio>
+    <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="large" theme="red"></s-radio>
     <s-radio v-model="num2" name="contact" label="email" :disabled="false" size="small"></s-radio>
   </div>
-  <!-- <scrollbar id='scroll'>
-    <div v-for="(item,index) in arr" :key="index">
-      <s-button size="default" type="default" icon='map' @click="print()">
-        item
-      </s-button>
-    </div>
-  </scrollbar> -->
-  <s-number-input v-model='num1' name='count' :max="10" :min="-2" />
-  
-  <!-- <s-number-input v-model='num1' name='count' :max="10" :min="-2" @blur="print" @focus="print" @change="print" /> -->
   <div>
-    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5" />
+    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5"/>
   </div>
   <div>
-    带下划线：
     <s-link :href="baidu" >default</s-link>
-    <s-link :href="baidu" type="primary">primary</s-link>
-    <s-link :href="baidu" type="success">success</s-link>
-    <s-link :href="baidu" type="warning">warning</s-link>
-    <s-link :href="baidu" type="danger">danger</s-link>
-    <s-link :href="baidu" type="info">info</s-link>
-  </div>
-  <div>
-    禁用：
-    <s-link :href="baidu" disabled>default</s-link>
-    <s-link :href="baidu" type="primary" disabled>primary</s-link>
-    <s-link :href="baidu" type="success" disabled>success</s-link>
-    <s-link :href="baidu" type="warning" disabled>warning</s-link>
-    <s-link :href="baidu" type="danger" disabled>danger</s-link>
-    <s-link :href="baidu" type="info" disabled>info</s-link>
-  </div>
-  <div>
-    带图标：
-    <s-link :href="baidu">
-      <template v-slot:icon>
-        <img src="/link.svg">
-      </template>
-      default
-    </s-link>
-    <s-link :href="baidu" type="primary">
-      <template v-slot:icon>
-        <img src="/link.svg">
-      </template>
-      primary
-    </s-link>
-    <s-link :href="baidu" type="success">
-      <template v-slot:icon>
-        <img src="/link.svg">
-      </template>
-      success
-    </s-link>
-    <s-link :href="baidu" type="warning">
-      <template v-slot:icon>
-        <img src="/link.svg">
-      </template>
-      warning
-    </s-link>
-    <s-link :href="baidu" type="danger">
-      <template v-slot:icon>
-        <img src="/link.svg">
-      </template>
-      danger
-    </s-link>
-    <s-link :href="baidu" type="info">
-      <template v-slot:icon>
-        <img src="/link.svg">
-      </template>
-      info
-    </s-link>
-  </div>
-  <div>
-    带下划线：
-    <s-link :href="baidu" >default</s-link>
-    <s-link :href="baidu" type="primary">primary</s-link>
-    <s-link :href="baidu" type="success">success</s-link>
-    <s-link :href="baidu" type="warning">warning</s-link>
-    <s-link :href="baidu" type="danger">danger</s-link>
-    <s-link :href="baidu" type="info">info</s-link>
+    <s-link :href="baidu" theme="red">default</s-link>
   </div>
 
-  
   <div>
     <s-select v-model="emptyStr" :multiple="booleanTrue" :multiple-limit="2" :name="str" :options="options" :disabledOptions="[false,true,false,false,false]" @change="print">
       <template v-slot="slotProps">
         <span>
-          {{slotProps.index}}-----{{slotProps.option}}
+          {{slotProps.option}}
         </span>
       </template>
     </s-select>
   </div>
+
+  <div>
+    <s-scrollbar  :width="100" :height="100">
+      <div style="width:200px;height:200px;background:yellow">
+        <p style="margin:0">111111111111</p>
+        <p>111111111111</p>
+        <p>111111111111</p>
+      </div>
+    </s-scrollbar>
+  </div>
+
 </template>
 
 <style>
@@ -154,10 +100,6 @@ watch( text, () => {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-#scroll{
-  width: 100px;
-  min-height:100px;
 }
 .scene-link{
   margin:0 5px;

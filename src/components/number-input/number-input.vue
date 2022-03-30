@@ -5,6 +5,7 @@
       :class='[
         `scene-number-input-${size}`
       ]'
+      :style="{color: theme}"
     >
         <button :disabled="disabled" class="scene-number-input-button" @click="decrease">-</button>
         <input 
@@ -142,7 +143,7 @@ export default defineComponent({
     display: inline-flex;
     width: 100px;
     height: 30px;
-    border: black 1px solid;
+    border: 1px solid;
     border-radius: 5px;
 }
 .scene-number-input-button{
@@ -164,13 +165,12 @@ export default defineComponent({
     outline: none;
     text-align: center;/** input内容居中 */
     border-width: 0px 1px;
-    border-color: black;
     border-style: solid;
 }
 .scene-number-input-button:disabled{
     color: #C0C4CC;
     /* 光标变化 */
-    cursor: not-allowed; 
+    cursor: not-allowed;
 }
 .scene-number-input-default:disabled{
     color: #C0C4CC;

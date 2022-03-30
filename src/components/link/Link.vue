@@ -2,10 +2,10 @@
     <a
         class="scene-link"
         :class="[
-            `scene-link-${type}`,
             disabled? `scene-link-disabled` : '',
             `scene-link-underline-${underline}`
         ]"
+        :style="{color: theme}"
         :href="disabled || !href ? undefined : href"
         @click="handleClick"
     >
@@ -22,13 +22,13 @@
 <script lang='ts'>
 import {defineComponent} from 'vue'
 import {linkProps,linkEmits} from './link'
+import { ComponentConstants } from '../../core/constants'; 
 
 export default defineComponent({
   name:'scene-link',
   props:linkProps,
   emits:linkEmits,
   setup(props,{emit,attrs,slots,expose}){
-      console.log(props.href);
     // 当disabled=false时，点击link触发外层的点击事件
     function handleClick(event: MouseEvent) {
         if (!props.disabled) 
@@ -50,8 +50,11 @@ export default defineComponent({
     cursor: pointer;
     padding:0;
 }
-.scene-link-disabled{
+.scene-link:hover{
     opacity: 0.7;
+}
+.scene-link-disabled{
+    opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none; /**元素永远不会成为鼠标事件的target。 */
 }
@@ -70,52 +73,5 @@ export default defineComponent({
 /* 默认设置有下划线 */
 .scene-link-underline-true:hover{
     text-decoration: underline;
-}
-/* type=default */
-.scene-link-default{
-    color:black;
-}
-.scene-link-default:hover{
-    color: #409EFF;
-}
-/* type=primary */
-.scene-link-primary{
-    color:#409EFF;
-}
-.scene-link-primary:hover{
-    opacity: 0.8;
-    color: #409EFF;
-}
-/* type=success */
-.scene-link-success{
-    color:#67C23A;
-}
-.scene-link-success:hover{
-    opacity: 0.8;
-    color: #67C23A;
-}
-/* type=warning */
-.scene-link-warning{
-    color:#E6A23C;
-}
-.scene-link-warning:hover{
-    opacity: 0.8;
-    color: #E6A23C;
-}
-/* type=danger */
-.scene-link-danger{
-    color:#F56C6C;
-}
-.scene-link-danger:hover{
-    opacity: 0.8;
-    color: #F56C6C;
-}
-/* type=info */
-.scene-link-info{
-    color:#909399;
-}
-.scene-link-info:hover{
-    opacity: 0.8;
-    color: #909399;
 }
 </style>

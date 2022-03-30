@@ -6,6 +6,7 @@
             `scene-button-${size}`,
             `scene-button-${type}`,
         ]" 
+        :style="{color: theme}"
         :disabled="disabled"
         :type='nativeType'
         @click="handleClick"

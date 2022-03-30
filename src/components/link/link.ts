@@ -1,10 +1,12 @@
+import { ComponentConstants } from '../../core/constants'; 
+
 export const linkProps = {
     href: { type: String, default: '' },
-    type: {
+    theme: {
         type: String,
-        default: 'default',
-        validator(value:string){
-            return ['primary', 'success', 'warning', 'info', 'danger', 'default'].includes(value);
+        default: 'black',
+        validator(value:ComponentConstants.StandardColor){
+            return ComponentConstants.StandardColorArr.includes(value)
         },
     },
     underline: {

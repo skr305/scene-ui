@@ -1,7 +1,14 @@
-import { componentSizes } from "../../core/constants/constant"
+import { ComponentConstants } from '../../core/constants'; 
 import {isString ,isNumber, isBoolean} from '../../core/utils/typeAssert'
 
 export const radioProps = {
+    theme: {
+        type: String,
+        default: 'black',
+        validator(value:ComponentConstants.StandardColor){
+            return ComponentConstants.StandardColorArr.includes(value)
+        },
+    },
     modelValue:{//单选框绑定的值
         type:[String,Number,Boolean],
         required: true,
@@ -26,7 +33,7 @@ export const radioProps = {
         type: String,
         default: 'default',
         validator(value: string) {
-            return componentSizes.includes(value)
+            return ComponentConstants.StandardSizeArr.includes(value)
         }
     },
     

@@ -5,12 +5,12 @@ import { reactive } from 'vue';
 export interface SceneInputProps {
     size ?: ComponentConstants.StandardSize;
     onInput ?: ( value: string ) => any;
-    color ?: ComponentConstants.StandardColor;
+    theme ?: ComponentConstants.StandardColor;
     borderColor ?: ComponentConstants.StandardColor;
     label ?: string;
 };
 const props = withDefaults( defineProps<SceneInputProps>(), {
-    color: ComponentConstants.DefaultColor,
+    theme: ComponentConstants.DefaultColor,
     size: ComponentConstants.DefaultSize,
     borderColor: ComponentConstants.DefaultColor 
 } );
@@ -20,7 +20,7 @@ const emit = defineEmits( {
 const SIZE_MAP = {
     "small": "8em",
     "default": "14em",
-    "big": "24em"
+    "large": "24em"
 };
 const data = reactive( {
     onInput: ( $event:InputEvent ) => {
@@ -38,21 +38,21 @@ const data = reactive( {
 <template>
     <div className="input-scene-go-div" :style="{
         'maxWidth': data.size,
-        'color': props.color
+        'color': props.theme
     }">
         <div v-if="props.label !== undefined" 
         className="input-sc-label-241">  {{ props.label }} : </div>
         <input className="input-scene-d" @input="data.onInput"
         :style="{
-            'borderBottom': `2px solid ${props.color}`,
-            'color': props.color
+            'borderBottom': `2px solid ${props.theme}`,
+            'color': props.theme
         }"/>
     </div>
 </template>
 
 <style scoped>
     .input-scene-go-div {
-        display: flex;
+        display: inline-flex;
         flex-direction: row;
         max-width: 14em;
         margin: 1em;

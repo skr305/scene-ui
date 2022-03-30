@@ -1,7 +1,14 @@
-import { componentSizes } from "../../core/constants/constant"
+import { ComponentConstants } from '../../core/constants'; 
 import { isNumber } from "../../core/utils/typeAssert"
 
 export const numberInputProps = {
+    theme: {
+        type: String,
+        default: 'black',
+        validator(value:ComponentConstants.StandardColor){
+            return ComponentConstants.StandardColorArr.includes(value)
+        },
+    },
     step: {
         type: Number,
         default: 1,
@@ -26,7 +33,7 @@ export const numberInputProps = {
         type: String,
         default: 'default',
         validator(value: string) {
-            return componentSizes.includes(value)
+            return ComponentConstants.StandardSizeArr.includes(value)
         }
     },
     name: String,

@@ -4,7 +4,8 @@
     :class="[
             `scene-radio-${size}`,
             `scene-radio-border-${border}`
-    ]" 
+    ]"
+    :style="{color: theme}" 
   >
         <input
             type="radio" 

@@ -1,4 +1,4 @@
-import { componentSizes } from "../../core/constants/constant"
+import { ComponentConstants } from '../../core/constants'; 
 
 export const buttonProps = {
     type:{// 按钮类型
@@ -10,11 +10,18 @@ export const buttonProps = {
             return ['default', 'round', 'text'].includes(value)
         }
     },
+    theme: {
+        type: String,
+        default: 'black',
+        validator(value:ComponentConstants.StandardColor){
+            return ComponentConstants.StandardColorArr.includes(value)
+        },
+    },
     size:{// 按钮的尺寸
         type: String,
         default: 'default',
         validator(value: string) {
-            return componentSizes.includes(value)
+            return ComponentConstants.StandardSizeArr.includes(value)
         }
     },
     disabled:{// 是否禁用

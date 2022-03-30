@@ -1,6 +1,14 @@
 import { isString, isBooleanArray } from "../../core/utils/typeAssert"
+import {ComponentConstants } from '../../core/constants'
 
 export const selectProps = {
+    theme: {
+        type: String,
+        default: 'black',
+        validator(value:ComponentConstants.StandardColor){
+            return ComponentConstants.StandardColorArr.includes(value)
+        },
+    },
     modelValue:{//选择器绑定的值
         type:[String,Number,Boolean,Array],
         required: true,

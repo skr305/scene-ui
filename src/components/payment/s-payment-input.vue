@@ -4,7 +4,7 @@ import { ComponentConstants } from '../../core/constants';
 import { reactive, watch, nextTick } from 'vue';
 
 export interface PaymentInputProps {
-    color ?: ComponentConstants.StandardColor;
+    theme ?: ComponentConstants.StandardColor;
     disabled ?: boolean;
     modelValue ?: string;
     numberOnly ?: boolean;
@@ -13,7 +13,7 @@ export interface PaymentInputProps {
 };
 export type PaymentInputSets = [ string, string, string, string, string, string ];
 const props = withDefaults( defineProps<PaymentInputProps>(), {
-    color: ComponentConstants.DefaultColor,
+    theme: ComponentConstants.DefaultColor,
     disabled: false,
     modelValue: "",
     numberOnly: true
@@ -89,7 +89,7 @@ const onDropPwdCell = () => {
     <div className="payment-input-251-w" >
         <input v-for="i in 6" :key="`PAY-REC-INPUT${i}`"
         :disabled=" !( i - 1 === data.inIdx || i - 1 === 5 && data.inIdx === 6 ) " 
-        :style="{ 'color': props.color }"
+        :style="{ 'color': props.theme }"
         @keydown.delete="onDropPwdCell"
         @keydown="onPut()"
         :id="`${i-1}-pay-rec-input-#scene`"
