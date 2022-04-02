@@ -1,12 +1,11 @@
 <template>
     <button 
         ref="root"
-        class="scene-button-default"
+        class="scene-button"
         :class="[
-            `scene-button-${size}`,
             `scene-button-${type}`,
         ]" 
-        :style="{color: theme}"
+        :style="{color: theme,padding: paddingSize}"
         :disabled="disabled"
         :type='nativeType'
         @click="handleClick"
@@ -20,7 +19,7 @@
 </template>
 
 <script lang='ts'>
-import {defineComponent, ref, onMounted} from 'vue'
+import {defineComponent, ref, onMounted, computed} from 'vue'
 import {buttonProps, buttonEmits } from './button'
 
 export default defineComponent({
@@ -37,17 +36,21 @@ export default defineComponent({
         // icon插槽
         const icon = slots.icon;
 
-        onMounted(()=>{   
-            if(icon){
-                // 获取根节点button的类名
-                let oldClassName:string | null | undefined = root.value?.getAttribute('class')
-                // 拼接上设置icon的类名
-                root.value?.setAttribute('class',oldClassName+' scene-button-icon')
+        // size决定着padding
+        let paddingSize = computed(()=>{
+            switch(props.size){
+                case 'default':
+                    return '10px 20px';
+                case 'large':
+                    return '15px 30px';
+                case 'small':
+                    return '5px 10px'
             }
         })
 
         return{
             root,
+            paddingSize,
             icon,
             handleClick,
         }
@@ -56,34 +59,22 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.scene-button-default{
+.scene-button{
     background: white;
     color:black;
     border:1px solid;
-    width: 80px;
-    height: 40px;
     border-radius: 5px;
     font-size: 14px;
+
     display: inline-flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.scene-button-default:disabled{
+.scene-button:disabled{
     border:#C0C4CC 1px solid;
     color: #C0C4CC;
     /* 光标变化 */
     cursor: not-allowed; 
-}
-/* size=large */
-.scene-button-large{
-    width: 90px;
-    height: 45px;
-}
-/* size=small */
-.scene-button-small{
-    width: 60px;
-    height: 30px;
 }
 /* type=round */
 .scene-button-round{
@@ -93,12 +84,10 @@ export default defineComponent({
 .scene-button-text{
     border: none;
 }
-/* 设置了icon slot时的button属性 */
-.scene-button-icon{
-    width:110px;
-    height:45px;
-}
 .scene-button-icon-slot{
     margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

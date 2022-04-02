@@ -15,7 +15,7 @@
             <button
                 class="scene-scrollbar-thumb"
                 ref="thumbY"
-                v-show="showThumb"
+                v-show="showThumb.y"
                 :style="thumbStyle.y"
             ></button>
         </transition>
@@ -23,7 +23,7 @@
             <button
                 class="scene-scrollbar-thumb"
                 ref="thumbX"
-                v-show="showThumb"
+                v-show="showThumb.x"
                 :style="thumbStyle.x"
             ></button>
         </transition>
@@ -89,7 +89,17 @@ export default defineComponent({
         }
     });
 
-    const showThumb = ref(false);
+    // 是否显示滚动条
+    const showThumb = reactive({
+        x:false,
+        y:false,
+    });
+    // 是否有必要显示滚动条
+    const mustShowThumb = reactive({
+        x:true,
+        y:true
+    })
+
 
     /**
     * 更新包裹容器样式
@@ -119,14 +129,20 @@ export default defineComponent({
         const wrapEl = wrap.value;
         if (wrapEl) {
             let height = wrapEl.clientHeight / wrapEl.scrollHeight * 100;  // 整个warp的可视高度与warp包裹的div的高度的比值
-            if (height >= 100) // 不需要滚动条
+            if (height >= 100){
+                // 不需要滚动条
                 height = 0;
+                mustShowThumb.y = false;
+            } 
             thumbStyle.y.height = height + "%";
             thumbStyle.y.transform = `translateY(${wrapEl.scrollTop / wrapEl.scrollHeight * wrapEl.clientHeight}px)`;
 
             let width = (wrapEl.clientWidth / wrapEl.scrollWidth) * 100;  // 整个warp的可视宽度与warp包裹的div的宽度的比值
-            if (width >= 100) // 不需要滚动条
+            if (width >= 100){
+                // 不需要滚动条
                 width = 0;
+                mustShowThumb.x = false;
+            } 
             thumbStyle.x.width = width + "%";
             thumbStyle.x.transform = `translateX(${wrapEl.scrollLeft / wrapEl.scrollWidth * wrapEl.clientWidth}px)`;
         }
@@ -143,10 +159,11 @@ export default defineComponent({
 
 
     function onDragStart(event: MouseEvent) {
-        console.log("摁下 >>", event);
+        // console.log("摁下 >>", event);
         const _thumbX = thumbX.value!;
         const _thumbY = thumbY.value!;
-        const target = event.target as HTMLElement;
+        const target = event.target as HTMLElement; // 获取鼠标事件的目标DOM node
+        // 判断拖拽的是哪个滚动条
         if (_thumbX.contains(target)) {
             isDrag = true;
             vertical = false;
@@ -161,13 +178,15 @@ export default defineComponent({
 
     function onDragMove(event: MouseEvent) {
         if (!isDrag) return;
-        console.log("拖拽移动 >>", event.offsetY, event.clientY, event);
+        // console.log("拖拽移动 >>", event.offsetY, event.clientY, event);
         const wrapEl = wrap.value!;
         if (vertical) {
             const wrapTop = wrapEl.getBoundingClientRect().top;
             const wrapHeight = wrapEl.clientHeight;
             let value = event.clientY - wrapTop;
-            wrapEl.scrollTop = (value - deviation) / wrapHeight * wrapEl.scrollHeight;
+            // _thumbY.getBoundingClientRect().top - wrapEl.getBoundingClientRect().top = 拖动滚动条移动的距离
+            // 再除以包裹div的高度计算出移动的百分比，乘上未压缩的高度就是需要移动距离
+            wrapEl.scrollTop = (value - deviation) / wrapHeight * wrapEl.scrollHeight; //这个元素的内容顶部（卷起来的）到它的视口可见内容（的顶部）的距离
         } else {
             const wrapLeft = wrapEl.getBoundingClientRect().left;
             const wrapWidth = wrapEl.clientWidth;
@@ -177,7 +196,7 @@ export default defineComponent({
     }
 
     function onDragEnd(event: MouseEvent) {
-        console.log("抬起");
+        // console.log("抬起");
         isDrag = false;
         if (el.value!.contains(event.target as HTMLElement)) {
             if (props.clickUpdateDelay > 0) {
@@ -186,38 +205,43 @@ export default defineComponent({
                 timer = setTimeout(updateThumbStyle, props.clickUpdateDelay);
             }
         } else {
-            showThumb.value = false;
+            showThumb.x = false;
+            showThumb.y = false;
         }
     }
 
     // 鼠标进入滚动条区域，显示滚动条
+    // 添加如果没有超过props的宽高则不显示
     function onEnter() {
-        showThumb.value = true;
+        if(mustShowThumb.x)
+            showThumb.x = true;
+        if(mustShowThumb.y)
+            showThumb.y = true;
         updateThumbStyle();
     }
     // 鼠标离开滚动条区域，隐藏滚动条
     function onLeave() {
         if (!isDrag) {
-            showThumb.value = false;
+            showThumb.x = false;
+            showThumb.y = false;
         }
     }
 
+    // 修改document 为 el 防止与其他点击事件冲突
     onMounted(()=>{
-        // console.log("onMounted >>", el.value!.clientHeight);
-        // console.log("scrollbarSize >>", scrollbarSize);
         updateWrapStyle();
         initThumbStyle();
         wrap.value && wrap.value.addEventListener("scroll", updateThumbStyle);
-        document.addEventListener("mousedown", onDragStart);
-        document.addEventListener("mousemove", onDragMove);
-        document.addEventListener("mouseup", onDragEnd);
+        el.value!.addEventListener("mousedown", onDragStart);
+        el.value!.addEventListener("mousemove", onDragMove);
+        el.value!.addEventListener("mouseup", onDragEnd);
     });
 
     onUnmounted(()=>{
         wrap.value && wrap.value.removeEventListener("scroll", updateThumbStyle);
-        document.removeEventListener("mousedown", onDragStart);
-        document.removeEventListener("mousemove", onDragMove);
-        document.removeEventListener("mouseup", onDragEnd);
+        el.value!.removeEventListener("mousedown", onDragStart);
+        el.value!.removeEventListener("mousemove", onDragMove);
+        el.value!.removeEventListener("mouseup", onDragEnd);
         timer && clearTimeout(timer);
     });
 
