@@ -30,11 +30,15 @@
         <img id="scene-select-icon" src="/down.svg" title="down">
             <!-- 选择器的隐藏部分 -->
         <div class="scene-select-dropdown-arrow"></div>
-        <div class="scene-select-dropdown-menu" ref="menu">
-            <div v-for="(option,index) of options" :key="index" class="scene-select-dropdown-menu-option" :tabindex="-1">
-                <!-- 作用域插槽，对外暴露 option 与 index -->
-                <slot :option="option" :index="index"></slot>
-            </div>
+        <div class="scene-select-dropdown-menu">
+            <s-scrollbar :width="220" :height="180">
+                <div ref="menu" >
+                   <div v-for="(option,index) of options" :key="index" class="scene-select-dropdown-menu-option" :tabindex="-1">
+                        <!-- 作用域插槽，对外暴露 option 与 index -->
+                        <slot :option="option" :index="index"></slot>
+                    </div> 
+                </div>
+            </s-scrollbar>
         </div>
     </div>
 </template>
@@ -42,12 +46,14 @@
 <script lang='ts'>
 import {computed, defineComponent, nextTick, onMounted, reactive, ref, toRefs} from 'vue'
 import {selectProps, selectEmits} from './select'
+import sScrollbar from '../scrollbar/scrollbar.vue'
 
 
 export default defineComponent({
   name:'scene-select',
   props:selectProps,
   emits:selectEmits,
+  components:{sScrollbar},
   setup(props,{emit,attrs,slots,expose}){
     // 选择器的选择区域 html引用
     const menu = ref<HTMLElement>()
@@ -264,7 +270,7 @@ export default defineComponent({
     border-top: #409EFF 1px solid;
     border-right: #409EFF 1px solid;
     transform: rotate(-45deg);
-    z-index: -1;
+    z-index: 1001;
     opacity: 0;
     transition: all 0.5s ease;
 }
@@ -273,20 +279,21 @@ export default defineComponent({
     /* display: none; */
     visibility: hidden; /** 占用空间但点击无效 */
     position: absolute;
-    width: 218px; /** 200px - 1px * 2  */
-    height: 168px; /** 190px - 5px*2 - 1px*2 */
+    width: 220px; /** 220px - 1px * 2  */
+    height: 190px; /** 190px - 5px*2 - 1px*2 */
     border:#409EFF 1px solid;
     border-radius: 5px;
     top: calc(100% + 5px);
     padding: 5px 0;
-    z-index: -2;
+    z-index: 1000;
     opacity: 0;
     transition: all 0.5s ease;
+    box-sizing: border-box;
 }
 /* 选择器具体的选项 */
 .scene-select-dropdown-menu-option{
     width: calc(100% - 20px);
-    height: 20%;
+    height: 38px;
     padding: 0 10px;
     display: flex;
     justify-content: flex-start;
@@ -320,7 +327,7 @@ export default defineComponent({
     visibility:visible
     /* display: block; */
 }
-#scene-select-input:focus+#scene-select-icon{
+#scene-select-input:focus~#scene-select-icon{
     transform: rotate(180deg);
 }
 
