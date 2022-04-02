@@ -6,11 +6,12 @@ import sInput from './components/input/s-input.vue'
 
 import sButton from './components/button/button.vue';
 import sRadio from './components/radio/radio.vue'
-import scrollbar from './components/scrollbar/scrollbar.vue'
 import sNumberInput from './components/number-input/number-input.vue'
 import sLink from './components/link/link.vue'
 import sSelect from './components/select/select.vue'
 import sScrollbar from './components/scrollbar/scrollbar.vue'
+import sCheckbox from './components/checkbox/checkbox.vue'
+import sCheckboxButton from './components/checkbox/checkbox-button.vue';
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -40,6 +41,11 @@ const text = ref( "" );
 watch( text, () => {
 
   console.log( "on text change", text.value );
+} )
+
+const select = ref( false );
+watch( select, () => {
+  console.log( select.value );
 } )
 
 </script>
@@ -90,9 +96,25 @@ watch( text, () => {
     </s-scrollbar>
   </div>
 
+  <div>
+    <s-checkbox v-model="select" label="是否堂食"></s-checkbox>
+    <s-checkbox v-model="select" theme="blue"  label="是否堂食"></s-checkbox>
+    <s-checkbox v-model="select" unsure theme="green"  label="待确认"></s-checkbox>
+    <s-checkbox disabled label="Disabled"></s-checkbox>
+  </div>
+
+  <div>
+    <s-checkbox-button v-model="select" @change="(event) => console.log(event)">默认</s-checkbox-button>
+    <s-checkbox-button leftBorderRound>左圆</s-checkbox-button>
+    <s-checkbox-button theme="red">变色</s-checkbox-button>
+    <s-checkbox-button theme="red" disabled>Disabled</s-checkbox-button>
+  </div>
+
 </template>
 
 <style>
+@import './styles/global.css';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
