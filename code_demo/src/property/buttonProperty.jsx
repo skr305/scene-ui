@@ -1,5 +1,6 @@
-import {computed, defineComponent} from "vue";
+import {computed, defineComponent, onBeforeMount, onMounted, onUpdated} from "vue";
 import {ElColorPicker, ElForm, ElFormItem, ElInput, ElInputNumber} from "element-plus";
+import {events} from "@/packages/events";
 
 
 export default defineComponent({
@@ -17,11 +18,21 @@ export default defineComponent({
     setup: function (props) {
         // 设置计算属性，以便于实现数据的双向绑定
         const attrs_style = computed({
-            get(){
+            get() {
                 return props.modelValue
             }
         })
-        return () =>{
+        // onBeforeMount(()=>{
+        //     console.log(attrs_style.value.attribute)
+        // })
+        // onMounted(()=>{
+        //     console.log(attrs_style.value.attribute)
+        // })
+        // onUpdated((attrs_style)=>{
+        //     console.log(attrs_style.value.attribute)
+        // })
+        return () => {
+            // console.log(attrs_style.value.attribute)
             return <div>
                 {
                     <div>
@@ -29,6 +40,7 @@ export default defineComponent({
                             <el-form-item label="X 坐标">
                                 <el-input-number
                                     style="width: 100%"
+                                    // change={events.emit("start")}
                                     // controls-position="right"
                                     step={1}
                                     v-model={attrs_style.value.block.left}>
@@ -137,7 +149,7 @@ export default defineComponent({
                                 </el-input-number>
                             </el-form-item>
                             <el-form-item label="内容">
-                                <el-input type="textarea" v-model={attrs_style.value.attribute.innerHTML} ></el-input>
+                                <el-input type="textarea" v-model={attrs_style.value.attribute.innerHTML}></el-input>
                             </el-form-item>
                         </el-form>
                     </div>

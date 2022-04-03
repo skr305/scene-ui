@@ -1,4 +1,4 @@
-import {computed, defineComponent} from "vue";
+import {computed, defineComponent, ref} from "vue";
 import {ElColorPicker, ElForm, ElFormItem, ElInput, ElInputNumber} from "element-plus";
 
 
@@ -62,7 +62,8 @@ export default defineComponent({
                         </el-form>
                         <el-form label-position="left">
                             <el-form-item label="颜色">
-                                <el-color-picker v-model={attrs_style.value.attribute.color}></el-color-picker>
+                                <el-color-picker v-model={attrs_style.value.attribute.color}
+                                                 style="touch-action:none"></el-color-picker>
                             </el-form-item>
                         </el-form>
                         <el-form label-position="top">

@@ -5,28 +5,33 @@ export function useMenuDragger(containerRef, data) {
     let currentComponent = null;
     const dragenter = (e) => {
         e.dataTransfer.dropEffect = 'move';
-
+        // console.log(123456)
     }
     const dragover = (e) => {
         e.preventDefault();
     }
     const dragleave = (e) => {
         e.dataTransfer.dropEffect = 'none';
+        // console.log(123)
     }
     const drop = (e) => {
         // console.log(currentComponent);
 
         let blocks = data.value.blocks; // 内部已经渲染的组件
+        // console.log(blocks.length)
+        // console.log(currentComponent.render())
         data.value = {
             ...data.value, blocks: [
                 ...blocks,
                 {
                     top: e.offsetY,
                     left: e.offsetX,
-                    zIndex: 1,
+                    zIndex: blocks.length,
                     key: currentComponent.key,
                     alignCenter: true, // 实现松手的时候鼠标可以居中
-                    focus: false    // 没有选定的状态
+                    focus: false,    // 没有选定的状态
+                    lock: false,     // 没有锁定的状态
+                    moveSign: 'move',  // 鼠标经过时的移动标识
                 }
             ]
         }

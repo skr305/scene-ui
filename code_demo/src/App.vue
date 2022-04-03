@@ -15,17 +15,17 @@ import {provide} from "vue";
 const {ElInput} = require("element-plus");
 
 export default {
-  components:{
+  components: {
     Editor,
   },
   // 整个程序的入口
-  setup(){
+  setup() {
     const state = ref(data);
 
     // 将组件的配置直接传出
-    provide('config',config);
+    provide('config', config);
 
-    return{
+    return {
       state
     }
   }
@@ -34,9 +34,9 @@ export default {
 </script>
 
 <style lang="scss">
-.app{
-  position:fixed;
-  top:20px;
+.app {
+  position: fixed;
+  top: 20px;
   left: 20px;
   right: 20px;
   bottom: 20px;

@@ -1,7 +1,6 @@
-export function textLastDraw(blockRef, block, data, id) {
+export function textUpdataDraw(blockRef, block, data, id) {
 
     // console.log(blockRef.value)
-    // todo 这里很可能在后期添加功能的时候出现bug，注意一下
     if (blockRef.value != null) {
         blockRef.value.style.width = `${data.value.style[id].width}px`;
         block.width = data.value.style[id].width;

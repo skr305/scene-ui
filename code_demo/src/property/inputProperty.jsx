@@ -52,6 +52,24 @@ export default defineComponent({
                                     v-model={attrs_style.value.block.top}>
                                 </el-input-number>
                             </el-form-item>
+                            <el-form-item label="宽">
+                                <el-input-number
+                                    style="width: 100%"
+                                    min={0}
+                                    // controls-position="right"
+                                    step={1}
+                                    v-model={attrs_style.value.attribute.width}>
+                                </el-input-number>
+                            </el-form-item>
+                            <el-form-item label="高">
+                                <el-input-number
+                                    style="width: 100%"
+                                    min={0}
+                                    // controls-position="right"
+                                    step={1}
+                                    v-model={attrs_style.value.attribute.height}>
+                                </el-input-number>
+                            </el-form-item>
                             <el-form-item label="字体大小">
                                 <el-input-number
                                     style="width: 100%"
@@ -114,7 +132,8 @@ export default defineComponent({
                                 <el-input type="textarea" v-model={attrs_style.value.attribute.placeholder}></el-input>
                             </el-form-item>
                             <el-form-item label="内容">
-                                <el-input maxlength={attrs_style.value.attribute.max} type="textarea" v-model={attrs_style.value.attribute.value}></el-input>
+                                <el-input maxlength={attrs_style.value.attribute.max} type="textarea"
+                                          v-model={attrs_style.value.attribute.value}></el-input>
                             </el-form-item>
                         </el-form>
                     </div>
