@@ -1,3 +1,5 @@
+// 用于日期时间选择器
+
 const commonYearMap = new Map<string,number>([
     ['1',31],
     ['2',28],
@@ -74,7 +76,8 @@ export default function getFullScreen(date: Date){
     // 该月有多少天
     let dateCount = getDateCountByYearAndMonth(nowYear,nowMonth);
     //[...Array.from(new Array(10).keys())] 快速生成天数数组
-    screenDates = [...Array.from(new Array(dateCount).keys())].map((value)=>value += 1)
+    // 在ts中 ...解构运算符只能用于array与string： [...Array.from(new Array(dateCount).keys())]
+    screenDates = [...new Array(dateCount).keys()].map((value)=>value += 1)
 
     // 计算该月首尾是星期几，这里使用year,month,day的参数注意时区问题：
     // 当Date作为构造函数调用并传入多个参数时，所定义参数代表的是当地时间。如果需要使用世界协调时 UTC，使用 new Date(Date.UTC(...)) 和相同参数。
@@ -89,7 +92,7 @@ export default function getFullScreen(date: Date){
 
     // 计算出该月的后一月需要补几天 = 7*6 - 当月的天数 - 前一月的天数
     let postMonthDateCount = 42 - dateCount - previousMonthDateCount
-    let postMonthDates = [...Array.from(new Array(postMonthDateCount).keys())].map((value)=>value += 1)
+    let postMonthDates = [...new Array(postMonthDateCount).keys()].map((value)=>value += 1)
 
     // 返回拼接的数组
     return previousMonthDates.concat(screenDates,postMonthDates)

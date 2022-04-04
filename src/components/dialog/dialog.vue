@@ -41,6 +41,7 @@
 import {defineComponent, onMounted, ref, watch} from 'vue'
 import {dialogProps, dialogEmits} from './dialog'
 import sButton from '../button/button.vue'
+import getFullScreen from '../../core/lib/date'
 
 export default defineComponent({
   name:'scene-dialog',
@@ -48,7 +49,9 @@ export default defineComponent({
   emits:dialogEmits,
   components:{sButton},
   setup(props,{emit,attrs,slots,expose}){
-    console.log([...new Array(10).keys()]);
+    console.log(getFullScreen(new Date('2022-04-04')));
+
+
     const mask = ref<HTMLElement>()
 
     const container = ref<HTMLElement>()
