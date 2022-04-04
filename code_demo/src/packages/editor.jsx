@@ -1,5 +1,6 @@
-import {computed, defineComponent, inject, onMounted, ref} from "vue";
+import {computed, defineComponent, inject, onMounted, reactive, ref} from "vue";
 import './editor.scss'
+import '../assets/iconfont/iconfont.scss'
 import EditorBlock from './editor-block'
 import Attribute from './attr-block'
 import deepcopy from "deepcopy";
@@ -8,12 +9,15 @@ import {useFocus} from "@/packages/useFocus";
 import {left} from "core-js/internals/array-reduce";
 import {useBlockDragger} from "@/packages/useBlockDragger";
 import {useCommand} from "@/packages/useCommand";
-import {useAttribute} from "@/packages/useAttribute";
 import Grid from "../utils/Grid"
+import {useRightClick} from "@/packages/useRightClick";
+import RightClick from "@/packages/rightClick"
+import {ElButton} from 'element-plus'
+
+
 
 export default defineComponent({
     props: {
-        // mark
         modelValue: {type: Object}
     },
     components: {
@@ -30,7 +34,34 @@ export default defineComponent({
                 ctx.emit('update:modelValue', deepcopy(newValue))
             }
         })
-    
+
+        const state = {
+            current: -1,
+            queue: [],
+            commands: {},
+            commandArray: [],
+            destroyArray: []
+        }
+
+        // 设置复制和剪切的内容容器，用来实现复制粘贴功能
+        const copyContent = reactive({
+            blockRightClickBox: false,
+            containerRightClickBox: false,
+            unlockRightClickBox: false,
+            copyContent: [],
+            startX: null,
+            startY: null,
+            data: data.value,
+            state: state
+        });
+        // const copyContent = computed({
+        //     get() {
+        //         return copyContentReal.value
+        //     },
+        //     set(newValue) {
+        //         ctx.emit('update:copyContent', deepcopy(newValue))
+        //     }
+        // })
 
         // 设置计算属性，用来改变和渲染画布的大小
         const containerStyles = computed(() => ({
@@ -46,31 +77,32 @@ export default defineComponent({
 
 
         // 实现获取焦点
-        let {blockMousedown, focusData, containerMousedown, lastSelectBlock} = useFocus(data, (e) => {
+        let {blockMousedown, focusData, containerMousedown, lastSelectBlock} = useFocus(data, copyContent, (e) => {
             mousedown(e)
             // console.log(JSON.stringify(attrs_style.value.attribute))
             // console.log(JSON.stringify(attrs_style.value.block))
         });
 
+        // 实现鼠标右键点击的操作
+        let {containerRightClick, blockRightClick} = useRightClick(data, copyContent)
 
         // 实现组件拖拽功能
         let {mousedown, markLine} = useBlockDragger(focusData, lastSelectBlock);
 
 
-        const {commands} = useCommand(data);
+        const {commands} = useCommand(data, state);
         const buttons = [
             {label: '撤销', handler: () => commands.undo()},
             {label: '重做', handler: () => commands.redo()},
-            // todo 这里有一个bug，（删除两个 -> 撤销两个 -> 重做两次） 就可以看到
-            {label: '删除', handler: () => commands.remo()},
-            {label: '置顶',},
-            {label: '置底',},
-            {label: '导出', handler: () => commands.outPut()},
+            {label: '导出', handler: () => commands.output()},
             {label: '导入',},
             {label: '预览',},
-            {label: '清空',},
-            {label: '锁定',},
-            {label: '解锁',},
+            {label: '清空', handler: () => commands.clear()},
+            {label: '删除', handler: () => commands.remove()},
+            {label: '置顶', handler: () => commands.top()},
+            {label: '置底', handler: () => commands.bottom()},
+            {label: '锁定', handler: () => commands.lock()},
+            {label: '解锁', handler: () => commands.unlock()},
         ]
 
         return () => <div class="editor">
@@ -91,16 +123,58 @@ export default defineComponent({
 
             <div class="editor-top">
                 {buttons.map((btn, index) => {
-                    return <div class="editor-top-button" onClick={btn.handler}>
-                        <span class={btn.label}>{btn.label}</span>
-                    </div>
+                    // console.log(JSON.stringify(data.value))
+                    let deleteDisabled = true
+                    let topDisabled = true
+                    let bottomDisabled = true
+                    let lockDisabled = true
+                    let unlockDisabled = true
+                    data.value.blocks.forEach((block, idx) => {
+                        if (block.focus === true && block.lock === false) {
+                            deleteDisabled = false
+                            topDisabled = false
+                            bottomDisabled = false
+                            lockDisabled = false
+                        }
+                        if (block.focus === true && block.lock === true) {
+                            unlockDisabled = false
+                        }
+                    })
+                    // console.log(index)
+                    if (index === 6) {
+                        // 删除
+                        return <ElButton class="editor-top-button" disabled={deleteDisabled} onClick={btn.handler}>
+                            <span class={btn.label}>{btn.label}</span>
+                        </ElButton>
+                    } else if (index === 7) {
+                        return <ElButton class="editor-top-button" disabled={topDisabled} onClick={btn.handler}>
+                            <span class={btn.label}>{btn.label}</span>
+                        </ElButton>
+                    } else if (index === 8) {
+                        return <ElButton class="editor-top-button" disabled={bottomDisabled} onClick={btn.handler}>
+                            <span class={btn.label}>{btn.label}</span>
+                        </ElButton>
+                    } else if (index === 9) {
+                        return <ElButton class="editor-top-button" disabled={lockDisabled} onClick={btn.handler}>
+                            <span class={btn.label}>{btn.label}</span>
+                        </ElButton>
+                    } else if (index === 10) {
+                        return <ElButton class="editor-top-button" disabled={unlockDisabled} onClick={btn.handler}>
+                            <span class={btn.label}>{btn.label}</span>
+                        </ElButton>
+                    } else {
+                        return <ElButton class="editor-top-button" onClick={btn.handler}>
+                            <span class={btn.label}>{btn.label}</span>
+                        </ElButton>
+                    }
                 })}
+
             </div>
             <div class="editor-right">
                 {/*产生滚动条*/}
                 <div class="editor-right-form">
                     {/*产生组件属性表单*/}
-                    <Attribute v-model={data.value}></Attribute>
+                    <Attribute v-model={data.value}/>
                 </div>
             </div>
 
@@ -112,23 +186,35 @@ export default defineComponent({
                         class="editor-container-canvas_content"
                         style={containerStyles.value}
                         ref={containerRef}
-                        onMousedown={containerMousedown}
+                        onmousedown={containerMousedown}
+                        oncontextmenu={containerRightClick}
                     >
+                        <RightClick v-model={copyContent}/>
                         {/*网格线*/}
                         <Grid/>
+
+
                         {
-                            (data.value.blocks.map((block, index) => (
-                                <EditorBlock
+                            (data.value.blocks.map((block, index) => {
+                                // console.log(index)
+                                return <EditorBlock
+                                    // class={"iconfont icon-suo"}
+                                    // cursor="move"
+                                    class={block.lock ? 'iconfont icon-suo' : ''}
                                     class={block.focus ? 'editor-block-focus' : ''}
                                     block={block}
                                     data={data}
-                                    idx={index}
-                                    onMousedown={(e) => blockMousedown(e, block, index)}
-                                ></EditorBlock>
-                            )))
+                                    index={index}
+                                    onmousedown={(e) => e.target.className === 'editor-block' || e.target.className === 'editor-block editor-block-focus' || e.target.className === 'editor-block iconfont icon-suo' ? blockMousedown(e, block, index) : ''}
+                                    onmouseover={(e) => e.target.className === 'editor-block' || e.target.className === 'editor-block editor-block-focus' || e.target.className === 'editor-block iconfont icon-suo' ? e.target.style.cursor = block.moveSign : ''}
+                                    // onmouseover={(e) => e.target.children.length === 0 ? '' : e.target.children[0].style.cursor ='move'}
+                                    // onmouseover={(e) => console.log(e.target.className)}
+                                    oncontextmenu={(e) => blockRightClick(e, block)}
+                                />
+                            }))
                         }
-                        {markLine.x !== null && <div class='line-x' style={{left: markLine.x + 'px'}}></div>}
-                        {markLine.y !== null && <div class='line-y' style={{top: markLine.y + 'px'}}></div>}
+                        {markLine.x !== null && <div class='line-x' style={{left: markLine.x + 'px'}}/>}
+                        {markLine.y !== null && <div class='line-y' style={{top: markLine.y + 'px'}}/>}
 
                     </div>
                 </div>

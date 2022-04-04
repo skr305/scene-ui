@@ -1,16 +1,9 @@
 import {events} from "@/packages/events";
 import deepcopy from "deepcopy";
 import {onUnmounted} from "vue";
-import { ElMessageBox, ElMessage } from 'element-plus';
+import {ElMessage} from 'element-plus';
 
-export function useCommand(data) {
-    const state = {
-        current: -1,
-        queue: [],
-        commands: {},
-        commandArray: [],
-        destroyArray: []
-    }
+export function useCommand(data, state) {
 
     const registry = (command) => {
         state.commandArray.push(command);
@@ -55,7 +48,7 @@ export function useCommand(data) {
         execute() {
             return {
                 redo() {
-                    if (state.current == -1) return;
+                    if (state.current === -1) return;
                     let item = state.queue[state.current];
                     if (item) {
                         item.undo && item.undo();
@@ -66,28 +59,160 @@ export function useCommand(data) {
         }
     })
     registry({
-        name: 'remo',
+        name: 'clear',
+        pushQueue: true,
+        execute() {
+            const before = deepcopy(data.value)
+            return {
+                redo() {
+                    data.value.blocks.splice(0, data.value.blocks.length)
+                    data.value.style.splice(0, data.value.style.length)
+                },
+                undo() {
+                    data.value = {...data.value, blocks: before.blocks, style: before.style}
+                    // console.log(JSON.stringify({...data.value, blocks: before.blocks, style: before.style}))
+                }
+            }
+        }
+    })
+    registry({
+        name: 'lock',
+        pushQueue: true,
+        execute() {
+            const before = deepcopy(data.value)
+            return {
+                redo() {
+                    data.value.blocks.forEach((block, idx) => {
+                        if (block.focus) {
+                            // console.log(JSON.stringify(data.value))
+                            // data.value.style.splice(idx, 1)
+                            data.value.blocks[idx].lock = true
+                            data.value.blocks[idx].moveSign = 'not-allowed'
+                        }
+                    })
+                },
+                undo() {
+                    data.value = {...data.value, blocks: before.blocks, style: before.style}
+                }
+            }
+        }
+    })
+    registry({
+        name: 'unlock',
+        pushQueue: true,
+        execute() {
+            const before = deepcopy(data.value)
+            return {
+                redo() {
+                    data.value.blocks.forEach((block, idx) => {
+                        if (block.focus) {
+                            // console.log(JSON.stringify(data.value))
+                            // data.value.style.splice(idx, 1)
+                            data.value.blocks[idx].lock = false
+                            data.value.blocks[idx].moveSign = 'move'
+                        }
+                    })
+                },
+                undo() {
+                    data.value = {...data.value, blocks: before.blocks, style: before.style}
+                }
+            }
+        }
+    })
+    registry({
+        name: 'top',
+        pushQueue: true,
+        execute() {
+            const before = deepcopy(data.value)
+            return {
+                redo() {
+                    data.value.blocks.forEach((block, idx) => {
+                        if (block.focus) {
+                            let temp = 0;
+                            data.value.blocks.forEach((blockDemo, idxDemo) => {
+                                if (blockDemo.zIndex > block.zIndex) {
+                                    blockDemo.zIndex = blockDemo.zIndex - 1;
+                                    temp = temp + 1;
+                                }
+                            })
+                            block.zIndex = block.zIndex + temp
+                        }
+                    })
+                },
+                undo() {
+                    data.value = {...data.value, blocks: before.blocks, style: before.style}
+                }
+            }
+        }
+    })
+    registry({
+        name: 'bottom',
+        pushQueue: true,
+        execute() {
+            const before = deepcopy(data.value)
+            return {
+                redo() {
+                    data.value.blocks.forEach((block, idx) => {
+                        if (block.focus) {
+                            let temp = 0;
+                            data.value.blocks.forEach((blockDemo, idxDemo) => {
+                                if (blockDemo.zIndex < block.zIndex) {
+                                    blockDemo.zIndex = blockDemo.zIndex + 1;
+                                    temp = temp + 1;
+                                }
+                            })
+                            block.zIndex = block.zIndex - temp
+                        }
+                    })
+                },
+                undo() {
+                    data.value = {...data.value, blocks: before.blocks, style: before.style}
+                }
+            }
+        }
+    })
+    registry({
+        name: 'remove',
         keyboard: 'ctrl+d',
         pushQueue: true,
         execute() {
-            const before = deepcopy(data.value.blocks)
+            let before = deepcopy(data.value)
+            // console.log(before.blocks.length)
+            // console.log(before.style.length)
+            // console.log(before)
+            // console.log(state)
             let focusLength = 0;
             return {
                 redo() {
                     data.value.blocks.forEach((block, idx) => {
                         if (block.focus) {
+                            data.value.blocks.forEach((blockDemo, idxDemo) => {
+                                if (blockDemo.zIndex > block.zIndex) {
+                                    blockDemo.zIndex = blockDemo.zIndex - 1;
+                                }
+                            })
+                            // console.log(JSON.stringify(data.value))
+                            data.value.style.splice(idx, 1)
                             data.value.blocks.splice(idx, 1)
                             focusLength = 1;
+
                         }
                     })
-                    if (focusLength === 0){
-                        alert("请选择要删除的组件")
+                    if (focusLength === 0) {
+                        ElMessage({
+                            message: '请选择要删除的组件',
+                            type: 'warning',
+                        })
                     }
                     // console.log(before)
                 },
 
-                undo(){
-                    data.value = {...data.value, blocks: before}
+                undo() {
+                    data.value = {...data.value, blocks: before.blocks, style: before.style}
+                    // console.log(JSON.stringify(before))
+                    // before = deepcopy(data.value)
+                    // console.log(JSON.stringify(before))
+                    // console.log(JSON.stringify({...data.value, blocks: before.blocks, style: before.style}))
                 },
             }
         }
@@ -97,7 +222,11 @@ export function useCommand(data) {
         pushQueue: true,
         init() {
             this.before = null
-            const start = () => this.before = deepcopy(data.value.blocks)
+            const start = () => {
+                this.before = deepcopy(data.value)
+                // console.log(123)
+                return this.before
+            }
             const end = () => state.commands.drag()
             events.on('start', start)
             events.on('end', end)
@@ -109,13 +238,18 @@ export function useCommand(data) {
         },
         execute() {
             let before = this.before;
-            let after = data.value.blocks
+            let after = data.value
             return {
                 redo() {
-                    data.value = {...data.value, blocks: after}
+                    // console.log(JSON.stringify(data.value))
+                    data.value = {...data.value, blocks: after.blocks, style: after.style}
+
+                    // console.log(JSON.stringify({...data.value, blocks: after.blocks}))
                 },
                 undo() {
-                    data.value = {...data.value, blocks: before}
+                    data.value = {...data.value, blocks: before.blocks, style: before.style}
+                    // console.log(JSON.stringify(state))
+                    // console.log(JSON.stringify({...data.value, blocks: before.blocks, style: before.style}))
                 }
             }
         }
@@ -129,7 +263,7 @@ export function useCommand(data) {
     }
 
     registryDome({
-        name: 'outPut',
+        name: 'output',
         keyboard: 'ctrl+o',
         execute() {
             return {
@@ -141,7 +275,6 @@ export function useCommand(data) {
             }
         }
     })
-
 
 
     const keyboardEvent = (() => {
@@ -166,7 +299,7 @@ export function useCommand(data) {
             })
         }
         const init = () => {
-            window.addEventListener('keydown', onKeydown)
+            window.addEventListener('keydown', onKeydown, {passive: false})
             return () => {
                 window.removeEventListener('keydown', onKeydown)
             }

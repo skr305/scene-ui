@@ -4,4 +4,5 @@ export enum XLS_ERROR_CODE_SET {
 
     PATH_ERROR = 2, // 路径错误 找不到文件
     EMPTY_ERROR = 3, // VNode 节点不能为空
+    COMPILE_ERROR = 4 // 编译语句时的错误
 };

@@ -1,8 +1,9 @@
-import {computed, defineComponent, inject} from "vue";
+import {computed, defineComponent, inject, onBeforeMount} from "vue";
 import ButtonProperty from "../property/buttonProperty"
 import TextProperty from "../property/textProperty"
 import InputProperty from "../property/inputProperty"
 import {ElForm, ElFormItem, ElInput, ElInputNumber, ElColorPicker} from 'element-plus'
+import deepcopy from "deepcopy";
 
 export default defineComponent({
     props: {
@@ -21,7 +22,6 @@ export default defineComponent({
 
     // emits: ['update:modelValue'],
     setup: function (props) {
-
 
         // 设置计算属性，以便于实现数据的双向绑定
         const data = computed({
@@ -47,8 +47,10 @@ export default defineComponent({
                 }
             })
 
+
             // console.log(JSON.stringify(attrs_style.value.attribute))
             let visual = false;
+
             if (attrs_style.value.block != null) {
                 visual = true;
 
@@ -60,7 +62,6 @@ export default defineComponent({
                     Message = (<InputProperty v-model={attrs_style.value}></InputProperty>)
                 }
             }
-
 
             return <div>
                 {
