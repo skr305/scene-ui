@@ -1,4 +1,4 @@
-import { isString, isBooleanArray } from "../../core/utils/typeAssert"
+import { isString, isBooleanArray } from "../../core/lib/type-assert"
 import {ComponentConstants } from '../../core/constants'
 
 export const selectProps = {

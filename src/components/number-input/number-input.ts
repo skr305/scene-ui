@@ -1,5 +1,5 @@
 import { ComponentConstants } from '../../core/constants'; 
-import { isNumber } from "../../core/utils/typeAssert"
+import { isNumber } from "../../core/lib/type-assert"
 
 export const numberInputProps = {
     theme: {

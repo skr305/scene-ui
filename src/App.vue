@@ -131,7 +131,7 @@ watch( select, () => {
     </s-select>
   </div>
 
-  <div>
+  <div class="exhibition">
     <s-button @click="booleanFalse = true">Show Modal</s-button>
     <!-- use the modal component, pass in the prop -->
     <s-dialog v-model="booleanFalse" 

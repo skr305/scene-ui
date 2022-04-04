@@ -48,6 +48,7 @@ export default defineComponent({
   emits:dialogEmits,
   components:{sButton},
   setup(props,{emit,attrs,slots,expose}){
+    console.log([...new Array(10).keys()]);
     const mask = ref<HTMLElement>()
 
     const container = ref<HTMLElement>()
