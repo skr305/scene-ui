@@ -4,7 +4,6 @@ export const buttonProps = {
     type:{// 按钮类型
         type: String,
         default: 'default',
-        required: true,
         validator(value: string) {
             // 这个值必须与下列字符串中的其中一个相匹配
             return ['default', 'round', 'text'].includes(value)

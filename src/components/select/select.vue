@@ -21,7 +21,7 @@
         >   
             <div v-if="showTags" class="scene-select-multiple-tag">
                 <span>{{selectedItems[selectedItems.length-1]}}</span>
-                <img src="/close.svg" @click.stop="handleDelete($event)" title="close">
+                <img src="/close_12.svg" @click.stop="handleDelete($event)" title="close">
             </div>
             <div v-if="showTags" class="scene-select-multiple-count">
                 <span>+{{selectedItems.length}}/{{multipleLimit}}</span>
@@ -282,6 +282,7 @@ export default defineComponent({
     width: 220px; /** 220px - 1px * 2  */
     height: 190px; /** 190px - 5px*2 - 1px*2 */
     border:#409EFF 1px solid;
+    background: white;
     border-radius: 5px;
     top: calc(100% + 5px);
     padding: 5px 0;

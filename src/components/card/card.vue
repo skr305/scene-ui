@@ -22,8 +22,6 @@ export default defineComponent({
     // 卡片元素
     const el = ref<HTMLElement>()
 
-    console.log(props.bodyStyle);
-
     onMounted(()=>{
       let card: HTMLElement = el.value!;
 
@@ -52,7 +50,7 @@ export default defineComponent({
 
   display: inline-flex;
   flex-direction: column;
-  border-radius: 5px;
+  border-radius: 4px;
   border: 1px solid var(--border-color);
   overflow: hidden;
   box-sizing: border-box; /** 设置宽高为加上border与padding的宽高 */

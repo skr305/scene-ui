@@ -12,6 +12,7 @@ import sLink from './components/link/link.vue'
 import sSelect from './components/select/select.vue'
 import sScrollbar from './components/scrollbar/scrollbar.vue'
 import sCard from './components/card/card.vue'
+import sDialog from './components/dialog/dialog.vue'
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -40,7 +41,6 @@ watch( data, () => {
 } );
 const text = ref( "" );
 watch( text, () => {
-
   console.log( "on text change", text.value );
 } )
 
@@ -111,6 +111,29 @@ watch( text, () => {
         </span>
       </template>
     </s-select>
+  </div>
+
+  <div>
+    <s-button @click="booleanFalse = true">Show Modal</s-button>
+    <!-- use the modal component, pass in the prop -->
+    <s-dialog v-model="booleanFalse" 
+      title="title" 
+      :modal="booleanFalse" 
+      @open="print"
+      @opened="print"
+      @close="print" 
+      @closed="print"
+    >
+      <s-card shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
+        <template #header>
+          <div class="card-header">
+            <span>Card Name</span>
+            <s-button class="button" type="text">Operation button</s-button>
+          </div>
+        </template>
+        <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+      </s-card>
+    </s-dialog>
   </div>
 </template>
 
