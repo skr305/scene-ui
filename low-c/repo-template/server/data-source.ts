@@ -1,9 +1,8 @@
 import { DataSource } from "typeorm";
 import chalk from 'chalk';
+import { BaseName, Cover } from './data-source-option';
 
-// 在数据库已经存在的情况下每次都重新创建 默认不使用
-const $COVER:boolean = false;
-const DB_NAME = "123-b";
+
 
 const dataSource = new DataSource( {
     "type": "mysql",
@@ -11,7 +10,7 @@ const dataSource = new DataSource( {
     "port": 3306,
     "username": "root",
     "password": "123456",
-    "database": DB_NAME,
+    "database": BaseName,
     "entities": [ __dirname + "\\entity\\*.entity.js" ],
     "cache": true,
     // here init will be false
@@ -31,15 +30,15 @@ export const initDataSource = async() => {
             "password": "123456" 
         } );
         await queier.initialize();
-        if( $COVER ) {
-            await queier.query( `DROP DATABASE IF EXISTS \`${DB_NAME}\`` )
+        if( Cover ) {
+            await queier.query( `DROP DATABASE IF EXISTS \`${BaseName}\`` )
         }
          // 如果该数据库没有被创建 则应该被重新创建
-        // 如果被创建了 是否从新重现视$COVER而定
-        isBaseExist = ( await queier.query( `SHOW DATABASES LIKE \"${DB_NAME}\"` ) as Array<any> ).length !== 0;
+        // 如果被创建了 是否从新重现视Cover而定
+        isBaseExist = ( await queier.query( `SHOW DATABASES LIKE \"${BaseName}\"` ) as Array<any> ).length !== 0;
         // 不存在则新建 
         if( !isBaseExist ) {
-            await queier.query( `CREATE DATABASE \`${DB_NAME}\`` );
+            await queier.query( `CREATE DATABASE \`${BaseName}\`` );
         }
         await queier.destroy();
     } catch ( error ) {

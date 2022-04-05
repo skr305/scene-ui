@@ -42,4 +42,6 @@ export type MidConfigType = {
     ErrorCode?: ErrorMapBlock;
     Model?: ModelConfigType
     Operation?: OperationBlock;
+    Cover ?: boolean,
+    BaseName: string
 };

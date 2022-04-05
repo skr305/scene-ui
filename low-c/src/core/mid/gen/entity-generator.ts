@@ -7,13 +7,19 @@ import { ModelConfigType, ModelOutposeSectionConfigType } from '../type';
  * @returns Map{ path: string: string } ()
  */
 const boot = ( model: ModelConfigType ) => {
+    const ConstructotInitialValueMap = {
+        "string": "\"\"",
+        "longstring": "\"\"",
+        "int": "0",
+        "longint": "0"
+    };
     const output:{ [key: string]: string } = {};
     // gen the orm annotation
     const PRIMARY_KEY_ANO = "@PrimaryColumn()";
     const COLUMN_ANO = "@Column()"
     const drawEntityAno = ( tableKey: string ) => {
         return `
-Entity(\"${tableKey}\")`;
+@Entity(\"${tableKey}\")`;
     }
     // reuse in the file begin
     const META_IMPORT = `
@@ -30,13 +36,15 @@ import { Entity, Column, PrimaryColumn } from 'typeorm';
                 if( sectionOutpose.isID === undefined ) {
                    nested += `
 ${ COLUMN_ANO }
-${ sectionKey }: ${ MODEL_TYPES_MAPS[ tableData[ sectionKey ] as DbAvailableSectionOutpose ] };\n
+${ sectionKey }: ${ MODEL_TYPES_MAPS[ tableData[ sectionKey ] as DbAvailableSectionOutpose ] }
+= ${ConstructotInitialValueMap[tableData[ sectionKey ] as DbAvailableSectionOutpose ]};\n
                     `
                 
                 } else {
                    nested += `
 ${ sectionOutpose.isID ? PRIMARY_KEY_ANO : COLUMN_ANO }
-${ sectionKey }: ${ MODEL_TYPES_MAPS[ sectionOutpose.type as DbAvailableSectionOutpose ] };\n
+${ sectionKey }: ${ MODEL_TYPES_MAPS[ sectionOutpose.type as DbAvailableSectionOutpose ] }
+= ${ConstructotInitialValueMap[sectionOutpose.type]};\n
 `
                 }
             } );
@@ -44,7 +52,7 @@ ${ sectionKey }: ${ MODEL_TYPES_MAPS[ sectionOutpose.type as DbAvailableSectionO
 ${ META_IMPORT }
 
 ${drawEntityAno( tableKey )}
-export default class {
+export default class ${tableKey} {
     ${ nested }
 };            
             `;

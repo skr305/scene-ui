@@ -1,5 +1,5 @@
 import dataSource from './data-source';
-import User from './entity/User.entity';
+import User from './entity/AppUser.entity';
 import AppContext from './app-context';
 import { Next } from 'koa';
 export default class Controller {
@@ -14,8 +14,8 @@ export default class Controller {
     static async getAllUserID( ctx: AppContext, next: Next ) {
         const rowData = await dataSource.manager.find( User );
         ctx.body = rowData.map( row => {
-            const { ID } = row;
-            return { ID }
+            const { userID } = row;
+            return { userID }
         } );
         await next();
     }

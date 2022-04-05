@@ -1,0 +1,52 @@
+{
+    "$AutoDownloadDeps": false,
+    "AppName": "Student",
+    "BaseName": "123-b",
+    "Cover": true,
+    "ErrorCode": {
+        "Suc": 0,
+        "BadRequest": 1,
+        "Unknown": 999
+    },
+    "Model": {
+        "$Cover": true,
+        "$Database": "2022student",
+        "tables": {
+            "Student": {
+                "usernick": "string",
+                "pwd": "string",
+                "userID": {
+                    "type": "string",
+                    "isID": true
+                }
+            },
+            "User": {
+                "userID": {
+                    "type":"string",
+                    "isID":true
+                },
+                "pwd": "string",
+                "usernick": "string"
+            }
+        }
+    },
+    "Operation": {
+        "$BaseURL": [ "./", "localhost:8080/" ],
+        "Router": {
+            "/unauth": {
+                "login": {
+                    "Response": {
+                        "done": "boolean"
+                    },
+                    "Data": {
+                        "username": "string",
+                        "pwd": "string"
+                    },
+                    "ExtraData": {
+                        "userID": "string"
+                    }
+                }
+            }
+        }        
+    }
+}

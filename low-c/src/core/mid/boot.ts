@@ -5,6 +5,8 @@ import modelGenerator from './gen/model-generator';
 import { stdMkdir, stdWriteFileCover } from '../../util/std-write';
 import errorCodeGenerator from './gen/error-code-generator';
 import generateEntityToDir from './gen/wrp/generate-entity-to-dir';
+import dataSourceOptionGenerator from './gen/data-source-option-generator';
+
 export enum MidGeneratorStatus {
     SUC = 0,
     BAD_PATH = 1,
@@ -34,7 +36,9 @@ export const BootGen = async ( path: string, options: MidGOptions = DEFAULT_MIDG
         // write the model in place
         const MODEL_SQL_OUTPATH = `${OUT_DIR}/${APP_NAME}-database.sql`;
         const ERROR_CODE_OUTPATH = `${OUT_DIR}/${APP_NAME}-error-code.ts`;
-        const ENTITY_OUTPUT_DIR = `${OUT_DIR}/entity`;
+        const ENTITY_OUTPUT_DIR = `${OUT_DIR}/server/entity`;
+        const DB_OPTION_OUTPUT_PATH = `${OUT_DIR}/server/data-source-option.ts`;
+
         await stdMkdir( ENTITY_OUTPUT_DIR );
         if( configBody.Model ) { 
             await stdWriteFileCover( MODEL_SQL_OUTPATH, await modelGenerator( configBody.Model ) );
@@ -44,7 +48,8 @@ export const BootGen = async ( path: string, options: MidGOptions = DEFAULT_MIDG
         if( configBody.ErrorCode ) {
             await stdWriteFileCover( ERROR_CODE_OUTPATH, await errorCodeGenerator( configBody.ErrorCode ) );
         } 
-
+        // 生成db-option
+        await stdWriteFileCover( DB_OPTION_OUTPUT_PATH, await dataSourceOptionGenerator( configBody ) );
     } catch( error ) {
         if( error instanceof BaseError ) {
             return MidGeneratorStatus.APP_ERROR;
