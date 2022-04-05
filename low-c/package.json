@@ -5,7 +5,8 @@
     "rp": "tsc && node ./dist/boot-p.js",
     "rdw": "nodemon --watch ./src -e ts,xld --exec npm run rd",
     "rsw": "nodemon --watch ./src -e ts --exec npm run rs",
-    "rpw": "nodemon --watch ./src -e ts --exec npm run rp"
+    "rpw": "nodemon --watch ./src -e ts --exec npm run rp",
+    "c-ini": "cnpm i & cd repo-template && cnpm i"
   },
   "dependencies": {
     "@types/moment": "^2.13.0",

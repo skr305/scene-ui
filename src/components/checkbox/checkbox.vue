@@ -23,14 +23,23 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, inject } from 'vue';
 import { checkBoxEmits, checkBoxProps } from './checkbox';
+import { CHECK_GROUP_CONTEXT, CheckGroupContextType } from './constants';
 export default defineComponent( {
     name: "s-checkbox",
     emits: checkBoxEmits,
     props: checkBoxProps,
     setup( props, ctx ) {
-        const current = ref( props.checked );
+        const groupContext = inject<CheckGroupContextType>( CHECK_GROUP_CONTEXT );
+        const initChecked = computed( () => {
+            if( !groupContext || !groupContext.groupLabels ) {
+                return props.checked;
+            }
+            return groupContext.groupLabels.includes( props.label );
+        } );
+        // 如果groupLabels 包含
+        const current = ref( initChecked.value );
         const checkboxClass = computed( () => {
             if( props.disabled ) {
                 return "checkbox-scene-disabled";
@@ -49,6 +58,21 @@ export default defineComponent( {
             }
             current.value = !current.value;
             ctx.emit( "change", current.value );
+            if( groupContext ) {
+                if( props.label ) {
+                    const groupLabels = groupContext.groupLabels;
+                    const labelChange = groupContext.labelChange;
+                    if( !current.value ) {
+                        const labelIdx = groupLabels.indexOf( props.label );
+                        if( labelIdx !== -1 ) {
+                            groupLabels.splice( labelIdx, 1 );
+                        }
+                    } else {
+                        groupLabels.push( props.label );
+                    }
+                    labelChange( Array.from( new Set( groupLabels ) ) );
+                }   
+            }
         };
         const SizeMap = {
             "large": "2.2rem",

@@ -14,15 +14,24 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, inject } from 'vue';
 import { checkBoxBtnEmits, checkBoxBtnProps } from './checkbox-button';
 import { ThemeColorClassName } from '../../styles/theme-color-expose';
+import { CHECK_GROUP_CONTEXT, CheckGroupContextType } from './constants';
 export default defineComponent( {
     name: "s-checkbox-button",
     emits: checkBoxBtnEmits,
     props: checkBoxBtnProps,
     setup( props, ctx ) {
-        const current = ref( props.checked );
+        const groupContext = inject<CheckGroupContextType>( CHECK_GROUP_CONTEXT );
+        const initChecked = computed( () => {
+            if( !groupContext || !groupContext.groupLabels ) {
+                return props.checked;
+            }
+            return groupContext.groupLabels.includes( props.label );
+        } );
+        // 如果groupLabels 包含
+        const current = ref( initChecked.value );
         const checkboxBtnClass = computed( () => {
             let classSet = "";
             if( props.disabled ) {
@@ -48,8 +57,27 @@ export default defineComponent( {
             if( props.disabled ) {
                 return;
             }
+            
             current.value = !current.value;
             ctx.emit( "change", current.value );
+            if( groupContext ) {
+                // 如果存在标签且存在groupLabels 
+                // 则需要额外去重更改
+                if( props.label ) {
+                    const groupLabels = groupContext.groupLabels;
+                    const labelChange = groupContext.labelChange;
+                    if( !current.value ) {
+                        const labelIdx = groupLabels.indexOf( props.label );
+                        if( labelIdx != -1 ) {
+                            groupLabels.splice( labelIdx, 1 );
+                        }
+                        
+                    } else {
+                        groupLabels.push( props.label );
+                    }
+                    labelChange( groupLabels );
+                }   
+            }
         };
         const PaddingMap = {
             "large": "0.6rem 1.2rem",

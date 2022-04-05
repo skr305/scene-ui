@@ -12,9 +12,12 @@
   "dependencies": {
     "@types/events": "^3.0.0",
     "@types/lodash": "^4.14.180",
+    "@types/vue-router": "^2.0.0",
+    "less": "^4.1.2",
     "lodash": "^4.17.21",
     "ts-loader": "^9.2.7",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

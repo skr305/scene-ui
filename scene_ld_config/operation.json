@@ -20,7 +20,7 @@
                     "$Program": [
                         " #CtMes.Insert|content=$Param.content|ID=$Params.cID|date=$Param.date",
                         " #UucRel.Insert|bindID=$Params.bindID|cID=$Params.cID",
-                        " $Return = true; "
+                        " $Return = { done: true }; "
                     ]
                 },
                 "get_new_mes": {

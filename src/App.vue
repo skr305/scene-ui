@@ -13,6 +13,7 @@ import sScrollbar from './components/scrollbar/scrollbar.vue'
 import sCheckbox from './components/checkbox/checkbox.vue'
 import sCheckboxButton from './components/checkbox/checkbox-button.vue';
 import sCard from './components/card/card.vue'
+import sCheckboxGroup from './components/checkbox/checkbox-group.vue';
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -49,6 +50,14 @@ const select = ref( false );
 watch( select, () => {
   console.log( select.value );
 } )
+const checkLabels = ref( [
+  "两广",
+  "汉中",
+  "大同"
+] );
+watch( checkLabels, () => {
+  console.log( checkLabels.value );
+}, { deep: true });
 
 </script>
 
@@ -104,10 +113,21 @@ watch( select, () => {
   </div>
 
   <div>
-    <s-checkbox-button v-model="select" @change="(event) => console.log(event)">默认</s-checkbox-button>
+    <s-checkbox-button v-model="select">默认</s-checkbox-button>
     <s-checkbox-button leftBorderRound>左圆</s-checkbox-button>
     <s-checkbox-button theme="red">变色</s-checkbox-button>
     <s-checkbox-button theme="red" disabled>Disabled</s-checkbox-button>
+    <s-checkbox-group v-model="checkLabels">
+        <s-checkbox-button label="两广"></s-checkbox-button>
+        <s-checkbox-button label="大同"></s-checkbox-button>
+        <s-checkbox-button label="武汉"></s-checkbox-button>
+    </s-checkbox-group>
+    <s-checkbox-group v-model="checkLabels">
+        <s-checkbox label="两广"></s-checkbox>
+        <s-checkbox label="大同"></s-checkbox>
+        <s-checkbox label="武汉"></s-checkbox>
+    </s-checkbox-group>
+  
   </div>
   <div class="exhibition">
     <s-card shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
