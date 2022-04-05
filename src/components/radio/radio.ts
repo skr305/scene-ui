@@ -1,5 +1,5 @@
 import { ComponentConstants } from '../../core/constants'; 
-import {isString ,isNumber, isBoolean} from '../../core/utils/typeAssert'
+import {isString ,isNumber, isBoolean} from "../../core/lib/type-assert"
 
 export const radioProps = {
     theme: {

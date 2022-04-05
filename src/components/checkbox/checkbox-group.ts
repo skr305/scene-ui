@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import { isString } from '../../core/utils/typeAssert';
+=======
+import { ComponentConstants } from "../../core/constants";
+import { DefaultColor, DefaultSize } from '../../core/constants/comp';
+import { isBoolean } from "../../core/lib/type-assert";
+>>>>>>> 70a7718c1ae061f38638b6c1c15011fdce6a4f8a
 
 export const checkBoxGroupProps = {
 

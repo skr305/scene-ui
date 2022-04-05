@@ -27,7 +27,7 @@
 
 <script lang='ts'>
 import {defineComponent,nextTick,onMounted,reactive,ref,watch,getCurrentInstance} from 'vue'
-import {isNumber} from '../../core/utils/typeAssert'
+import {isNumber} from '../../core/lib/type-assert'
 import {numberInputProps,numberInputEmits} from './number-input'
 
 export default defineComponent({
