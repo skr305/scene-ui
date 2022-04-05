@@ -15,6 +15,7 @@ import sCheckboxButton from './components/checkbox/checkbox-button.vue';
 import sCard from './components/card/card.vue'
 import sCheckboxGroup from './components/checkbox/checkbox-group.vue';
 import sDialog from './components/dialog/dialog.vue'
+import message  from './components/message';
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -58,6 +59,13 @@ const checkLabels = ref( [
 watch( checkLabels, () => {
   console.log( checkLabels.value );
 }, { deep: true });
+
+const onMessage = () => {
+  message( { type: "suc", text: "成功", showCloseButton: true } );
+  message( { type: "warn", text: "警告" } );
+  message( { type: "info", text: "资料" } );
+  message( { type: "error", text: "错误" } );
+}
 
 </script>
 
@@ -172,6 +180,12 @@ watch( checkLabels, () => {
         <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
       </s-card>
     </s-dialog>
+  </div>
+  
+  <div>
+    <s-button @click="onMessage">
+        跳出信息
+    </s-button>
   </div>
 </template>
 
