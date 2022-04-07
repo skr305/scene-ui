@@ -32,14 +32,20 @@ export default defineComponent( {
     props: checkBoxProps,
     setup( props, ctx ) {
         const groupContext = inject<CheckGroupContextType>( CHECK_GROUP_CONTEXT );
-        const initChecked = computed( () => {
-            if( !groupContext || !groupContext.groupLabels ) {
-                return props.checked;
+        const current = ref( false );
+        {
+            const updateWithLabels = ( labels: string[] ) => {
+                current.value = labels.includes( props.label );
             }
-            return groupContext.groupLabels.includes( props.label );
-        } );
-        // 如果groupLabels 包含
-        const current = ref( initChecked.value );
+            //init for current and pushToDeps
+            if( !groupContext ) {
+                // 没有注入上下文的情况下 以checked提供的为准
+                current.value = props.checked;
+            } else {
+                updateWithLabels( groupContext.groupLabels );
+                groupContext.pushToDeps( updateWithLabels );
+            }
+        }
         const checkboxClass = computed( () => {
             if( props.disabled ) {
                 return "checkbox-scene-disabled";
@@ -70,7 +76,8 @@ export default defineComponent( {
                     } else {
                         groupLabels.push( props.label );
                     }
-                    labelChange( Array.from( new Set( groupLabels ) ) );
+                    const newLabels = Array.from( new Set( groupLabels ) );
+                    labelChange( newLabels );
                 }   
             }
         };

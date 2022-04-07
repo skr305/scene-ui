@@ -14,7 +14,7 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref, inject } from 'vue';
+import { computed, defineComponent, ref, inject, watch, onMounted } from 'vue';
 import { checkBoxBtnEmits, checkBoxBtnProps } from './checkbox-button';
 import { ThemeColorClassName } from '../../styles/theme-color-expose';
 import { CHECK_GROUP_CONTEXT, CheckGroupContextType } from './constants';
@@ -24,14 +24,20 @@ export default defineComponent( {
     props: checkBoxBtnProps,
     setup( props, ctx ) {
         const groupContext = inject<CheckGroupContextType>( CHECK_GROUP_CONTEXT );
-        const initChecked = computed( () => {
-            if( !groupContext || !groupContext.groupLabels ) {
-                return props.checked;
+        const current = ref( false );
+        {
+            const updateWithLabels = ( labels: string[] ) => {
+                current.value = labels.includes( props.label );
             }
-            return groupContext.groupLabels.includes( props.label );
-        } );
-        // 如果groupLabels 包含
-        const current = ref( initChecked.value );
+            //init for current and pushToDeps
+            if( !groupContext ) {
+                // 没有注入上下文的情况下 以checked提供的为准
+                current.value = props.checked;
+            } else {
+                updateWithLabels( groupContext.groupLabels );
+                groupContext.pushToDeps( updateWithLabels );
+            }
+        }
         const checkboxBtnClass = computed( () => {
             let classSet = "";
             if( props.disabled ) {
@@ -75,7 +81,8 @@ export default defineComponent( {
                     } else {
                         groupLabels.push( props.label );
                     }
-                    labelChange( groupLabels );
+                    const newLabels = Array.from( new Set( groupLabels ) );
+                    labelChange( newLabels );
                 }   
             }
         };
