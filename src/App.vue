@@ -61,10 +61,8 @@ watch( checkLabels, () => {
 }, { deep: true });
 
 const onMessage = () => {
-  message( { type: "suc", text: "成功", showCloseButton: true } );
-  message( { type: "warn", text: "警告" } );
-  message( { type: "info", text: "资料" } );
-  message( { type: "error", text: "错误" } );
+  message( { type: "suc", text: "成功", showCloseButton: true, "duration": 5000 } );
+
 }
 
 </script>

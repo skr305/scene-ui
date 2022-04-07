@@ -35,7 +35,7 @@ export const BootGen = async ( path: string, options: MidGOptions = DEFAULT_MIDG
         const APP_NAME = configBody.AppName;
         // write the model in place
         const MODEL_SQL_OUTPATH = `${OUT_DIR}/${APP_NAME}-database.sql`;
-        const ERROR_CODE_OUTPATH = `${OUT_DIR}/${APP_NAME}-error-code.ts`;
+        const ERROR_CODE_OUTPATH = `${OUT_DIR}/server/error-code.ts`;
         const ENTITY_OUTPUT_DIR = `${OUT_DIR}/server/entity`;
         const DB_OPTION_OUTPUT_PATH = `${OUT_DIR}/server/data-source-option.ts`;
 

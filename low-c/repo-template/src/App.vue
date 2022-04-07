@@ -10,7 +10,6 @@ const onRecieveData = () => {
   post( { url: "/api/find_all_users", payload: {} } ).then( result => {
     console.info( result );
     console.time();
-    console.profile( JSON.stringify( result ) );
     console.warn( result );
   } );
 };

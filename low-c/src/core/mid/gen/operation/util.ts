@@ -44,16 +44,17 @@ export type FIND_ORDER_VALUE
 "a" |
 "D" |
 "d";
+/** deprecated 所有的oper/method 皆是以本身生成的字句作为返回  */
 // 如果是null 则无法赋值 应给出warning 且应说明赋值无效
 // 如果是string 即是固定值 则会在下一行生成一个新的赋值语句 被赋值即是string
 // 如果是函数 则会根据该函数生成的字符串值在本行进行赋值
-const OperationReturnValue: { [key in OPERATION_TYPE]: ( null | ( ( compiled: string ) => string ) | string ) } = {
+export const OperationReturnValue: { [key in OPERATION_TYPE]: ( null | ( ( compiled: string ) => string ) | string ) } = {
     "Find": ( compiled: string ) => compiled,
     "FindOne": ( compiled: string ) => compiled,
     "Insert": "true",
     "Delete": "true"
 };
-const OperationGenerator:{ [key in OPERATION_TYPE]: ( base: string, params: Array<string> ) => string } = {
+export const OperationGenerator:{ [key in OPERATION_TYPE]: ( base: string, params: Array<string> ) => string } = {
     "Find": ( base: string, params: Array<string> ) => {
         let whereNested = "";
         let orderNested = "";
@@ -104,6 +105,21 @@ const OperationGenerator:{ [key in OPERATION_TYPE]: ( base: string, params: Arra
         `
     }
 };
+export type MethodType 
+= 
+"GenID" |
+"Map";
+export const MethodGenerator: { [ key in MethodType ]: ( params: string[] ) => string } = {
+    "GenID": ( params: string[] ) => {
+        const pre = params[0] || "";
+        return ` GenID( ${pre} );`;
+    },
+    "Map": ( params: string[] ) => {
+        let arrName = params[0];
+        let fmtAttr = params.slice( 1 ).join( ", " );
+        return ` ${arrName}.map( val => { const { ${fmtAttr} } = val; return { ${ fmtAttr } }; } ); `
+    }
+}
 export const SpecificVarname: { [ key: string ]: string } = {
     "$Return": "ctx.body",
     // param或params皆指向ctx.json
@@ -113,13 +129,13 @@ export const SpecificVarname: { [ key: string ]: string } = {
 };
 export const VarnameReg = /(\$\w+)/g
 export const PreHandlingStringWithVarName = ( sentence: string ) => {
-    sentence.replace( VarnameReg, ( v: string ) => {
+    return sentence.trim().replace( VarnameReg, ( v: string ) => {
         if( v in SpecificVarname ) {
             return SpecificVarname[ v ];
         }
         // 去除$符号
         return v.slice(1);
-    } )
+    } );
 };
 // 把一个经过变量替换的语句进行Token化
 export const compileSentenceToToken = ( sentence: string ) => {

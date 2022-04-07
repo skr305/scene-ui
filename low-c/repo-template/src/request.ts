@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import ServerError from '../server/server-error';
 import BASE_URL from './base-url';
 import { getSession } from './util/storage';
@@ -22,7 +22,7 @@ export const post = async <P, R>( options: { payload: P, url: string }  ):Promis
                 return ret
             }
         ]
-    } ).then( response => {
-        return response.data
+    } ).then( ( response: AxiosResponse<ServerError<R>, any> ) => {
+        return response.data;
     } );
 };

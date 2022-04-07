@@ -1,13 +1,9 @@
-export enum ServerErrorCode {
-    // succuess handling
-    OK = 0,
-    NOT_FOUND = 1,
-    UNKNOWN = 999
-};
+import { ServerErrorCode } from "./error-code";
+
 export default class ServerError<T> {
     data: T;
     errorCode: ServerErrorCode;
-    constructor( data: T, errorCode = ServerErrorCode.UNKNOWN ) {
+    constructor( data: T, errorCode = ServerErrorCode.Unknown ) {
         this.data = data;
         this.errorCode = errorCode;
     }

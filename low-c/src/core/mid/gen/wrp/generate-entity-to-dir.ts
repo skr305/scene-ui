@@ -10,7 +10,7 @@ import { stdWriteFileCover } from '../../../../util/std-write';
 const boot = async ( model: ModelConfigType, outDirPath: string = "", appName: string = "App" ) => {
     // the method to get the entity name
     const getEntityFileName = ( key: string ) => {
-        return `${ appName }${ key }.entity.ts`
+        return `${ key }.entity.ts`
     };
     const entityRawMeta = await entityGenerator( model );
     Object.keys( entityRawMeta ).map( async( entKey ) => { 

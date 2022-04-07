@@ -2,7 +2,7 @@ import dataSource from './data-source';
 import User from './entity/AppUser.entity';
 import AppContext from './app-context';
 import { Next } from 'koa';
-export default class Controller {
+export default class UnauthController {
     // @P( .. )
     public static async findAllUser( ctx: AppContext, next: Next ) {
         ctx.body = await dataSource.manager.find( User );
