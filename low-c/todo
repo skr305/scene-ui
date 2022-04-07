@@ -1,5 +1,6 @@
 1. error-code生成到server下 √
 2. error-code的到处变量不在命名app前缀 而以Server做前缀 √
 3. error-code的Unknown无需配置 会自动成一个Unknown的值 √
-3. operation-gen 统一安排到bootGen中去
-4. 新增base-port生成器
+3. operation-gen 统一安排到bootGen中去 √
+4. 新增base-port生成器 √
+5. 生成配置data-base name/pwd 的配置文件

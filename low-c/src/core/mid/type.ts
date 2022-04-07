@@ -50,5 +50,7 @@ export type MidConfigType = {
     Model?: ModelConfigType
     Operation?: OperationBlock;
     Cover ?: boolean,
-    BaseName: string
+    BaseName: string,
+    BaseUser: string,
+    BasePwd: string
 };

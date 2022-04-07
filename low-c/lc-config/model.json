@@ -2,6 +2,8 @@
     "$AutoDownloadDeps": false,
     "AppName": "Student",
     "BaseName": "123-b",
+    "BaseUser": "root",
+    "BasePwd": "123456",
     "Cover": true,
     "ErrorCode": {
         "Suc": 0,

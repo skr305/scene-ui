@@ -4,23 +4,23 @@ import { Entity, Column, PrimaryColumn } from 'typeorm';
     
 
 
-@Entity("User")
-export default class User {
+@Entity("Student")
+export default class Student {
     
-@PrimaryColumn()
-userID: string
-= "";
-
-
-@Column()
-pwd: string
-= "";
-
-                    
 @Column()
 usernick: string
 = "";
 
                     
+@Column()
+pwd: string
+= "";
+
+                    
+@PrimaryColumn()
+userID: string
+= "";
+
+
 };            
             

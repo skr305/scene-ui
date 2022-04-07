@@ -1,6 +1,5 @@
-import BaseError from 'core/error/base-error';
-import { XLS_ERROR_CODE_SET } from 'core/error/error-code';
-import { isString } from 'lodash';
+import BaseError from '../../../error/base-error';
+import { XLS_ERROR_CODE_SET } from '../../../error/error-code';
 import { OperationBlock } from '../../type';
 import { compileSentenceToToken, PreHandlingStringWithVarName, MethodGenerator, MethodType, OperationGenerator, OPERATION_TYPE, OperationReturnValue } from './util';
 
@@ -10,7 +9,7 @@ const compileSingleProgram = ( spr: string ):string => {
     if( afterVarReplace[0] !== "#" ) {
         return afterVarReplace;
     }
-    const token = compileSentenceToToken( afterVarReplace );
+    const token = compileSentenceToToken( afterVarReplace.slice(1) );
     // 执行操作/方法的核心语句
     let coreHandling = "";
     if( token.isMethod ) {
@@ -42,8 +41,8 @@ const compileSingleProgram = ( spr: string ):string => {
         }
     }
     // 存在赋值
-    if( token.varName !== undefined ) {
-        return  `let ${ token.varName } = ${ coreHandling };` ;
+    if( token.varName !== null) {
+        return  `let ${ token.varName } = ${ coreHandling }` ;
     }
     return coreHandling;
 }
@@ -66,9 +65,10 @@ const boot = ( root: OperationBlock, entityList: string[] ): { [key in "Auth" | 
         "Unauth": ""
     };
     [ "Auth", "Unauth" ].map( ( fp: "Auth" | "Unauth" ) => {
+        const currentBindRouter = root.Api[fp] || {};
         let nested = "";
-        Object.keys( root.Api[fp] ).map( ( cp ) => {
-        const pr = root.Api[fp][cp].Program;
+        Object.keys( currentBindRouter ).map( ( cp ) => {
+        const pr = currentBindRouter[cp].Program;
             nested += `
 public static async ${ cp } ( ctx: AppContext, next: Next ) {
     ${ pr ? compileProgram( pr ) : "" }
@@ -84,10 +84,7 @@ import ${ en } from './entity/${en}.entity'; `
 import dataSource from './data-source';
 import AppContext from './app-context';
 import { Next } from 'koa';
-import { compileSentenceToToken, PreHandlingStringWithVarName } from './util';
 import GenID from './gen-id';
-import { XLS_ERROR_CODE_SET } from '../../../error/error-code';
-import { OperatorType } from '../../../vue-generator/type';
 export default class ${fp}Controller {
     ${ nested }
 };

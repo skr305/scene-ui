@@ -1,22 +1,47 @@
+
+
+import Student from './entity/Student.entity'; 
+import User from './entity/User.entity'; 
 import dataSource from './data-source';
-import User from './entity/AppUser.entity';
 import AppContext from './app-context';
 import { Next } from 'koa';
+import GenID from './gen-id';
 export default class AuthController {
-    // @P( .. )
-    public static async findAllUser( ctx: AppContext, next: Next ) {
-        ctx.body = await dataSource.manager.find( User );
-        console.log( ctx.body );
-        await next();
-    };
-    // 删除操作 插入操作 查找操作 更改操作(暂略)
-    // 实体保存语言
-    static async getAllUserID( ctx: AppContext, next: Next ) {
-        const rowData = await dataSource.manager.find( User );
-        ctx.body = rowData.map( row => {
-            const { userID } = row;
-            return { userID }
-        } );
-        await next();
-    }
+    
+public static async Login ( ctx: AppContext, next: Next ) {
+    let user = await dataSource.manager.findOne( User, { where: { userID: ctx.json.userID,  } } );
+ctx.body = { done: user && user.pwd === ctx.json.pwd };
+
+    await next();
 };
+            
+public static async DeleteUser ( ctx: AppContext, next: Next ) {
+    
+        await dataSource
+        .createQueryBuilder()
+        .delete()
+        .from(User)
+        
+.where("userID=:userID", {userID: ctx.json.userID})
+        .execute();
+        
+ctx.body = { done: true };
+
+    await next();
+};
+            
+public static async InsertUser ( ctx: AppContext, next: Next ) {
+     { 
+ const __inserting = new User ();
+__inserting.userID = ctx.json.userID;
+await dataSource.manager.insert( User, __inserting );
+ 
+ } 
+ 
+ctx.body = { done: true };
+
+    await next();
+};
+            
+};
+        

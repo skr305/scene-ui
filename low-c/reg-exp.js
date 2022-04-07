@@ -9,3 +9,9 @@ console.log( fakeDocs.replace( varReg, ( v, ...args ) => {
         console.log( v, args[0], "\n" );
         return "HAYAYI"
 } ) );
+const boot = () => {
+    {
+        console.log( 233 );
+    }
+};
+boot();

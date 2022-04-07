@@ -2,6 +2,9 @@ import { OperationBlock } from '../../type';
 const boot = ( root: OperationBlock ): string => {
     let result = "";
     [ "Auth", "Unauth" ].map( ( fp: "Auth" | "Unauth" ) => {
+        if( !root.Api[fp] ) {
+            return;
+        }
         Object.keys( root.Api[fp] ).map( ( cp ) => {
             const p = root.Api[fp][cp].Params;
             const r = root.Api[fp][cp].Response;

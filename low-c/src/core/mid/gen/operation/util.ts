@@ -76,7 +76,7 @@ export const OperationGenerator:{ [key in OPERATION_TYPE]: ( base: string, param
             const condi = splitPairSafely( pair );
             whereNested += `${condi[0]}: ${condi[1]}, `
         }
-        return `await dataSource.manager.find( ${base}, { where: { ${whereNested} } } );`
+        return `await dataSource.manager.findOne( ${base}, { where: { ${whereNested} } } );`
     },
     "Insert": ( base: string, params: Array<string> ) => {
         const TEMP_VAR_NAME = "__inserting";
@@ -86,7 +86,8 @@ export const OperationGenerator:{ [key in OPERATION_TYPE]: ( base: string, param
             columnSequence += `${TEMP_VAR_NAME}.${given[0]} = ${given[1]};\n`
         }
         columnSequence += `await dataSource.manager.insert( ${base}, ${ TEMP_VAR_NAME } );\n`;
-        return columnSequence;
+        // 嵌入块级作用域
+        return ` { \n ${columnSequence} \n } \n `;
     },
     "Delete": ( base: string, params: Array<string> ) => {
         let whereExposed = "";
@@ -166,7 +167,7 @@ export const compileSentenceToToken = ( sentence: string ) => {
                 throw Error();
             };
         } catch( error ) {
-            throw new BaseError( XLS_ERROR_CODE_SET.COMPILE_ERROR, "method and operation sentence error: " + JSON.stringify( error ) );
+            throw new BaseError( XLS_ERROR_CODE_SET.COMPILE_ERROR, "method and operation sentence error: should start with ^/& \n or check out the variable given: should use => " + JSON.stringify( error ) + " \n error sentence: " + s );
         }
         
     };

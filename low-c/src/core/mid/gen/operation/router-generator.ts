@@ -12,9 +12,12 @@ const unauthRouter = new KoaRouter();
     `;
 
     [ "Auth", "Unauth" ].map( ( fp: "Auth" | "Unauth" ) => {
+        if( !oper.Api[fp] ) {
+            return;
+        }
         Object.keys( oper.Api[fp] ).map( ( cp ) => {
             result += `
-${ fp.toLowerCase() }Router.post( /${cp}, ${ fp }Controller.${ cp } ); 
+${ fp.toLowerCase() }Router.post( '/${cp}', ${ fp }Controller.${ cp } ); 
             `;
         } );
     } );

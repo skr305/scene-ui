@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import chalk from 'chalk';
-import { BaseName, Cover } from './data-source-option';
+import { BaseName, BaseUser, BasePwd, Cover } from './data-source-option';
 
 
 
@@ -8,8 +8,8 @@ const dataSource = new DataSource( {
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
-    "username": "root",
-    "password": "123456",
+    "username": BaseUser,
+    "password": BasePwd,
     "database": BaseName,
     "entities": [ __dirname + "\\entity\\*.entity.js" ],
     "cache": true,
