@@ -88,7 +88,7 @@ import {computed, defineComponent, ref, watch, nextTick} from 'vue'
 import sButton from '../button/button.vue'
 import sScrollbar from '../scrollbar/scrollbar.vue'
 import {datetimeProps, datetimeEmits} from './datetime'
-import {englishMonths, DateObject, getYearMonthDateHourMinuteSecond, createDate, getFullScreen} from '../../core/lib/date'
+import {englishMonths, DateObject, getDateCountByYearAndMonth, getYearMonthDateHourMinuteSecond, createDate, getFullScreen} from '../../core/lib/date'
 import {turnTo2dArray} from '../../core/lib/array'
 
 /**
@@ -166,7 +166,18 @@ export default defineComponent({
           emit('change',props.modelValue,oldDate)
           break
         case 'month':
-          emit('update:modelValue',createDate(year,value as number,date,hour,minute,second))
+          if(value === 0)
+            emit('update:modelValue',createDate(year-1,12,date,hour,minute,second))
+          else if(value === 13)
+            emit('update:modelValue',createDate(year+1,1,date,hour,minute,second))
+          else{
+            // 需要更改的月份的总天数
+            let MonthDateCount: number = getDateCountByYearAndMonth(year,value as number)
+            if(date > MonthDateCount)// 修改的日期在更改的月份不存在，改为最后一天
+              emit('update:modelValue',createDate(year,value as number,MonthDateCount,hour,minute,second))
+            else
+              emit('update:modelValue',createDate(year,value as number,date,hour,minute,second))
+          }
           emit('change',props.modelValue,oldDate)
           break
         case 'date':

@@ -56,23 +56,23 @@ function isLeapYear(year:number): boolean{
     return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0
 }
 
+// ****************************
+// 导出
+// **************************
+
 /**
  * 根据年月获取该月的天数
  * @param year 
  * @param month 从1开始月
  * @returns 
  */
-function getDateCountByYearAndMonth(year: number, month: number): number{
+export function getDateCountByYearAndMonth(year: number, month: number): number{
     // 该年是否是闰年
     if(isLeapYear(year))
         return leapYearMap.get(month.toString())!
     else
         return commonYearMap.get(month.toString())!
 }
-
-// ****************************
-// 导出
-// ****************************
 
 /**
  * 日期时间选择器的时间对象
@@ -120,8 +120,6 @@ export function createDate(year: number, month: number, date: number, hour?: num
  * @returns 日数组
  */
 export function getFullScreen(date: Date){
-    console.log('getFullScreen: ',date);
-    
     let [nowYear, nowMonth, nowDate, nowHour, nowMinute, nowSecond] = getYearMonthDateHourMinuteSecond(date);
 
     // 一个展示屏的所有天数
@@ -147,13 +145,13 @@ export function getFullScreen(date: Date){
     let prevCount = monthStartDay - 1;
     let prevMonthDates: DateObject[] = []
     // 计算出上一个月的总天数
-    let prevMonthDateCount = getDateCountByYearAndMonth(nowYear,nowMonth - 1)
+    let prevMonthDateCount = getDateCountByYearAndMonth(nowMonth===1?nowYear-1:nowYear,nowMonth===1?12:nowMonth-1)
     // 上一个月的date对象
     for(let i=prevCount - 1;i>=0;i--)
         prevMonthDates.push(
             new DateObject(createDate(nowMonth===1?nowYear-1:nowYear,nowMonth===1?12:nowMonth-1,prevMonthDateCount - i), false, false )// nowMonth 是真实月份
         );
-
+    
     // 计算出该月的后一月需要补几天 = 7*6 - 当月的天数 - 前一月补的天数
     let postCount = 42 - dateCount - prevCount;
     // 获取下一个月的date对象

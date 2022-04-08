@@ -37,7 +37,7 @@ const emptyStr = ref('')
 const print = (...args: any[])=>{
   console.log(...args)
 }
-const date1 = ref(new Date('2022-03-31'))
+const date1 = ref(new Date('2022-01-2'))
 
 const data = reactive( { value: "", pwd: "" } );
 watch( data, () => {

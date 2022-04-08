@@ -55,6 +55,7 @@ export default defineComponent({
   emits:selectEmits,
   components:{sScrollbar},
   setup(props,{emit,attrs,slots,expose}){
+    
     // 选择器的选择区域 html引用
     const menu = ref<HTMLElement>()
     // input html引用
