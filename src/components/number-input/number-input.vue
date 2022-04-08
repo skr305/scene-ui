@@ -144,7 +144,7 @@ export default defineComponent({
     width: 100px;
     height: 30px;
     border: 1px solid;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 .scene-number-input-button{
     display: flex;
@@ -152,7 +152,7 @@ export default defineComponent({
     align-items: center;
     width: 20%;
     border:none;
-    border-radius: 5px;
+    border-radius: 3px;
     background: white;
     /* 文字无法被选中 */
     -webkit-user-select:none;

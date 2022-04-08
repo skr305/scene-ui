@@ -14,6 +14,7 @@ import sCheckbox from './components/checkbox/checkbox.vue'
 import sCheckboxButton from './components/checkbox/checkbox-button.vue';
 import sCard from './components/card/card.vue'
 import sDialog from './components/dialog/dialog.vue'
+import sDatetime from './components/datetime/datetime.vue'
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -29,13 +30,13 @@ const options = ref([
   'option5',
   'option6'
 ])
-
 const baidu = ref('https://www.baidu.com')
 const emptyStr = ref('')
-
 const print = (...args: any[])=>{
   console.log(...args)
 }
+const date1 = ref(new Date('2022-03-31'))
+
 const data = reactive( { value: "", pwd: "" } );
 watch( data, () => {
   console.log( data );
@@ -109,6 +110,7 @@ watch( select, () => {
     <s-checkbox-button theme="red">变色</s-checkbox-button>
     <s-checkbox-button theme="red" disabled>Disabled</s-checkbox-button>
   </div>
+  
   <div class="exhibition">
     <s-card shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
       <template #header>
@@ -129,6 +131,10 @@ watch( select, () => {
         </span>
       </template>
     </s-select>
+  </div>
+
+  <div class="exhibition">
+    <s-datetime v-model="date1" name="start"></s-datetime>
   </div>
 
   <div class="exhibition">
@@ -153,6 +159,9 @@ watch( select, () => {
       </s-card>
     </s-dialog>
   </div>
+
+  
+
 </template>
 
 <style>
@@ -165,6 +174,7 @@ watch( select, () => {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 2000px;
 }
 .scene-link{
   margin:0 5px;

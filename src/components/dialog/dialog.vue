@@ -41,7 +41,6 @@
 import {defineComponent, onMounted, ref, watch} from 'vue'
 import {dialogProps, dialogEmits} from './dialog'
 import sButton from '../button/button.vue'
-import getFullScreen from '../../core/lib/date'
 
 export default defineComponent({
   name:'scene-dialog',
@@ -49,9 +48,6 @@ export default defineComponent({
   emits:dialogEmits,
   components:{sButton},
   setup(props,{emit,attrs,slots,expose}){
-    console.log(getFullScreen(new Date('2022-04-04')));
-
-
     const mask = ref<HTMLElement>()
 
     const container = ref<HTMLElement>()
@@ -178,11 +174,7 @@ export default defineComponent({
  * You can easily play with the scene-dialog transition by editing
  * these styles.
  */
-
-.scene-dialog-enter-from {
-  opacity: 0;
-}
-
+.scene-dialog-enter-from,
 .scene-dialog-leave-to {
   opacity: 0;
 }
