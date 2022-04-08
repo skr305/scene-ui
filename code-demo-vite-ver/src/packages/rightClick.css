@@ -1,0 +1,36 @@
+.contextmenu {
+  position: absolute;
+  z-index: 1000;
+}
+
+.contextmenu ul {
+  border: 1px solid #e4e7ed;
+  border-radius: 4px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 5px 0;
+  padding: 6px 0;
+}
+
+.contextmenu ul li {
+  font-size: 14px;
+  padding: 0 20px;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #606266;
+  height: 34px;
+  line-height: 34px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+}
+
+.contextmenu ul li:hover {
+  background-color: #f5f7fa;
+}
+/*# sourceMappingURL=rightClick.css.map */

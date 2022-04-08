@@ -1,40 +1,40 @@
 {
-    "$Entitys": {
-        "$Cover": true,
-        "$Database": "demo_chat",
-        "$SQL_User": "root",
-        "$SQL_Pwd": "123456",
-        "$Table": {
+    "Entitys": {
+        "Cover": true,
+        "Database": "demo_chat",
+        "SQL_User": "root",
+        "SQL_Pwd": "123456",
+        "Table": {
             "User": {
-                "userID": "string$ID",
+                "userID": "stringID",
                 "nick": "longstring",
                 "pwd": "string"
             },
             "ScMes": {
-                "ID": "string$ID",
+                "ID": "stringID",
                 "content": "string",
                 "date": "string"
             },
             "CtMes": {
-                "ID": "string$ID",
+                "ID": "stringID",
                 "content": "string",
                 "date": "string"
             },
             "UsRel": {
-                "UID": "string$ID",
-                "SID": "string$ID"
+                "UID": "stringID",
+                "SID": "stringID"
             },
             "UcRel": {
-                "UID": "string$ID",
-                "CID": "string$ID"
+                "UID": "stringID",
+                "CID": "stringID"
             },
             "UuRel": {
-                "masterID": "string$ID",
-                "slaveID": "string$ID"
+                "masterID": "stringID",
+                "slaveID": "stringID"
             },
             "UucRel": {
-                "bindUID": "string$ID",
-                "cID": "string$ID"
+                "bindUID": "stringID",
+                "cID": "stringID"
             }
         }
     }

@@ -1,3 +1,5 @@
+import { isString } from "../../core/lib/type-assert";
+
 import { ComponentConstants } from "../../core/constants";
 import { DefaultColor, DefaultSize } from '../../core/constants/comp';
 import { isBoolean } from "../../core/lib/type-assert";
@@ -10,7 +12,7 @@ export const checkBoxGroupProps = {
         required: false,
         validator(value:Array<any>){
             for( let ele of value ) {
-                if( !isBoolean( ele ) ) {
+                if( !isString( ele ) ) {
                     return false;
                 }
             }
@@ -23,7 +25,7 @@ export const checkBoxGroupProps = {
 export const checkBoxGroupEmits = {
     change: (value:Array<any>) => {
         for( let ele of value ) {
-            if( !isBoolean( ele ) ) {
+            if( !isString( ele ) ) {
                 return false;
             }
         }

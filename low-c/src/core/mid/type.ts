@@ -19,17 +19,24 @@ export interface OperaionOutposeCell<R = any, D = any, E = any> {
     Data: D;
     ExtraData: E;
 };
+// deprecated
 export type OpeationRouterCell = {
     // /auth: { /v1: { ... } }, /auth: { login: {} }
     // 2 situation available
     // if the path key start with "/", it will be recg as a routercell 
     [path: string]: OpeationRouterCell | OperaionOutposeCell
 };
+export type AvailableRouter = "Auth" | "Unauth";
+export type OperationDefineType = {
+    Response?: string,
+    Params?: string,
+    Program?: Array<string>
+};
 export type OperationBlock = {
     // the server's default site
     // first is the pr env, sec is the dev env
-    $BaseURL: [ string, string ];
-    Router ?: OpeationRouterCell;
+    DevPort: number;
+    Api: { [ routetr in AvailableRouter ]: { [operation: string]: OperationDefineType } };
 };
 // the type of the config
 export type ErrorMapBlock = { [ MEAN: string ]: number };
@@ -42,4 +49,8 @@ export type MidConfigType = {
     ErrorCode?: ErrorMapBlock;
     Model?: ModelConfigType
     Operation?: OperationBlock;
+    Cover ?: boolean,
+    BaseName: string,
+    BaseUser: string,
+    BasePwd: string
 };

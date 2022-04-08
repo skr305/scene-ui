@@ -246,7 +246,7 @@ export default defineComponent({
 }
 /* 选择器主体的子元素有获取焦点时 */
 .scene-select:focus-within{
-    border: 1px solid #409EFF;
+    border: 1px solid #9000ff;
 }
 /* 选择器的输入框 */
 #scene-select-input{
@@ -318,7 +318,7 @@ export default defineComponent({
 }
 /* 选中 */
 .scene-select-dropdown-menu-option[selected="true"]{
-    color:#409EFF
+    color:#9000ff
 }
 /* 悬浮 */
 .scene-select-dropdown-menu-option:hover{
