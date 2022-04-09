@@ -15,6 +15,7 @@ export default defineComponent( {
     name: "s-checkbox-group",
     emits: checkBoxGroupEmits,
     props: checkBoxGroupProps,
+    
     setup( props, ctx ) {
         watch( props, () => {
              deps.map( dep => {
