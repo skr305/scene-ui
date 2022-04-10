@@ -1,13 +1,24 @@
 {
   "name": "scene-ui",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.8",
+  "description": "fix some bug",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:lib": "vite build --config ./vite.lib.config.ts",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "b-comp": "vite build --config build/comp.config.ts"
+  },
+  "main": "./dist/scene-ui.umd.js",
+  "module": "./dist/scene-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/scene-ui.es.js",
+      "require": "./dist/scene-ui.umd.js"
+    }
   },
   "dependencies": {
     "@types/events": "^3.0.0",
@@ -16,6 +27,8 @@
     "less": "^4.1.2",
     "lodash": "^4.17.21",
     "ts-loader": "^9.2.7",
+    "vite": "^2.9.1",
+    "vite-plugin-dts": "^1.0.5",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
   },
