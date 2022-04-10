@@ -21,7 +21,7 @@
         >   
             <div v-if="showTags" class="scene-select-multiple-tag">
                 <span>{{selectedItems[selectedItems.length-1]}}</span>
-                <img src="/close.svg" @click.stop="handleDelete($event)" title="close">
+                <img src="/close_12.svg" @click.stop="handleDelete($event)" title="close">
             </div>
             <div v-if="showTags" class="scene-select-multiple-count">
                 <span>+{{selectedItems.length}}/{{multipleLimit}}</span>
@@ -55,6 +55,7 @@ export default defineComponent({
   emits:selectEmits,
   components:{sScrollbar},
   setup(props,{emit,attrs,slots,expose}){
+    
     // 选择器的选择区域 html引用
     const menu = ref<HTMLElement>()
     // input html引用
@@ -238,8 +239,15 @@ export default defineComponent({
     position: relative; /** 定位该元素是子元素中设置了position：absolute的相对父元素*/
     justify-content: space-between;
     align-items: center;
-    border: #409EFF 1px solid;
+    border: 1px solid #E4E7ED;
     border-radius: 5px;
+}
+.scene-select:hover{
+    border: 1px solid #C0C4CC
+}
+/* 选择器主体的子元素有获取焦点时 */
+.scene-select:focus-within{
+    border: 1px solid #9000ff;
 }
 /* 选择器的输入框 */
 #scene-select-input{
@@ -259,7 +267,6 @@ export default defineComponent({
 }
 /* 选择器的箭头 */
 .scene-select-dropdown-arrow{
-    /* display: none; */
     visibility: hidden;
     position: absolute;
     width: 10px;
@@ -267,8 +274,8 @@ export default defineComponent({
     background: white;
     top: calc(100%);
     left: calc(50%);
-    border-top: #409EFF 1px solid;
-    border-right: #409EFF 1px solid;
+    border-top: 1px solid #E4E7ED;
+    border-right: 1px solid #E4E7ED;
     transform: rotate(-45deg);
     z-index: 1001;
     opacity: 0;
@@ -281,7 +288,11 @@ export default defineComponent({
     position: absolute;
     width: 220px; /** 220px - 1px * 2  */
     height: 190px; /** 190px - 5px*2 - 1px*2 */
-    border:#409EFF 1px solid;
+
+    border: 1px solid #E4E7ED;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+
+    background: white;
     border-radius: 5px;
     top: calc(100% + 5px);
     padding: 5px 0;
@@ -308,7 +319,7 @@ export default defineComponent({
 }
 /* 选中 */
 .scene-select-dropdown-menu-option[selected="true"]{
-    color:#409EFF
+    color:#9000ff
 }
 /* 悬浮 */
 .scene-select-dropdown-menu-option:hover{
@@ -330,7 +341,6 @@ export default defineComponent({
 #scene-select-input:focus~#scene-select-icon{
     transform: rotate(180deg);
 }
-
 /* 没有选项时的提示 */
 .scene-select-no-options{
     width: calc(100% - 20px);

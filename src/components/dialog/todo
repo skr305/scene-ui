@@ -1,0 +1,28 @@
+show	是否显示 Dialog	boolean	—	—
+title	Dialog 对话框 Dialog 的标题， 也可通过具名 slot （见下表）传入	string	—	—
+width	Dialog 的宽度	string / number	—	50%
+modal	是否需要遮罩层	boolean	—	true
+
+lock-scroll	是否在 Dialog 出现时将 body 滚动锁定	boolean	—	true
+
+open-delay	Dialog 打开的延时时间，单位毫秒	number	—	0
+close-delay	Dialog 关闭的延时时间，单位毫秒	number	—	0
+
+close-on-click-modal	是否可以通过点击 modal 关闭 Dialog	boolean	—	true
+close-on-press-escape	是否可以通过按下 ESC 关闭 Dialog	boolean	—	true
+
+show-close	是否显示关闭按钮	boolean	—	true
+before-close	关闭前的回调，会暂停 Dialog 的关闭	function(done)，done 用于关闭 Dialog	—	—
+
+
+插槽名	说明
+—	Dialog 的内容
+title	Dialog 标题区的内容
+footer	Dialog 按钮操作区的内容
+
+
+事件名	说明	参数
+open	Dialog 打开的回调	—
+opened	Dialog 打开动画结束时的回调	—
+close	Dialog 关闭的回调	—
+closed	Dialog 关闭动画结束时的回调	—

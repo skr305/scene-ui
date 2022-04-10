@@ -1,0 +1,31 @@
+{
+    "DevPort": 4000,
+    "Api": {
+        "Auth": {
+            "Login": {
+                "Params": "{userID: string, pwd: string}",
+                "Response": "{done: boolean}",
+                "Program": [
+                    "# $user => &User.FindOne|userID=$Params.userID ",
+                    " $Return = { done: $user && $user.pwd === $Params.pwd };"
+                ]
+            },
+            "DeleteUser": {
+                "Params": "{userID: string}",
+                "Response": "{done: boolean}",
+                "Program": [
+                    "# &User.Delete|userID=$Params.userID ",
+                    " $Return = { done: true };"
+                ]
+            },
+            "InsertUser": {
+                "Params": "{userID: string}",
+                "Response": "{done: boolean}",
+                "Program": [
+                    "# &User.Insert|userID=$Params.userID ",
+                    " $Return = { done: true };"
+                ]
+            }
+        }
+    }
+}

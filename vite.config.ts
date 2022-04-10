@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     extensions: [".js", ".jsx", ".tsx", ".ts"]
+  },
+  server: {
+    host: '0.0.0.0',
+    port: 5000,
+    // 是否开启 https
+    https: false,
   }
 })

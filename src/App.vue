@@ -13,6 +13,10 @@ import sScrollbar from './components/scrollbar/scrollbar.vue'
 import sCheckbox from './components/checkbox/checkbox.vue'
 import sCheckboxButton from './components/checkbox/checkbox-button.vue';
 import sCard from './components/card/card.vue'
+import sCheckboxGroup from './components/checkbox/checkbox-group.vue';
+import sDialog from './components/dialog/dialog.vue'
+import sDatetime from './components/datetime/datetime.vue'
+import message  from './components/message';
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -28,20 +32,19 @@ const options = ref([
   'option5',
   'option6'
 ])
-
 const baidu = ref('https://www.baidu.com')
 const emptyStr = ref('')
-
 const print = (...args: any[])=>{
   console.log(...args)
 }
+const date1 = ref(new Date('2022-01-2'))
+
 const data = reactive( { value: "", pwd: "" } );
 watch( data, () => {
   console.log( data );
 } );
 const text = ref( "" );
 watch( text, () => {
-
   console.log( "on text change", text.value );
 } )
 
@@ -49,6 +52,19 @@ const select = ref( false );
 watch( select, () => {
   console.log( select.value );
 } )
+const checkLabels = ref( [
+  "两广",
+  "汉中",
+  "大同"
+] );
+watch( checkLabels, () => {
+  console.log( checkLabels.value );
+}, { deep: true });
+
+const onMessage = () => {
+  message( { type: "suc", text: "成功", showCloseButton: true, "duration": 5000 } );
+
+}
 
 </script>
 
@@ -104,11 +120,23 @@ watch( select, () => {
   </div>
 
   <div>
-    <s-checkbox-button v-model="select" @change="(event) => console.log(event)">默认</s-checkbox-button>
+    <s-checkbox-button v-model="select">默认</s-checkbox-button>
     <s-checkbox-button leftBorderRound>左圆</s-checkbox-button>
     <s-checkbox-button theme="red">变色</s-checkbox-button>
     <s-checkbox-button theme="red" disabled>Disabled</s-checkbox-button>
+    <s-checkbox-group v-model="checkLabels">
+        <s-checkbox-button label="两广"></s-checkbox-button>
+        <s-checkbox-button label="大同"></s-checkbox-button>
+        <s-checkbox-button label="武汉"></s-checkbox-button>
+    </s-checkbox-group>
+    <s-checkbox-group v-model="checkLabels">
+        <s-checkbox label="两广"></s-checkbox>
+        <s-checkbox label="大同"></s-checkbox>
+        <s-checkbox label="武汉"></s-checkbox>
+    </s-checkbox-group>
+  
   </div>
+  
   <div class="exhibition">
     <s-card shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
       <template #header>
@@ -130,6 +158,39 @@ watch( select, () => {
       </template>
     </s-select>
   </div>
+
+  <div class="exhibition">
+    <s-datetime v-model="date1" name="start"></s-datetime>
+  </div>
+
+  <div class="exhibition">
+    <s-button @click="booleanFalse = true">Show Modal</s-button>
+    <!-- use the modal component, pass in the prop -->
+    <s-dialog v-model="booleanFalse" 
+      title="title" 
+      :modal="booleanFalse" 
+      @open="print"
+      @opened="print"
+      @close="print" 
+      @closed="print"
+    >
+      <s-card shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
+        <template #header>
+          <div class="card-header">
+            <span>Card Name</span>
+            <s-button class="button" type="text">Operation button</s-button>
+          </div>
+        </template>
+        <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+      </s-card>
+    </s-dialog>
+  </div>
+
+  <div>
+    <s-button @click="onMessage">
+        跳出信息
+    </s-button>
+  </div>
 </template>
 
 <style>
@@ -142,6 +203,7 @@ watch( select, () => {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 2000px;
 }
 .scene-link{
   margin:0 5px;

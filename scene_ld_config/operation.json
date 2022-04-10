@@ -1,83 +1,81 @@
 {
-    "$Opers": {
-        "$Devport": "9000",
-        "$Api": {
-            "Auth": {
-                "get_in_chat": {
-                    "$Response": "Array<string>",
-                    "$Program": [
-                        "# $chattings => &UuRel.Find|masterID=$UserID|type=1 ",
-                        " $Returns = chattings.map( val => val.slaveID ) "
-                    ]
-                },
-                "get_chat_content": {
-                    "$Params": "{ bindID: string }",
-                    "$Response": "Array<{isMe: boolean, content: string, date: string}>"
-                },
-                "send_mes": {
-                    "$Params": "{ bindID: string, content: string, cID: string, date: string }",
-                    "$Response": "{done: boolean}",
-                    "$Program": [
-                        " #CtMes.Insert|content=$Param.content|ID=$Params.cID|date=$Param.date",
-                        " #UucRel.Insert|bindID=$Params.bindID|cID=$Params.cID",
-                        " $Return = true; "
-                    ]
-                },
-                "get_new_mes": {
-                    "$Params": "{ toID: string }",
-                    "$Response": "Array<{content: string, date: string}>"
-                },
-                "get_social_list": {
-                    "$Params": "{}",
-                    "$Response":  "Array<content: string, date: string, ID: string>",
-                    "$Program": [
-                        "#$Return=>ScMes.Find"
-                    ]
-                },
-                "star_social": {
-
-                },
-                "thumb_social": {
-
-                },
-                "add_chat": {
-                    "$Param": "{ toID: string } ",
-                    "$Response": "{ done: boolean }",
-                    "$Program": [
-                        "#UuRel.Insert|masterID=$UserID|slaveID=$Params.toID|type=1",
-                        "$Return = true"
-                    ]
-                }
+    "DevPort": "9000",
+    "Api": {
+        "Auth": {
+            "get_in_chat": {
+                "Response": "Array<string>",
+                "Program": [
+                    "# chattings => &UuRel.Find|masterID=UserID|type=1 ",
+                    " Returns = chattings.map( val => val.slaveID ) "
+                ]
             },
-            "$Unauth": {
-                "login": {
-                    "$Params": {
-                        "userID": "string",
-                        "pwd": "string"
-                    },
-                    "$Response": {
-                        "done": "boolean"
-                    },
-                    "$Program": [
-                        "# $pwd => &User.FindOne|userID=$Params.userID",
-                        "$Return = $Params.pwd === pwd;"
-                    ]
+            "get_chat_content": {
+                "Params": "{ bindID: string }",
+                "Response": "Array<{isMe: boolean, content: string, date: string}>"
+            },
+            "send_mes": {
+                "Params": "{ bindID: string, content: string, cID: string, date: string }",
+                "Response": "{done: boolean}",
+                "Program": [
+                    " #CtMes.Insert|content=Param.content|ID=Params.cID|date=Param.date",
+                    " #UucRel.Insert|bindID=Params.bindID|cID=Params.cID",
+                    " Return = { done: true }; "
+                ]
+            },
+            "get_new_mes": {
+                "Params": "{ toID: string }",
+                "Response": "Array<{content: string, date: string}>"
+            },
+            "get_social_list": {
+                "Params": "{}",
+                "Response":  "Array<content: string, date: string, ID: string>",
+                "Program": [
+                    "#Return=>ScMes.Find"
+                ]
+            },
+            "star_social": {
+
+            },
+            "thumb_social": {
+
+            },
+            "add_chat": {
+                "Params": "{ toID: string } ",
+                "Response": "{ done: boolean }",
+                "Program": [
+                    "#UuRel.Insert|masterID=UserID|slaveID=Params.toID|type=1",
+                    "Return = true"
+                ]
+            }
+        },
+        "Unauth": {
+            "login": {
+                "Params": {
+                    "userID": "string",
+                    "pwd": "string"
                 },
-                "register": {
-                    "$Params": {
-                        "userID": "string",
-                        "nick": "string",
-                        "pwd": "string"
-                    },
-                    "$Response": {
-                        "done": "boolean"
-                    },
-                    "$Program": [
-                        "# &User.Insert|userID=$Params.userID|pwd=$Params.pwd|nick=$Params.nick",
-                        "$Return = true"
-                    ]
-                }
+                "Response": {
+                    "done": "boolean"
+                },
+                "Program": [
+                    "# pwd => &User.FindOne|userID=Params.userID",
+                    "Return = Params.pwd === pwd;"
+                ]
+            },
+            "register": {
+                "Params": {
+                    "userID": "string",
+                    "nick": "string",
+                    "pwd": "string"
+                },
+                "Response": {
+                    "done": "boolean"
+                },
+                "Program": [
+                    "# &User.Insert|userID=Params.userID|pwd=Params.pwd|nick=Params.nick",
+                    "Return = true"
+                ]
             }
         }
-    }   
+    }
 }

@@ -1,6 +1,6 @@
 import { ComponentConstants } from "../../core/constants";
 import { DefaultColor, DefaultSize } from '../../core/constants/comp';
-import { isBoolean } from '../../core/utils/typeAssert';
+import { isBoolean } from "../../core/lib/type-assert";
 
 export const checkBoxProps = {
     checked: {

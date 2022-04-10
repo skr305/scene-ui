@@ -186,7 +186,7 @@ export default defineComponent({
             let value = event.clientY - wrapTop;
             // _thumbY.getBoundingClientRect().top - wrapEl.getBoundingClientRect().top = 拖动滚动条移动的距离
             // 再除以包裹div的高度计算出移动的百分比，乘上未压缩的高度就是需要移动距离
-            wrapEl.scrollTop = (value - deviation) / wrapHeight * wrapEl.scrollHeight; //这个元素的内容顶部（卷起来的）到它的视口可见内容（的顶部）的距离
+            wrapEl.scrollTop = (value - deviation) / wrapHeight * wrapEl.scrollHeight; //这个元素的内容顶部（卷起来的）到它的视图可见内容（的顶部）的距离
         } else {
             const wrapLeft = wrapEl.getBoundingClientRect().left;
             const wrapWidth = wrapEl.clientWidth;
@@ -200,7 +200,6 @@ export default defineComponent({
         isDrag = false;
         if (el.value!.contains(event.target as HTMLElement)) {
             if (props.clickUpdateDelay > 0) {
-                // console.log("执行");
                 timer && clearTimeout(timer);
                 timer = setTimeout(updateThumbStyle, props.clickUpdateDelay);
             }
@@ -209,6 +208,18 @@ export default defineComponent({
             showThumb.y = false;
         }
     }
+
+    /**
+     * 控制 滚动包裹的元素自动移动 distance px的距离，实现滚动条的移动
+     */
+    function moveTo(distance: number,direction: 'Y'|'X'){
+        const wrapEl = wrap.value!;
+        if(direction === 'Y')
+            wrapEl.scrollTop = distance
+        else
+            wrapEl.scrollLeft = distance
+    }
+
 
     // 鼠标进入滚动条区域，显示滚动条
     // 添加如果没有超过props的宽高则不显示
@@ -238,11 +249,13 @@ export default defineComponent({
     });
 
     onUnmounted(()=>{
-        wrap.value && wrap.value.removeEventListener("scroll", updateThumbStyle);
-        el.value!.removeEventListener("mousedown", onDragStart);
-        el.value!.removeEventListener("mousemove", onDragMove);
-        el.value!.removeEventListener("mouseup", onDragEnd);
-        timer && clearTimeout(timer);
+        if(el.value){
+            wrap.value && wrap.value.removeEventListener("scroll", updateThumbStyle);
+            el.value!.removeEventListener("mousedown", onDragStart);
+            el.value!.removeEventListener("mousemove", onDragMove);
+            el.value!.removeEventListener("mouseup", onDragEnd);
+            timer && clearTimeout(timer);
+        }
     });
 
 
@@ -256,7 +269,8 @@ export default defineComponent({
         showThumb,
         updateThumbStyle,
         onEnter,
-        onLeave
+        onLeave,
+        moveTo
     }
   }
 })

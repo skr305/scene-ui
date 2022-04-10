@@ -43,3 +43,10 @@ registerConfig.register({
     render: () => <ElInput></ElInput>,
     key: "input"
 })
+
+registerConfig.register({
+    label: 'div',
+    preview: () => <div>233</div>,
+    render: () => <div>233</div>,
+    key: "div"
+})

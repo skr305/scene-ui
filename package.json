@@ -1,7 +1,7 @@
 {
   "name": "scene-ui",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -12,10 +12,18 @@
   "dependencies": {
     "@types/events": "^3.0.0",
     "@types/lodash": "^4.14.180",
+    "@types/vue-router": "^2.0.0",
+    "less": "^4.1.2",
     "lodash": "^4.17.21",
+<<<<<<< HEAD
     "vue": "^3.2.25",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2"
+=======
+    "ts-loader": "^9.2.7",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14"
+>>>>>>> 426b0ea9b5079db74c329913ed06dec9251ab2a4
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

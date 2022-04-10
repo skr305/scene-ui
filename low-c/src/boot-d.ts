@@ -1,9 +1,10 @@
-import BootGen from './core/mid/boot';
+import modelEngine from './model-engine';
+import chalk from 'chalk';
 
 console.log( "IN-boot-demo run 233" );
 const boot = async () => {
-    const result = await BootGen( './model.json' );
-    console.log( result );
+    await modelEngine();
+    console.log( chalk.blueBright( "finish" ) );
 };
 
 boot();

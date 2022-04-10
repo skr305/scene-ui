@@ -40,9 +40,9 @@ export default defineComponent({
         let paddingSize = computed(()=>{
             switch(props.size){
                 case 'default':
-                    return '10px 20px';
+                    return '8px 16px';
                 case 'large':
-                    return '15px 30px';
+                    return '12px 24px';
                 case 'small':
                     return '5px 10px'
             }
@@ -63,7 +63,7 @@ export default defineComponent({
     background: white;
     color:black;
     border:1px solid;
-    border-radius: 5px;
+    border-radius: 4px;
     font-size: 14px;
 
     display: inline-flex;

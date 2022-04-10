@@ -13,7 +13,7 @@ const drawErrorMapToEnum = ( errorMap: ErrorMapBlock, appName: string = "App" ) 
         }
     } );
     return `
-export enum ${appName}ErrorCode {
+export enum ServerErrorCode {
     ${ nested }
 };
     `;
@@ -25,7 +25,7 @@ export enum ${appName}ErrorCode {
  */
 const drawErrorCodeMap = (  errorMap: ErrorMapBlock, appName: string = "App"  ): string => {
     return `
-export const ${appName}ErroCodeMap = ${ JSON.stringify( errorMap ) };\n
+export const ServerErroCodeMap = ${ JSON.stringify( errorMap ) };\n
     `;
 };
 /**
@@ -34,6 +34,11 @@ export const ${appName}ErroCodeMap = ${ JSON.stringify( errorMap ) };\n
  * @returns gened file that be stringfy
  */
 const boot = ( errorMap: ErrorMapBlock, appName: string = "App" ):string => {
+    const DEFAULT_UNKNOWN_ERROR_TAG = "Unknown";
+    // 必须有一个默认为Unknown的不可处理错误
+    if( DEFAULT_UNKNOWN_ERROR_TAG !in errorMap ) {
+        errorMap[ DEFAULT_UNKNOWN_ERROR_TAG ] = 999;
+    }
     let result = `
 ${ drawErrorMapToEnum( errorMap, appName ) }
 ${ drawErrorCodeMap( errorMap, appName ) }    
