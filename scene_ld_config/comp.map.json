@@ -1,7 +1,0 @@
-{
-    "$DefaultPath": "../assetsComp",
-    "LoginReg": {
-        "$Path": "/LoginReg.vue"
-    }
-    
-}
