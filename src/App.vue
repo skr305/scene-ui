@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, watch, ref } from 'vue';
+import { reactive, watch, ref, VNode } from 'vue';
 import buttonVue from './components/button/button.vue';
 import paymentInputVue from './components/payment/s-payment-input.vue';
 import sInput from './components/input/s-input.vue'
@@ -17,6 +17,8 @@ import sCheckboxGroup from './components/checkbox/checkbox-group.vue';
 import sDialog from './components/dialog/dialog.vue'
 import sDatetime from './components/datetime/datetime.vue'
 import message  from './components/message';
+import {SceneLoading} from './components/loading/loading'
+
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -65,6 +67,33 @@ const onMessage = () => {
   message( { type: "suc", text: "成功", showCloseButton: true, "duration": 5000 } );
 
 }
+
+const card1 = ref<HTMLElement>()
+const onLocalLoading = (target: HTMLElement | string) =>{
+  let loadingInstance = SceneLoading.service({
+    target: target,
+    fullScreen: true,
+    text: 'loading...',
+    onClose: ()=>{
+      console.log('loading close!');
+    }
+  })
+  loadingInstance.open()
+  setTimeout(loadingInstance.close,5000)
+}
+const onGlobalLoading = () =>{
+  let loadingInstance1 = SceneLoading.service({
+    target: 'body',
+    fullScreen: true,
+    text: 'loading...',
+    onClose: ()=>{
+      console.log('loading close!');
+    }
+  })
+  loadingInstance1.open()
+  setTimeout(loadingInstance1.close,5000)
+}
+
 
 </script>
 
@@ -138,11 +167,11 @@ const onMessage = () => {
   </div>
   
   <div class="exhibition">
-    <s-card shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
+    <s-card ref="card1" id="card" shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
       <template #header>
         <div class="card-header">
           <span>Card Name</span>
-          <s-button class="button" type="text">Operation button</s-button>
+          <s-button @click="onLocalLoading(card1)" type="text">local loading</s-button>
         </div>
       </template>
       <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
@@ -174,11 +203,13 @@ const onMessage = () => {
       @close="print" 
       @closed="print"
     >
-      <s-card shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
+      <s-card id="card2" shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
         <template #header>
           <div class="card-header">
             <span>Card Name</span>
-            <s-button class="button" type="text">Operation button</s-button>
+            <s-button @click="onLocalLoading('#card2')" type="text">
+              local loading
+            </s-button>
           </div>
         </template>
         <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
@@ -186,9 +217,15 @@ const onMessage = () => {
     </s-dialog>
   </div>
 
-  <div>
+  <div class="exhibition">
     <s-button @click="onMessage">
         跳出信息
+    </s-button>
+  </div>
+
+  <div class="exhibition">
+    <s-button @click="onGlobalLoading">
+        global loading
     </s-button>
   </div>
 </template>
@@ -202,7 +239,6 @@ const onMessage = () => {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   height: 2000px;
 }
 .scene-link{
@@ -227,5 +263,6 @@ const onMessage = () => {
 .item {
   margin-bottom: 18px;
   flex-grow: 1;
+  
 }
 </style>
