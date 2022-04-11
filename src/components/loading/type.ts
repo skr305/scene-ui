@@ -20,7 +20,7 @@ export type loadingData = {
     onClose: Function       
     loadingVM: App<Element>
     loadingMountElement: HTMLElement
-    visible: boolean
+    visible: boolean            // loading组件的可见性
     originalPosition: string,   // target原始的css position值
     originalOverflow: string    // target原始的css overflow值
 }
