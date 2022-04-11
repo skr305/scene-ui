@@ -1,2 +1,2 @@
-export * as SButton from './src/components/button/button.vue';
-export * as SDatetime from './src/components/datetime/datetime.vue';
+export * as SButton from './package/components/button/button.vue';
+export * as SDatetime from './package/components/datetime/datetime.vue';

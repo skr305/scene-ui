@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import { reactive, watch, ref, VNode } from 'vue';
-import buttonVue from './components/button/button.vue';
-import paymentInputVue from './components/payment/s-payment-input.vue';
-import sInput from './components/input/s-input.vue'
+import buttonVue from '../package/components/button/button.vue';
+import paymentInputVue from '../package/components/payment/s-payment-input.vue';
+import sInput from '../package/components/input/s-input.vue'
 
-import sButton from './components/button/button.vue';
-import sRadio from './components/radio/radio.vue'
-import sNumberInput from './components/number-input/number-input.vue'
-import sLink from './components/link/link.vue'
-import sSelect from './components/select/select.vue'
-import sScrollbar from './components/scrollbar/scrollbar.vue'
-import sCheckbox from './components/checkbox/checkbox.vue'
-import sCheckboxButton from './components/checkbox/checkbox-button.vue';
-import sCard from './components/card/card.vue'
-import sCheckboxGroup from './components/checkbox/checkbox-group.vue';
-import sDialog from './components/dialog/dialog.vue'
-import sDatetime from './components/datetime/datetime.vue'
-import message  from './components/message';
-import {SceneLoading} from './components/loading/loading'
+import sButton from '../package/components/button/button.vue';
+import sRadio from '../package/components/radio/radio.vue'
+import sNumberInput from '../package/components/number-input/number-input.vue'
+import sLink from '../package/components/link/link.vue'
+import sSelect from '../package/components/select/select.vue'
+import sScrollbar from '../package/components/scrollbar/scrollbar.vue'
+import sCheckbox from '../package/components/checkbox/checkbox.vue'
+import sCheckboxButton from '../package/components/checkbox/checkbox-button.vue';
+import sCard from '../package/components/card/card.vue'
+import sCheckboxGroup from '../package/components/checkbox/checkbox-group.vue';
+import sDialog from '../package/components/dialog/dialog.vue'
+import sDatetime from '../package/components/datetime/datetime.vue'
+import message  from '../package/components/message';
+import {SceneLoading} from '../package/components/loading/loading'
 
 
 const booleanTrue = ref(true)
@@ -231,7 +231,7 @@ const onGlobalLoading = () =>{
 </template>
 
 <style>
-@import './styles/global.css';
+@import '../package/styles/global.css';
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

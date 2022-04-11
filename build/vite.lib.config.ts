@@ -12,7 +12,11 @@ export default defineConfig({
         'src/**/*.d.ts',
         'src/**/*.tsx',
         'src/**/*.vue',
-        'index.ts'
+        'index.ts',
+        'package/**/*.ts',
+        'package/**/*.d.ts',
+        'package/**/*.tsx',
+        'package/**/*.vue'
         ],
     }),
         
@@ -20,7 +24,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, './index.ts'),
+      entry: path.resolve(__dirname, '../index.ts'),
       name: 'scene-ui',
       fileName: (format: string) => `scene-ui.${format}.js`,
     },

@@ -11,10 +11,10 @@ node_modules
 */node_modules
 **/node_modules
 */*/node_modules
-*/dist
+
 */xld**dist
 */xld_mid_dist
-dist
+
 dist-ssr
 *.local
 

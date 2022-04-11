@@ -1,12 +1,12 @@
 {
   "name": "scene-ui",
   "private": false,
-  "version": "0.0.8",
-  "description": "fix some bug",
+  "version": "0.0.12",
+  "description": "a ui library",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:lib": "vite build --config ./vite.lib.config.ts",
+    "build:lib": "vite build --config ./build/vite.lib.config.ts",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
