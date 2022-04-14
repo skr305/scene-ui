@@ -1,7 +1,7 @@
 <template>
       <div class="scene-datetime">
         <div class="scene-datetime-input">
-          <img id="scene-datetime-input-img" src="/calendar_16.svg">
+          <calendar/>
           <input v-model="datetimeTemplate" @focus="calendarControl(true)" id="scene-datetime-input-input" type="text" readonly/>
         </div>
         <Transition name="scene-datetime">
@@ -11,16 +11,17 @@
               <div class="scene-datetime-calendar">
                 <div class="scene-datetime-calendar-header">
                     <div>
-                      <img src="/left2_16.svg" @click="updateDatetime('year',modelValue.getFullYear()-1)">
-                      <img src="/left_16.svg" @click="updateDatetime('month',modelValue.getMonth())">
+                      <left216 @click="updateDatetime('year',modelValue.getFullYear()-1)"/>
+                      <left16 src="/left_16.svg" @click="updateDatetime('month',modelValue.getMonth())"/>
                     </div>
                     <div>
                       <span style="margin-right:20px">{{modelValue.getFullYear()}}</span>
                       <span style="margin-right:20px">{{englishMonthName}}</span>
                     </div>
                     <div>
-                      <img src="/right_16.svg" @click="updateDatetime('month',modelValue.getMonth()+2)">
-                      <img src="/right2_16.svg" @click="updateDatetime('year',modelValue.getFullYear()+1)">
+                      <right16 @click="updateDatetime('month',modelValue.getMonth()+2)"/>
+                      <!-- <img src="/right_16.svg" @click="updateDatetime('month',modelValue.getMonth()+2)"> -->
+                      <right216 @click="updateDatetime('year',modelValue.getFullYear()+1)"/>
                     </div>
                 </div>
                 <div class="scene-datetime-calendar-body">
@@ -90,7 +91,11 @@ import sScrollbar from '../scrollbar/scrollbar.vue'
 import {datetimeProps, datetimeEmits} from './datetime'
 import {englishMonths, DateObject, getDateCountByYearAndMonth, getYearMonthDateHourMinuteSecond, createDate, getFullScreen} from '../../core/lib/date'
 import {turnTo2dArray} from '../../core/lib/array'
-
+import Calendar from '../svg/calendar.vue';
+import Right16 from '../svg/right16.vue';
+import Right216 from '../svg/right216.vue';
+import Left216 from '../svg/left216.vue';
+import Left16 from '../svg/left16.vue';
 /**
  * 修改modelValue的七种模式
  */
@@ -100,7 +105,7 @@ export default defineComponent({
   name:'scene-datetime',
   props:datetimeProps,
   emits:datetimeEmits,
-  components:{sButton,sScrollbar},
+  components:{ sButton, sScrollbar, Calendar, Right16, Right216, Left16, Left216 },
   setup(props,{emit,attrs,slots,expose}){
     // 模板引用
     const hours = ref<HTMLElement>()
