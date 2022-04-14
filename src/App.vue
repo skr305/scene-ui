@@ -2,8 +2,8 @@
 import { reactive, watch, ref, VNode } from 'vue';
 import buttonVue from '../package/components/button/button.vue';
 import paymentInputVue from '../package/components/payment/s-payment-input.vue';
-import sInput from '../package/components/input/s-input.vue'
-
+import sInput from '../package/components/input/input.vue'
+import sTextarea from '../package/components/textarea/textarea.vue'
 import sButton from '../package/components/button/button.vue';
 import sRadio from '../package/components/radio/radio.vue'
 import sNumberInput from '../package/components/number-input/number-input.vue'
@@ -36,6 +36,7 @@ const options = ref([
 ])
 const baidu = ref('https://www.baidu.com')
 const emptyStr = ref('')
+const emptyStr1 = ref('')
 const print = (...args: any[])=>{
   console.log(...args)
 }
@@ -94,12 +95,29 @@ const onGlobalLoading = () =>{
   setTimeout(loadingInstance1.close,5000)
 }
 
+const inputValidator = (value: string | number)=>{
+  if(value.toString().length > 19)
+    return [false, 'out of length']
+  else
+    return [true, 'success!']
+}
 
 </script>
 
 <template>
   <div class="exhibition">
-    <s-input v-model="emptyStr"></s-input>
+    <s-input v-model="emptyStr" type="password" :validate="inputValidator" :disabled="false" @change="print(emptyStr)">
+      <template #prefix>
+        <img src="/search_16.svg">
+      </template>
+      <template #suffix>
+        <span>.com</span>
+      </template>
+    </s-input>
+  </div>
+  <div class="exhibition">
+    <s-textarea v-model="emptyStr1" :width="300" :height="300" :maxLength="30" @change="print(emptyStr1)">
+    </s-textarea>
   </div>
   <div class="exhibition">
     <s-button size="large" theme="red" :disabled="booleanFalse" type="default" @click="print">
