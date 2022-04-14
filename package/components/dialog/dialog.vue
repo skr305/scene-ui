@@ -15,7 +15,7 @@
               <div v-if="$slots.title || title" class="scene-dialog-title">
                   <slot name="title">
                     <div class="scene-dialog-default-title">
-                      <h3>{{title}}</h3><img @click="closeDialog(true)" src="/close_16.svg">
+                      <h3>{{title}}</h3><img @click="closeDialog(true)" src="/close_12_1.svg">
                     </div>
                   </slot>
               </div>

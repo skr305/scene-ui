@@ -279,7 +279,7 @@ export default defineComponent({
 /* 日期输入框 */
 #scene-datetime-input-input{
   width: 212px;
-  height: 28px;
+  height: 30px;
   box-sizing: border-box; 
   padding: 0 5px;
   outline: none;
