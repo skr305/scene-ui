@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { reactive, watch, ref, VNode } from 'vue';
-import buttonVue from '../package/components/button/button.vue';
+import { reactive, watch, ref } from 'vue';
 import paymentInputVue from '../package/components/payment/s-payment-input.vue';
 import sInput from '../package/components/input/input.vue'
 import sTextarea from '../package/components/textarea/textarea.vue'
@@ -128,6 +127,8 @@ const inputValidator = (value: string | number)=>{
   </div>
   <div class="exhibition">
     <s-button size="default" theme="main" :disabled="booleanFalse" type="default" @click="print">
+    <s-button> hello </s-button>
+    <s-button size="large" theme="red" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>

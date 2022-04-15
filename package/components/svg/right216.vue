@@ -1,0 +1,11 @@
+<template>
+<svg t="1649238091088" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8140" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><defs></defs><path d="M550.4 490.666667L230.4 170.666667 170.666667 230.4l260.266666 260.266667L170.666667 750.933333 230.4 810.666667l320-320z m298.666667 0L533.333333 170.666667 469.333333 230.4l260.266667 260.266667-260.266667 260.266666 59.733334 59.733334 320-320z" fill="#444444" p-id="8141"></path></svg>
+</template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+    name: 'right216',
+})
+</script>
+<style type="text/css">@font-face { font-family: feedback-iconfont; src: url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.woff2?t=1630033759944") format("woff2"), url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.woff?t=1630033759944") format("woff"), url("//at.alicdn.com/t/font_1031158_u69w8yhxdu.ttf?t=1630033759944") format("truetype"); }
+</style>

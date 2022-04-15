@@ -6,6 +6,7 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   plugins: [
     vue(),
+    // svgLoader(),
     dts({
         include: [
         'src/**/*.ts',
@@ -28,9 +29,13 @@ export default defineConfig({
       name: 'scene-ui',
       fileName: (format: string) => `scene-ui.${format}.js`,
     },
+    cssCodeSplit: true,
+    outDir: "dist",
     rollupOptions: {
-    //   external: Object.keys(require(__dirname + './package.json').peerDependencies),
+      // 在编译时候必须要引入的库 就算在包内没有显示的声明 peerDependency
+      external: [ ...Object.keys((require(__dirname + '/../package.json' )).peerDependencies || {}), "vue"],
       output: {
+        
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           vue: 'Vue',

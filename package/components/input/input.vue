@@ -19,11 +19,11 @@
                 @blur="handleBlur"/>
             <div class="scene-input-main-plugin">
                 <div class="scene-input-main-plugin-clear" v-if="clearable && type==='text'">
-                  <img src="/close_12.svg" @click="updateValue(null,'')" />  
+                  <close12 @click="updateValue(null,'')" />  
                 </div>
                 <div class="scene-input-main-plugin-eye"  v-if="type==='password'">
-                  <img v-if="isFocus && isEncrypt" src="/eye_12.svg"  @mousedown="showPassword($event,true)"/>  
-                  <img v-if="isFocus && !isEncrypt" src="/eye-close_12.svg"  @mousedown="showPassword($event,false)"/> 
+                  <eye12 v-if="isFocus && isEncrypt" @mousedown="showPassword($event,true)"/>  
+                  <eyeclose12 v-if="isFocus && !isEncrypt" @mousedown="showPassword($event,false)"/> 
                 </div>
             </div>
         </div>
@@ -41,10 +41,14 @@ import {computed, toRefs, defineComponent,onMounted,reactive,ref, onUpdated} fro
 import {inputProps, inputEmits} from './input'
 import '../../styles/global.css'
 
+import Close12 from '../svg/close12.vue';
+import Eye12 from '../svg/eye12.vue';
+import Eyeclose12 from '../svg/eyeclose12.vue';
 export default defineComponent({
   name:'scene-input',
   props: inputProps,
   emits: inputEmits,
+  components: { Close12, Eye12, Eyeclose12 },
   setup(props,{emit,attrs,slots,expose}){
     // 模板引用
     const input = ref<HTMLInputElement>()

@@ -1,0 +1,15 @@
+.npmignore
+.gitignore
+package
+public
+node_modules
+.vscode
+build
+tsconfig.json
+tsconfig.node.json
+vetur.config.js
+vite.config.ts
+yarn-error.log
+src
+pnpm-lock.yaml
+package.json.bak
