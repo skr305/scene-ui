@@ -36,6 +36,7 @@ const options = ref([
 const baidu = ref('https://www.baidu.com')
 const emptyStr = ref('')
 const emptyStr1 = ref('')
+const emptyStr2 = ref('')
 const print = (...args: any[])=>{
   console.log(...args)
 }
@@ -126,13 +127,7 @@ const inputValidator = (value: string | number)=>{
     </s-textarea>
   </div>
   <div class="exhibition">
-    <s-button size="default" theme="main" :disabled="booleanFalse" type="default" @click="print">
-    <s-button> hello </s-button>
-    <s-button size="large" theme="red" :disabled="booleanFalse" type="default" @click="print">
-      <template v-slot:icon>
-        <img src="/set_16.svg">
-      </template>
-    </s-button>
+    <s-button size="default" theme="main" :disabled="booleanFalse" type="default" @click="print"/>
     <s-button size="default" theme="info" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
@@ -229,8 +224,9 @@ const inputValidator = (value: string | number)=>{
       </s-card>
     </s-dialog>
   </div>
+
   <div class="exhibition">
-    <s-select v-model="emptyStr" :multiple="booleanTrue" :multiple-limit="2" :name="str" :options="options" :disabledOptions="[false,true,false,false,false,false]" @change="print">
+    <s-select v-model="emptyStr2" :multiple="booleanTrue" :multiple-limit="2" :name="str" :options="options" :disabledOptions="[false,true,false,false,false,false]" @change="print">
       <template v-slot="slotProps">
         <span>
           {{slotProps.option}}

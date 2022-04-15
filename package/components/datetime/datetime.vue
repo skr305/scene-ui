@@ -283,6 +283,7 @@ export default defineComponent({
 #scene-datetime-input-input{
   width: 212px;
   height: 26px;
+  line-height: 26px;
   box-sizing: border-box; 
   padding: 0 5px;
   outline: none;
