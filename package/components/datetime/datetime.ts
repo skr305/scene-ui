@@ -1,3 +1,6 @@
+import { ComponentConstants } from "../../core/constants";
+import { DefaultColor} from '../../core/constants/constants';
+
 export const datetimeProps = {
     modelValue:{
         type: Date,
@@ -10,7 +13,15 @@ export const datetimeProps = {
     },
     placeholder:{
         type: String,
-    }
+    },
+    theme: {
+        type: String,
+        default: DefaultColor,
+        required: false,
+        validator(value:ComponentConstants.StandardColor){
+            return ComponentConstants.StandardColorArr.includes(value)
+        },
+    },
 }
 
 export const datetimeEmits = {

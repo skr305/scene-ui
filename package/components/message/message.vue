@@ -18,6 +18,7 @@
 import { reactive, toRefs, defineComponent, computed } from 'vue';
 import { messageProps } from './type';
 import { SceneMessageStyleType } from './index';
+import '../../styles/global.css'
 
 export default defineComponent( {
   props: messageProps,
@@ -32,7 +33,7 @@ export default defineComponent( {
         state.visibled = true;
       }, 10);
 
-      if (props.duration >= 0) {
+      if (props.duration! >= 0) {
         setTimeout(() => {
           onClose();
         }, props.duration);
@@ -45,19 +46,19 @@ export default defineComponent( {
     const onClose = () => {
       state.visibled = false;
       setTimeout(() => {
-        props.onClose();
+        props.onClose!();
       }, 200);
     };
 
     const contentClass = computed( () => {
-        const classNameMap: { [key in SceneMessageStyleType] } = {
-            "suc": "sc-message-content-suc",
-            "warn": "sc-message-content-warn",
+        const classNameMap: { [key in SceneMessageStyleType]: string } = {
+            "success": "sc-message-content-suc",
+            "warning": "sc-message-content-warn",
             "info": "sc-message-content-info",
             "error": "sc-message-content-error"
         };
-        return classNameMap[ props.type ];
-    } );
+        return classNameMap[ props.type as  SceneMessageStyleType];
+    });
 
     return {
       ...toRefs(state),
@@ -93,6 +94,8 @@ export default defineComponent( {
       display: inline-block;
 
       i {
+        font-family: var(--scene-font-family);
+        letter-spacing: var(--scene-letter-spacing);
         font-size: 18px;
         font-weight: 400;
         margin-top: -3px;
@@ -118,23 +121,25 @@ export default defineComponent( {
     }
 
     .sc-message-content-suc {
-      background: rgb(72, 171, 178);
+      background: var(--scene-theme-color-success);
       color: rgb(255, 255, 255);
     }
     .sc-message-content-info {
-      background: rgb(26, 131, 129);
+      background: var(--scene-theme-color-info);
       color: rgb(255, 255, 255);
     }
     .sc-message-content-error {
-      background: rgb(255, 255, 255);
-      color: rgb(225, 88, 88);
+      background: var(--scene-theme-color-error);
+      color: rgb(255, 255, 255);
     }
     .sc-message-content-warn {
-      background: rgb(255, 255, 255);
-      color: rgb(237, 185, 12);
+      background: var(--scene-theme-color-warning);
+      color: rgb(255, 255, 255);
     }
 
     .sc-message-content {
+      font-family: var(--scene-font-family);
+      letter-spacing: var(--scene-letter-spacing);
       display: inline-block;
       padding: 6px 24px;
       height: 34px;
@@ -142,9 +147,9 @@ export default defineComponent( {
       line-height: 34px;
       font-size: 17px;
       font-weight: 400;
-      border-radius: 4px;
+      border-radius: var(--scene-border-radius);
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+      box-shadow: var(--scene-box-shadow);
      
 
       span {

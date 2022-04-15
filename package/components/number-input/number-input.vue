@@ -5,23 +5,28 @@
       :class='[
         `scene-number-input-${size}`
       ]'
-      :style="{color: theme}"
+    > 
+    <s-input 
+        type='text'
+        ref="input"
+        :name='name'
+        :modelValue='modelValue'
+        :disabled="disabled"
+        :clearable="false"
+        :readonly="true"
+        class="scene-number-input-input"
+        @blur="handleBlur"
+        @focus="handleFocus"
+        @input="handleInput"
+        @change="handleInputChange"
     >
-        <button :disabled="disabled" class="scene-number-input-button" @click="decrease">-</button>
-        <input 
-            type='text'
-            ref="input"
-            :name='name'
-            :value='modelValue'
-            :label='label'
-            :disabled="disabled"
-            class="scene-number-input-input"
-            @blur="handleBlur"
-            @focus="handleFocus"
-            @input="handleInput"
-            @change="handleInputChange"
-        />
-        <button :disabled="disabled" class="scene-number-input-button" @click="increase">+</button>
+        <template #prefix>
+            <button :disabled="disabled" class="scene-number-input-button" @click="decrease">➖</button>
+        </template>
+        <template #suffix>
+            <button :disabled="disabled" class="scene-number-input-button" @click="increase">➕</button>
+        </template>
+    </s-input>
     </div>
 </template>
 
@@ -29,11 +34,14 @@
 import {defineComponent,nextTick,onMounted,reactive,ref,watch,getCurrentInstance} from 'vue'
 import {isNumber} from '../../core/lib/type-assert'
 import {numberInputProps,numberInputEmits} from './number-input'
+import sInput from '../input/input.vue'
+
 
 export default defineComponent({
   name:'scene-number-input',
   props: numberInputProps,
   emits: numberInputEmits,
+  components: {sInput},
   setup(props,{emit,attrs,slots,expose}){
     const input = ref<HTMLInputElement>()
 
@@ -141,19 +149,13 @@ export default defineComponent({
 <style scoped>
 .scene-number-input-default{
     display: inline-flex;
-    width: 100px;
-    height: 30px;
-    border: 1px solid;
-    border-radius: 3px;
 }
 .scene-number-input-button{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20%;
     border:none;
     border-radius: 3px;
-    background: white;
     /* 文字无法被选中 */
     -webkit-user-select:none;
     -moz-user-select:none;
@@ -161,10 +163,8 @@ export default defineComponent({
     user-select:none;
 }
 .scene-number-input-input{
-    width: 60%;
     outline: none;
     text-align: center;/** input内容居中 */
-    border-width: 0px 1px;
     border-style: solid;
 }
 .scene-number-input-button:disabled{

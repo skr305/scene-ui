@@ -1,1 +1,69 @@
-@import './theme-color.css';
+:root{
+    /*  颜色方面，分为：
+    *   主题色：main，sccess，warning，info，error
+    *   中性色：gray
+    */
+    --scene-theme-color-main: #aa00ff;
+    --scene-theme-color-main-light: #e254ff;
+    --scene-theme-color-main-dark: #7200ca;
+
+    --scene-theme-color-info: #263238;
+    --scene-theme-color-info-light: #4f5b62;
+    --scene-theme-color-info-dark: #000a12;
+
+    --scene-theme-color-success: #00c853;
+    --scene-theme-color-success-light: #5efc82;
+    --scene-theme-color-success-dark: #009624;
+
+    --scene-theme-color-warning: #ffab00;
+    --scene-theme-color-warning-light: #ffdd4b;
+    --scene-theme-color-warning-dark: #c67c00;
+
+    --scene-theme-color-error: #d50000;
+    --scene-theme-color-error-light: #ff5131;
+    --scene-theme-color-error-dark: #9b0000;
+
+    --scene-color-light-gray: #eeeeee;
+    --scene-color-gray: #e0e0e0;
+    --scene-color-dark-gray: #BDBDBD;
+    --scene-color-Extra-dark-gray: #757575; /* 可用于placeholder */
+    --scene-color-disabled: #C0C4CC;
+
+    --scene-color-mask: rgba(0, 0, 0, 0.5);
+    --scene-color-black: #000000;
+    --scene-color-white: #ffffff;
+
+    /* 
+    *   字体方面
+    *   字体颜色，大小，间距，字体
+    */
+    --scene-font-family: Avenir, Helvetica, Arial, sans-serif;
+    --scene-font-color-dark: #2c3e50;
+    --scene-font-color-light: #ffffff;
+    --scene-font-size: 14px;
+    --scene-letter-spacing: 1px;
+    --scene-font-placeholder-color: var(--scene-color-Extra-dark-gray);
+    /*
+    *   边框方面
+    *   边框大小，颜色，圆角
+    */
+    --scene-border-size: 3px;
+    --scene-border-inner-size: 1px;
+    --scene-border-color-light: var(--scene-color-gray);
+    --scene-border-color-dark: var(--scene-color-dark-gray);
+    --scene-border-radius: 3px;
+    --scene-round-border-radius: 20px;
+    /* 
+    *   z-index有四个优先级（z-index越高优先级越高）：lowest basic advanced superlative
+    */
+    --scene-index-lowest: -1000;
+    --scene-index-basic: 0;
+    --scene-index-heighter: 100;
+    --scene-index-advanced: 1000;
+    --scene-index-superlative: 10000;
+
+    /*
+    *   阴影特效
+    */
+    --scene-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08);
+}

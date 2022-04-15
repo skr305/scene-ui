@@ -1,5 +1,5 @@
 import { ComponentConstants } from "../../core/constants";
-import { DefaultColor, DefaultSize } from '../../core/constants/comp';
+import { DefaultColor, DefaultSize } from '../../core/constants/constants';
 import { isBoolean } from "../../core/lib/type-assert";
 
 export const checkBoxBtnProps = {

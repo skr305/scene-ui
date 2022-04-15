@@ -93,15 +93,20 @@ export default defineComponent({
     display: inline-flex;
     position: relative;
     flex-direction: row;
-    border: 2px solid #E4E7ED;
-    border-radius: 2px;
+    border: var(--scene-border-size) solid var(--scene-border-color-light);
+    border-radius: var(--scene-border-radius);
+
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
+    color: var(--scene-font-color-dark)
 }
 .scene-textarea:hover{
-    border: 2px solid #C0C4CC
+    border: var(--scene-border-size) solid var(--scene-border-color-dark);
 }
 /* 文本域主体的子元素有获取焦点时 */
 .scene-textarea:focus-within{
-    border: 2px solid #9000ff;
+    border: var(--scene-border-size) solid var(--scene-theme-color-main);
 }
 .scene-textarea textarea{
     border: none;
@@ -109,36 +114,39 @@ export default defineComponent({
     outline: none;    
     /*如果有需要，去掉右下角的可拉伸变大小的图标和功能*/
     resize: none;
-
-    font-size: 14px;
-    letter-spacing: 1px;
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
 /* 对 input中的placeholder的样式 */
-.scene-input-main input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+.scene-textarea textarea::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
-.scene-input-main input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+.scene-textarea textarea::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
-.scene-input-main input::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+.scene-textarea textarea::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
-.scene-input-main input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+.scene-textarea textarea::-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);;
 }
 .scene-textarea-length{
     position: absolute;
     right:0;
     bottom: 0;
-    font-size: 14px;
-    letter-spacing: 1px;
 }
 </style>

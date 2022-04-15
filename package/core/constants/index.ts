@@ -1,1 +1,1 @@
-export * as ComponentConstants from "./comp";
+export * as ComponentConstants from "./constants";

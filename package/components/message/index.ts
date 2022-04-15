@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import Message from './message.vue'
-export type SceneMessageStyleType = "info" | "suc" | "error" | "warn";
+export type SceneMessageStyleType = "info" | "success" | "error" | "warning";
 export interface MessageInvokeParams {
     type ?: SceneMessageStyleType;
     duration ?: number;
@@ -14,11 +14,10 @@ const message = ( params: MessageInvokeParams ) => {
         text = "Tip", 
         showCloseButton = false
     } = params;
-
     createInstance( { type, duration, text, showCloseButton } );
-
 };
 export default message;
+
 const createInstance = ( params: MessageInvokeParams ) => {
   
     // 创建包裹容器，并设置外层的 Class 属性
@@ -45,6 +44,10 @@ const createInstance = ( params: MessageInvokeParams ) => {
   
     const onClose = ()=>{
       app.unmount();
+      // 需要添加一个判断
+      if( !Array.from(document.body.children).includes(messageNode) ) {
+        return;
+      }
       document.body.removeChild(messageNode);
       resetMsgTop();
     }

@@ -11,7 +11,7 @@ export const buttonProps = {
     },
     theme: {
         type: String,
-        default: 'black',
+        default: 'main',
         validator(value:ComponentConstants.StandardColor){
             return ComponentConstants.StandardColorArr.includes(value)
         },

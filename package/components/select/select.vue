@@ -31,7 +31,7 @@
             <!-- 选择器的隐藏部分 -->
         <div class="scene-select-dropdown-arrow"></div>
         <div class="scene-select-dropdown-menu">
-            <s-scrollbar :width="220" :height="180">
+            <s-scrollbar :width="214" :height="180">
                 <div ref="menu" >
                    <div v-for="(option,index) of options" :key="index" class="scene-select-dropdown-menu-option" :tabindex="-1">
                         <!-- 作用域插槽，对外暴露 option 与 index -->
@@ -234,35 +234,47 @@ export default defineComponent({
 /* 选择器主体 */
 .scene-select{
     display: inline-flex;
+    box-sizing: border-box;
     width: 220px;
-    min-height: 32px;
+    height: 36px;
     position: relative; /** 定位该元素是子元素中设置了position：absolute的相对父元素*/
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #E4E7ED;
-    border-radius: 5px;
+
+    border: var(--scene-border-size) solid var(--scene-border-color-light);
+    border-radius: var(--scene-border-radius);
+
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
 .scene-select:hover{
-    border: 1px solid #C0C4CC
+    border: var(--scene-border-size) solid var(--scene-border-color-dark);
 }
 /* 选择器主体的子元素有获取焦点时 */
 .scene-select:focus-within{
-    border: 1px solid #9000ff;
+    border: var(--scene-border-size) solid var(--scene-theme-color-main);
 }
 /* 选择器的输入框 */
 #scene-select-input{
     outline: none;
     border: none;
-    width: calc(90% - 10px); /** 198px - 10px*/
-    height: calc(100%); /** 32px */
+    box-sizing: border-box;
+    width: 200px; /** 198px - 10px*/
+    height: 30px; /** 32px */
     padding: 0 0 0 10px;
-    border-radius: 5px;
+    /* border-radius: var(--scene-round-border-radius); */
+
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
+    color: var(--scene-font-color-dark)
 }
 /* 选择器的按钮 */
 #scene-select-icon{
-    width: calc(10% - 4px); /** 22px - 4px */
-    height: calc(100% - 4px); /** 32px -4px  */
-    margin-right: 4px;
+    box-sizing: border-box;
+    width: 20px; /** 22px - 4px */
+    height: 30px; /** 32px -4px  */
     transition: transform 0.5s ease;
 }
 /* 选择器的箭头 */
@@ -274,10 +286,10 @@ export default defineComponent({
     background: white;
     top: calc(100%);
     left: calc(50%);
-    border-top: 1px solid #E4E7ED;
-    border-right: 1px solid #E4E7ED;
+    border-top: var(--scene-border-size) solid var(--scene-border-color-light);
+    border-right: var(--scene-border-size) solid var(--scene-border-color-light);
     transform: rotate(-45deg);
-    z-index: 1001;
+    z-index: var(--scene-index-advanced);
     opacity: 0;
     transition: all 0.5s ease;
 }
@@ -288,42 +300,43 @@ export default defineComponent({
     position: absolute;
     width: 220px; /** 220px - 1px * 2  */
     height: 190px; /** 190px - 5px*2 - 1px*2 */
-
-    border: 1px solid #E4E7ED;
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+    box-sizing: border-box;
+    z-index: var(--scene-index-heighter);
+    border: var(--scene-border-size) solid var(--scene-border-color-light);
+    box-shadow: var(--scene-box-shadow);
 
     background: white;
-    border-radius: 5px;
+    border-radius: var(--scene-border-radius);
     top: calc(100% + 5px);
+    left: -3px;
     padding: 5px 0;
-    z-index: 1000;
     opacity: 0;
     transition: all 0.5s ease;
-    box-sizing: border-box;
+    
 }
 /* 选择器具体的选项 */
 .scene-select-dropdown-menu-option{
-    width: calc(100% - 20px);
+    width: 194px;
     height: 38px;
     padding: 0 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     /* 文字溢出处理 */
-    overflow: hidden
+    overflow: hidden;
 }
 /* 被禁用 */
 .scene-select-dropdown-menu-option[disabled="true"]{
     cursor:not-allowed;
-    color:#a8abb2;
+    color:var(--scene-color-disabled);
 }
 /* 选中 */
 .scene-select-dropdown-menu-option[selected="true"]{
-    color:#9000ff
+    color:var(--scene-theme-color-main);
 }
 /* 悬浮 */
 .scene-select-dropdown-menu-option:hover{
-    background: #f5f7fa;
+    color: var(--scene-theme-color-main);
 }
 /* 点击获取焦点显示选项 */
 #scene-select-input:focus~.scene-select-dropdown-menu{
@@ -350,18 +363,15 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
 }
-
-
 /* 多选情况下的tag容器 */
 #scene-select-multiple-container{
     position: absolute;
-    background: white;
+    background: var(--scene-color-white);
     outline: none;
     border: none;
     width: calc(90% - 10px); /** 198px - 10px*/
     min-height: calc(100%); /** 32px */
     padding: 0 0 0 10px;
-    border-radius: 5px;
 
     display: flex;
     flex-wrap: wrap;
@@ -372,8 +382,8 @@ export default defineComponent({
 }
 /* 多选情况下的tag */
 .scene-select-multiple-tag{
-    background: #F0F2F5;
-    color: #909399;
+    background: var(--scene-color-light-gray);
+    color: var(--scene-color-Extra-dark-gray);
     min-width: 70px;
     height: 24px;
     display: inline-flex;
@@ -382,11 +392,11 @@ export default defineComponent({
     padding: 0 5px;
     margin-right: 5px;
     font-size: 12px;
-    border-radius: 5px;
+    border-radius: var(--scene-border-radius);
 }
 .scene-select-multiple-count{
-    background: #F0F2F5;
-    color: #909399;
+    background: var(--scene-color-light-gray);
+    color: var(--scene-color-Extra-dark-gray);
     width: 30px;
     height: 24px;
     display: inline-flex;
@@ -394,6 +404,6 @@ export default defineComponent({
     align-items: center;
     padding: 0 5px;
     font-size: 12px;
-    border-radius: 5px;
+    border-radius: var(--scene-border-radius);
 }
 </style>

@@ -4,16 +4,17 @@
             <div :class="[checkboxClass, 'checkbox-scene-body']"
             @click="onChange"
             :style="{
-                color: theme,
+                color: themeBorderColor,
                 width: SizeMap[ size ],
                 height: SizeMap[ size ],
-                border: `solid 3px ${theme}`
+                border: `solid 3px ${themeBorderColor}`
             }"> 
                 <div>
                     {{ checkboxSign }} 
                 </div>
             </div>
             <span className="checkbox-scene-label" :style="{
+                color: themeBorderColor,
                 lineHeight: SizeMap[ size ],
                 fontSize: FontSizeMap[ size ]
             }"> 
@@ -23,9 +24,12 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref, inject } from 'vue';
+import { computed, defineComponent, ref, inject,onMounted } from 'vue';
 import { checkBoxEmits, checkBoxProps } from './checkbox';
 import { CHECK_GROUP_CONTEXT, CheckGroupContextType } from './constants';
+import { ThemeColorMap } from '../../core/constants/constants'
+import '../../styles/global.css'
+
 export default defineComponent( {
     name: "s-checkbox",
     emits: checkBoxEmits,
@@ -50,7 +54,7 @@ export default defineComponent( {
             if( props.disabled ) {
                 return "checkbox-scene-disabled";
             }
-            return current.value ? "checkbox-scene-checked" : "checkbox-scene-unchecked"
+            return current.value ? "checkbox-scene-checked-"+props.theme : "checkbox-scene-unchecked-"+props.theme
         } );
         const checkboxSign = computed( () => {
             if( props.unsure ) {
@@ -91,12 +95,18 @@ export default defineComponent( {
             "default": "0.9rem",
             "small": "0.6rem"
         }
+
+        const themeBorderColor = computed(()=>{
+            return ThemeColorMap.get(props.theme+'-dark')
+        })
+
         return {
             current,
             checkboxClass,
             SizeMap,
             FontSizeMap,
             checkboxSign,
+            themeBorderColor,
             onChange
         };
     }
@@ -124,19 +134,50 @@ export default defineComponent( {
         opacity: 0.8;
         transition: 1s;
     }
-    .checkbox-scene-unchecked:hover {
-        background: rgba(85, 158, 222, 0.538);
+    /* 不同主题的背景色 */
+    .checkbox-scene-unchecked-main:hover {
+        background: var(--scene-theme-color-main);
         transition: 1s;
     }
-    .checkbox-scene-checked {
-        background: rgba(85, 158, 222, 0.641);
+    .checkbox-scene-checked-main{
+        background: var(--scene-theme-color-main);
+    }
+    .checkbox-scene-unchecked-info:hover {
+        background: var(--scene-theme-color-info);
+        transition: 1s;
+    }
+    .checkbox-scene-checked-info{
+        background: var(--scene-theme-color-info);
+    }
+    .checkbox-scene-unchecked-success:hover {
+        background: var(--scene-theme-color-success);
+        transition: 1s;
+    }
+    .checkbox-scene-checked-success{
+        background: var(--scene-theme-color-success);
+    }
+    .checkbox-scene-unchecked-warning:hover {
+        background: var(--scene-theme-color-warning);
+        transition: 1s;
+    }
+    .checkbox-scene-checked-warning{
+        background: var(--scene-theme-color-warning);
+    }
+    .checkbox-scene-unchecked-error:hover {
+        background: var(--scene-theme-color-error);
+        transition: 1s;
+    }
+    .checkbox-scene-checked-error{
+        background: var(--scene-theme-color-error);
     }
     .checkbox-scene-disabled {
-        background-color: gray;
+        background-color: var(--scene-color-disabled)
         /* border: 2px solid rgb(14, 8, 8); */
     }
     .checkbox-scene-label {
         text-align: center;
         margin: 0em .5em;
+        font-family: var(--scene-font-family);
+        letter-spacing: var(--scene-letter-spacing);
     }
 </style>

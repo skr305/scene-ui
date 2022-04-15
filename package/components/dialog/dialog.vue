@@ -41,6 +41,7 @@
 import {defineComponent, onMounted, ref, watch} from 'vue'
 import {dialogProps, dialogEmits} from './dialog'
 import sButton from '../button/button.vue'
+import '../../styles/global.css'
 
 export default defineComponent({
   name:'scene-dialog',
@@ -117,12 +118,12 @@ export default defineComponent({
 <style scoped>
 .scene-dialog-mask {
   position: fixed;
-  z-index: 9999;
+  z-index: var(--scene-index-advanced)+1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--scene-color-mask);
 
   display: flex;
   justify-content: center;
@@ -130,11 +131,11 @@ export default defineComponent({
   transition: opacity 0.3s ease;
 }
 .scene-dialog-container {
-  z-index: 10000;
+  z-index: var(--scene-index-superlative);
   margin: 0px auto;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  background-color: var(--scene-color-white);
+  border-radius: var(--scene-border-radius);
+  box-shadow: var(--scene-box-shadow);
   transition: all 0.3s ease;
 }
 
@@ -158,7 +159,9 @@ export default defineComponent({
 
 .scene-dialog-default-title h3{
   margin: 0;
-  color: #42b983;
+  font-family: var(--scene-font-family);
+  letter-spacing: var(--scene-letter-spacing);
+  color: var(--scene-theme-color-main);
 }
 
 .scene-dialog-default-footer{

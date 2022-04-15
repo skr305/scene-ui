@@ -33,6 +33,8 @@
 <script lang='ts'>
 import {defineComponent, ref, reactive, onMounted, onUnmounted} from 'vue'
 import { scrollbarProps } from './scrollbar'
+import {ThemeColorMap} from '../../core/constants/constants'
+import '../../styles/global.css'
 
 /** 根据不同的浏览器计算滚动条的厚度 */
 const scrollbarSize = (function() {
@@ -75,7 +77,7 @@ export default defineComponent({
             bottom: "",
             transform: "",
             borderRadius: "",
-            backgroundColor: props.theme
+            backgroundColor: ThemeColorMap.get(props.theme)
         },
         y: {
             padding: '0',
@@ -85,7 +87,7 @@ export default defineComponent({
             right: "",
             transform: "",
             borderRadius: "",
-            backgroundColor: props.theme
+            backgroundColor: ThemeColorMap.get(props.theme)
         }
     });
 
@@ -286,7 +288,7 @@ export default defineComponent({
 }
 .scene-scrollbar .scene-scrollbar-thumb{
     position: absolute;
-    z-index: 10;
+    z-index: 10001;
     outline: none;
     border: none;
 }

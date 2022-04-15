@@ -1,3 +1,10 @@
+.scene-loading-mask{
+  font-size: var(--scene-font-size);
+  font-family: var(--scene-font-family);
+  letter-spacing: var(--scene-letter-spacing);
+}
+
+
 .scene-loading-enter-from,
 .scene-loading-leave-to {
   opacity: 0;
@@ -21,7 +28,7 @@
 .loading {
   display: block;
   font-size: 0;
-  color: #9000ff;
+  color: var(--scene-theme-color-main);
 }
 
 .loading.la-dark {
@@ -58,7 +65,7 @@
 .loading > div:nth-child(2) {
   bottom: -9%;
   height: 10%;
-  background: #9000ff;
+  background: var(--scene-theme-color-main);
   border-radius: 50%;
   opacity: 0.2;
   animation: square-jelly-box-shadow 0.6s -0.1s linear infinite;

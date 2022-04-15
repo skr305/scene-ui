@@ -52,17 +52,17 @@
                     <strong class="scene-datetime-calendar-body-time-label">Hour</strong>
                     <strong class="scene-datetime-calendar-body-time-label">Minute</strong>
                     <strong class="scene-datetime-calendar-body-time-label">Second</strong>
-                    <s-scrollbar ref="hourScrollbar" :width="43" :height="210" theme="blue">
+                    <s-scrollbar ref="hourScrollbar" :width="43" :height="210">
                       <div ref="hours">
                         <div v-for="(hour,index) in 24" :key="index" class="scene-datetime-calendar-body-time-cell" @click="updateDatetime('hour',hour-1)">{{hour-1}}</div>
                       </div>
                     </s-scrollbar>
-                    <s-scrollbar ref="minuteScrollbar" :width="43" :height="210" theme="blue">
+                    <s-scrollbar ref="minuteScrollbar" :width="43" :height="210">
                       <div ref="minutes">
                         <div v-for="(minute,index) in 60" :key="index" class="scene-datetime-calendar-body-time-cell" @click="updateDatetime('minute',minute-1)">{{minute-1}}</div>
                       </div>
                     </s-scrollbar>
-                    <s-scrollbar ref="secondScrollbar" :width="44" :height="210" theme="blue">
+                    <s-scrollbar ref="secondScrollbar" :width="44" :height="210">
                       <div ref="seconds">
                         <div v-for="(second,index) in 60" :key="index" class="scene-datetime-calendar-body-time-cell" @click="updateDatetime('second',second-1)">{{second-1}}</div>
                       </div>
@@ -71,10 +71,10 @@
                 </div>
                 <div class="scene-datetime-calendar-footer">
                   <div>
-                    <s-button style="margin-right:5px" size="small" type="text" @click="updateDatetime('Date',new Date())">now</s-button>
-                    <s-button  size="small" type="text" theme="blue" @click="updateDatetime('Date',createDate(modelValue.getFullYear(),modelValue.getMonth()+1,modelValue.getDate()))">clear time</s-button>
+                    <s-button size="small" type="text" theme="info" @click="updateDatetime('Date',new Date())">now</s-button>
+                    <s-button size="small" type="text" theme="info" @click="updateDatetime('Date',createDate(modelValue.getFullYear(),modelValue.getMonth()+1,modelValue.getDate()))">clear time</s-button>
                   </div>
-                  <s-button size="small" theme="blue" @click="calendarControl(false)">confirm</s-button>
+                  <s-button size="small" theme="success" @click="calendarControl(false)">confirm</s-button>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ import sScrollbar from '../scrollbar/scrollbar.vue'
 import {datetimeProps, datetimeEmits} from './datetime'
 import {englishMonths, DateObject, getDateCountByYearAndMonth, getYearMonthDateHourMinuteSecond, createDate, getFullScreen} from '../../core/lib/date'
 import {turnTo2dArray} from '../../core/lib/array'
-
+import '../../styles/global.css'
 /**
  * 修改modelValue的七种模式
  */
@@ -245,12 +245,14 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  font-family: var(--scene-font-family);
 }
 /* 日期输入区域 */
 .scene-datetime-input{
   display: flex;
-  border: 1px solid #E4E7ED;
-  border-radius: 5px;
+  border: var(--scene-border-size) solid var(--scene-border-color-light);
+  border-radius: var(--scene-border-radius);
   box-sizing: border-box; 
   width: 240px;
   height: 32px;
@@ -258,11 +260,11 @@ export default defineComponent({
   align-items: center;
 }
 .scene-datetime-input:hover{
-  border: 1px solid #C0C4CC
+  border: var(--scene-border-size) solid var(--scene-border-color-dark);
 }
 /* 日期输入区域的子元素有获取焦点时 */
 .scene-datetime-input:focus-within{
-  border: 1px solid	#9000ff;
+  border: var(--scene-border-size) solid var(--scene-theme-color-main);
 }
 /* 日期输入框边上的图标 */
 #scene-datetime-input-img{
@@ -274,11 +276,15 @@ export default defineComponent({
 /* 日期输入框 */
 #scene-datetime-input-input{
   width: 212px;
-  height: 30px;
+  height: 26px;
   box-sizing: border-box; 
   padding: 0 5px;
   outline: none;
   border: none;
+  font-size: var(--scene-font-size);
+  font-family: var(--scene-font-family);
+  letter-spacing: var(--scene-letter-spacing);
+  color: var(--scene-font-color-dark)
 }
 /* 日期选择器的箭头 */
 .scene-datetime-arrow{
@@ -288,24 +294,24 @@ export default defineComponent({
     background: white;
     top: 40px;
     left: calc(50%);
-    border-top: 1px solid #E4E7ED;
-    border-right: 1px solid #E4E7ED;
+    border-top: var(--scene-border-size) solid var(--scene-border-color-light);
+    border-right: var(--scene-border-size) solid var(--scene-border-color-light);
     transform: rotate(-45deg);
-    z-index: 1001;
+    z-index: var(--scene-index-advanced);
 }
 /* 日期选择器的下拉日历 */
 .scene-datetime-calendar{
   position: absolute;
   top: 45px;
   left: calc(-50%);
-  border-radius: 5px;
+  border-radius: var(--scene-border-radius);
   width: 450px;
   height: 350px;
   background: white;
-  z-index: 1000;
+  z-index: var(--scene-index-heighter);
 
-  border: 1px solid #E4E7ED;
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+  border: var(--scene-border-size) solid var(--scene-border-color-light);
+  box-shadow: var(--scene-box-shadow);
 
   display: flex;
   flex-direction: column;
@@ -322,7 +328,7 @@ export default defineComponent({
   padding: 7px 10px 0;
   width: 450px;
   height: 35px;
-  border-bottom: 1px solid #E4E7ED;
+  border-bottom: var(--scene-border-inner-size) solid var(--scene-border-color-light);
 }
 /* 日期选择器的主体 */
 .scene-datetime-calendar-body{
@@ -351,7 +357,7 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  border-bottom: 1px solid #E4E7ED;
+  border-bottom: var(--scene-border-inner-size) solid var(--scene-border-color-light);
 }
 /* 日历表头每一格 */
 .scene-datetime-calendar-body-date-headcell{
@@ -387,14 +393,14 @@ export default defineComponent({
   font-size: 12px;
 }
 .scene-datetime-calendar-body-date-bodycell:hover{
-  color:#9000ff;
+  color:var(--scene-theme-color-main);
 }
 .scene-datetime-calendar-body-date-bodycell[is-selected="true"]{
-  background:#9000ff;
+  background:var(--scene-theme-color-main);
   color: white;
 }
 .scene-datetime-calendar-body-date-bodycell[is-current-month="false"]{
-  color: #A8ABB2;
+  color: var(--scene-color-dark-gray);
 }
 /* 日期选择器的时间部分 */
 .scene-datetime-calendar-body-time{
@@ -424,10 +430,10 @@ export default defineComponent({
   cursor: pointer;
 }
 .scene-datetime-calendar-body-time-cell:hover{
-  color: #9000ff;
+  color: var(--scene-theme-color-main);
 }
 .scene-datetime-calendar-body-time-cell[is-selected="true"]{
-  background:#9000ff;
+  background:var(--scene-theme-color-main);
   color: white;
 }
 /* 日期选择器的底部 */
@@ -437,7 +443,7 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
 
-  border-top: 1px solid #E4E7ED;
+  border-top: var(--scene-border-inner-size) solid var(--scene-border-color-light);
   width: 450px;
   height: 35px;
   padding: 0 10px;

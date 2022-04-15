@@ -5,7 +5,7 @@
                 :style="{
                     padding: PaddingMap[ size ],
                     lineHeight: LineheightMap[ size ],
-                    border: `solid 1px gray`
+                    border: `solid 3px ${backgroundColor}`
                 }"> 
             <slot>
                 {{ label }}
@@ -14,10 +14,12 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref, inject, watch, onMounted } from 'vue';
+import { computed, defineComponent, ref, inject} from 'vue';
 import { checkBoxBtnEmits, checkBoxBtnProps } from './checkbox-button';
-import { ThemeColorClassName } from '../../styles/theme-color-expose';
+import { ThemeColorMap } from '../../core/constants/constants';
 import { CHECK_GROUP_CONTEXT, CheckGroupContextType } from './constants';
+import '../../styles/global.css'
+
 export default defineComponent( {
     name: "s-checkbox-button",
     emits: checkBoxBtnEmits,
@@ -55,10 +57,13 @@ export default defineComponent( {
             }
             if( current.value ) {
                 classSet += " ";
-                classSet += ThemeColorClassName[ props.theme ];
+                classSet += "scene-checkbox-button-theme-"+props.theme;
             }
             return classSet;
         } );
+        const backgroundColor = computed(()=>{
+            return ThemeColorMap.get(props.theme+'-dark')
+        })
         const onChange = () => {
             if( props.disabled ) {
                 return;
@@ -107,6 +112,7 @@ export default defineComponent( {
             PaddingMap,
             FontSizeMap,
             LineheightMap,
+            backgroundColor,
             onChange
         };
     }
@@ -121,6 +127,9 @@ export default defineComponent( {
         text-align: center;
         margin: 0 auto;
         display: inline-block;
+        font-size: var(--scene-font-size);
+        font-family: var(--scene-font-family);
+        letter-spacing: var(--scene-letter-spacing);
     }
     .checkbox-scene-body:hover {
         opacity: 0.8;
@@ -137,9 +146,11 @@ export default defineComponent( {
         color: white;
     }
     .checkbox-btnsc-wrp .checkbox-btnSc-disabled {
-        background-color: rgb(85, 82, 82);
-        color: rgb(221, 217, 217);
-        border: 2px solid rgb(68, 65, 65);
+        background: var(--scene-color-disabled);
+        /* background: rgb(85, 82, 82); */
+        color: var(--scene-font-color-light);
+        /* color: rgb(221, 217, 217); */
+        border: var(--scene-border-size) solid rgb(68, 65, 65);
     }
     .checkbox-btnSc-leftRound {
         border-top-left-radius: 10px ;
@@ -148,5 +159,21 @@ export default defineComponent( {
     .checkbox-btnSc-rightRound {
         border-top-right-radius: 10px ;
         border-bottom-right-radius: 10px ;
+    }
+    /* 不同主题的背景色 */
+    .scene-checkbox-button-theme-main{
+        background: var(--scene-theme-color-main);
+    }
+    .scene-checkbox-button-theme-info{
+        background: var(--scene-theme-color-info);
+    }
+    .scene-checkbox-button-theme-success{
+        background: var(--scene-theme-color-success);
+    }
+    .scene-checkbox-button-theme-warning{
+        background: var(--scene-theme-color-warning);
+    }
+    .scene-checkbox-button-theme-error{
+        background: var(--scene-theme-color-error);
     }
 </style>

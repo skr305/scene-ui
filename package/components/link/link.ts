@@ -4,7 +4,7 @@ export const linkProps = {
     href: { type: String, default: '' },
     theme: {
         type: String,
-        default: 'black',
+        default: 'main',
         validator(value:ComponentConstants.StandardColor){
             return ComponentConstants.StandardColorArr.includes(value)
         },

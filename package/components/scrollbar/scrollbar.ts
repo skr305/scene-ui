@@ -12,12 +12,12 @@ export const scrollbarProps = {
     /** 滚动条厚度 */
     thumbSize: {
         type: Number,
-        default: 8
+        default: 6
     },
     /** 滚动条颜色 */
     theme: {
         type: String,
-        default: 'black',
+        default: 'main',
         validator(value:ComponentConstants.StandardColor){
             return ComponentConstants.StandardColorArr.includes(value)
         },

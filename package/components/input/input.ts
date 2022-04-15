@@ -31,6 +31,10 @@ export const inputProps = {
         type: Boolean,
         default: false
     },
+    readonly:{
+        type: Boolean,
+        default: false
+    },
     clearable:{// 在type=text的情况下可用
         type: Boolean,
         default: true

@@ -5,7 +5,7 @@
             disabled? `scene-link-disabled` : '',
             `scene-link-underline-${underline}`
         ]"
-        :style="{color: theme}"
+        :style="{color: fontColor}"
         :href="disabled || !href ? undefined : href"
         @click="handleClick"
     >
@@ -22,7 +22,8 @@
 <script lang='ts'>
 import {defineComponent} from 'vue'
 import {linkProps,linkEmits} from './link'
-import { ComponentConstants } from '../../core/constants'; 
+import { ThemeColorMap } from '../../core/constants/constants'; 
+import '../../styles/global.css'
 
 export default defineComponent({
   name:'scene-link',
@@ -35,7 +36,10 @@ export default defineComponent({
             emit('click', event)
     }
 
+    const fontColor = ThemeColorMap.get(props.theme)
+
     return {
+      fontColor,
       handleClick,
     }
   }

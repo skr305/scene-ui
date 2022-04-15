@@ -11,6 +11,8 @@ import { defineComponent, computed, provide, WritableComputedRef, nextTick, watc
 import { checkBoxGroupEmits, checkBoxGroupProps } from './checkbox-group';
 import { CHECK_GROUP_CONTEXT } from './constants';
 import { removeRepeatInPlace } from './util';
+import '../../styles/global.css'
+
 export default defineComponent( {
     name: "s-checkbox-group",
     emits: checkBoxGroupEmits,

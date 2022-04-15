@@ -12,6 +12,7 @@
                 v-model="inputValue"
                 spellcheck="false"
                 :placeholder="placeholder"
+                :readonly="readonly"
                 :disabled="disabled"
                 @input="updateValue"
                 @focus="handleFocus"
@@ -38,6 +39,7 @@
 <script lang='ts'>
 import {computed, toRefs, defineComponent,onMounted,reactive,ref, onUpdated} from 'vue'
 import {inputProps, inputEmits} from './input'
+import '../../styles/global.css'
 
 export default defineComponent({
   name:'scene-input',
@@ -163,25 +165,25 @@ export default defineComponent({
     display: inline-flex;
     position: relative;
     flex-direction: row;
-    border: 2px solid #E4E7ED;
-    border-radius: 2px;
+    border: var(--scene-border-size) solid var(--scene-border-color-light);
+    border-radius: var(--scene-border-radius);
 }
 /* disabled 样式 */
 .scene-input[disabled = 'true']{
-    background: #F5F7FA;
+    background: var(--scene-color-disabled);
     cursor: not-allowed;
 }
 .scene-input-main input:disabled{
-    background: #F5F7FA;
+    background: var(--scene-color-disabled);
     cursor: not-allowed;
 }
 
 .scene-input:hover{
-    border: 2px solid #C0C4CC
+    border: var(--scene-border-size) solid var(--scene-border-color-dark);
 }
 /* 选择器主体的子元素有获取焦点时 */
 .scene-input:focus-within{
-    border: 2px solid #9000ff;
+    border: var(--scene-border-size) solid var(--scene-theme-color-main);
 }
 .scene-input-slot{
     height: 22px;
@@ -205,32 +207,38 @@ export default defineComponent({
     width: 200px;
     padding: 2px 5px;
 
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
+    color: var(--scene-font-color-dark)
 }
 /* 去除password默认眼睛 */
 input::-ms-clear{display:none;}
 input::-ms-reveal{display:none;}
 /* 对 input中的placeholder的样式 */
 .scene-input-main input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
 .scene-input-main input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
 .scene-input-main input::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
 .scene-input-main input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: gray;
-    font-size: 14px;
-    letter-spacing: 1px;
+    color: var(--scene-color-Extra-dark-gray);
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);;
 }
 /* input的按钮区域 */
 .scene-input-main-plugin{
@@ -248,7 +256,8 @@ input::-ms-reveal{display:none;}
     height: 20px;
     padding: 5px;
 
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
 }
 </style>

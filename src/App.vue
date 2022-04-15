@@ -16,7 +16,7 @@ import sCard from '../package/components/card/card.vue'
 import sCheckboxGroup from '../package/components/checkbox/checkbox-group.vue';
 import sDialog from '../package/components/dialog/dialog.vue'
 import sDatetime from '../package/components/datetime/datetime.vue'
-import message  from '../package/components/message';
+import message, { SceneMessageStyleType }  from '../package/components/message';
 import {SceneLoading} from '../package/components/loading/loading'
 
 
@@ -64,9 +64,8 @@ watch( checkLabels, () => {
   console.log( checkLabels.value );
 }, { deep: true });
 
-const onMessage = () => {
-  message( { type: "suc", text: "成功", showCloseButton: true, "duration": 5000 } );
-
+const onMessage = (type: string) => {
+  message({type: type as SceneMessageStyleType, text: "成功", showCloseButton: true, "duration": 5000 });
 }
 
 const card1 = ref<HTMLElement>()
@@ -106,6 +105,14 @@ const inputValidator = (value: string | number)=>{
 
 <template>
   <div class="exhibition">
+    <s-input v-model="emptyStr" :disabled="false" @change="print(emptyStr)">
+      <template #prefix>
+        <img src="/search_16.svg">
+      </template>
+      <template #suffix>
+        <span>.com</span>
+      </template>
+    </s-input>
     <s-input v-model="emptyStr" type="password" :validate="inputValidator" :disabled="false" @change="print(emptyStr)">
       <template #prefix>
         <img src="/search_16.svg">
@@ -120,57 +127,58 @@ const inputValidator = (value: string | number)=>{
     </s-textarea>
   </div>
   <div class="exhibition">
-    <s-button size="large" theme="red" :disabled="booleanFalse" type="default" @click="print">
+    <s-button size="default" theme="main" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>
     </s-button>
-    <s-button size="default" theme="red" :disabled="booleanFalse" type="default" @click="print">
+    <s-button size="default" theme="info" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>
     </s-button>
-    <s-button size="small" theme="red" :disabled="booleanFalse" type="default" @click="print">
+    <s-button size="default" theme="success" :disabled="booleanFalse" type="text" @click="print">
+      <template v-slot:icon>
+        <img src="/set_16.svg">
+      </template>
+    </s-button>
+    <s-button size="large" theme="warning" :disabled="booleanFalse" type="round" @click="print">
+      <template v-slot:icon>
+        <img src="/set_16.svg">
+      </template>
+    </s-button>
+    <s-button size="small" theme="error" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>
     </s-button>
   </div>
   <div class="exhibition">
+    <s-link :href="baidu" >default</s-link>
+    <s-link :href="baidu" theme="warning">default</s-link>
+  </div>
+  <div class="exhibition">
+    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5"/>
+  </div>
+  <!--<div class="exhibition">
     <paymentInputVue v-model="data.pwd"/>
   </div>
   <div class="exhibition">
     <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="large" theme="red"></s-radio>
     <s-radio v-model="num2" name="contact" label="email" :disabled="false" size="small"></s-radio>
-  </div>
-  <div class="exhibition">
-    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5"/>
-  </div>
-  <div class="exhibition">
-    <s-link :href="baidu" >default</s-link>
-    <s-link :href="baidu" theme="red">default</s-link>
-  </div>
-  <div class="exhibition">
-    <s-scrollbar  :width="100" :height="100">
-      <div style="width:100px;height:200px;background:yellow">
-        <p style="margin:0">111111111111</p>
-        <p>111111111111</p>
-        <p>111111111111</p>
-      </div>
-    </s-scrollbar>
-  </div>
+  </div>-->
   <div>
-    <s-checkbox v-model="select" label="是否堂食"></s-checkbox>
-    <s-checkbox v-model="select" theme="blue"  label="是否堂食"></s-checkbox>
-    <s-checkbox v-model="select" unsure theme="green"  label="待确认"></s-checkbox>
+    <s-checkbox v-model="select" label="是否堂食" size="large"></s-checkbox>
+    <s-checkbox v-model="select" theme="success"  label="是否堂食"></s-checkbox>
+    <s-checkbox v-model="select" unsure theme="warning"  label="待确认" size="small"></s-checkbox>
     <s-checkbox disabled label="Disabled"></s-checkbox>
   </div>
 
   <div>
     <s-checkbox-button v-model="select">默认</s-checkbox-button>
-    <s-checkbox-button leftBorderRound>左圆</s-checkbox-button>
-    <s-checkbox-button theme="red">变色</s-checkbox-button>
-    <s-checkbox-button theme="red" disabled>Disabled</s-checkbox-button>
+    <s-checkbox-button theme="warning" leftBorderRound>左圆</s-checkbox-button>
+    <s-checkbox-button theme="success">变色</s-checkbox-button>
+    <s-checkbox-button theme="main" disabled>Disabled</s-checkbox-button>
     <s-checkbox-group v-model="checkLabels">
         <s-checkbox-button label="两广"></s-checkbox-button>
         <s-checkbox-button label="大同"></s-checkbox-button>
@@ -181,9 +189,7 @@ const inputValidator = (value: string | number)=>{
         <s-checkbox label="大同"></s-checkbox>
         <s-checkbox label="武汉"></s-checkbox>
     </s-checkbox-group>
-  
   </div>
-  
   <div class="exhibition">
     <s-card ref="card1" id="card" shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
       <template #header>
@@ -195,24 +201,12 @@ const inputValidator = (value: string | number)=>{
       <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
     </s-card>
   </div>
-
-  <div class="exhibition">
-    <s-select v-model="emptyStr" :multiple="booleanTrue" :multiple-limit="2" :name="str" :options="options" :disabledOptions="[false,true,false,false,false,false]" @change="print">
-      <template v-slot="slotProps">
-        <span>
-          {{slotProps.option}}
-        </span>
-      </template>
-    </s-select>
-  </div>
-
   <div class="exhibition">
     <s-datetime v-model="date1" name="start"></s-datetime>
   </div>
 
   <div class="exhibition">
     <s-button @click="booleanFalse = true">Show Modal</s-button>
-    <!-- use the modal component, pass in the prop -->
     <s-dialog v-model="booleanFalse" 
       title="title" 
       :modal="booleanFalse" 
@@ -234,16 +228,33 @@ const inputValidator = (value: string | number)=>{
       </s-card>
     </s-dialog>
   </div>
-
   <div class="exhibition">
-    <s-button @click="onMessage">
-        跳出信息
-    </s-button>
+    <s-select v-model="emptyStr" :multiple="booleanTrue" :multiple-limit="2" :name="str" :options="options" :disabledOptions="[false,true,false,false,false,false]" @change="print">
+      <template v-slot="slotProps">
+        <span>
+          {{slotProps.option}}
+        </span>
+      </template>
+    </s-select>
   </div>
 
   <div class="exhibition">
     <s-button @click="onGlobalLoading">
         global loading
+    </s-button>
+  </div>
+  <div class="exhibition">
+    <s-button @click="onMessage('info')">
+        跳出信息
+    </s-button>
+    <s-button @click="onMessage('success')">
+        跳出成功信息
+    </s-button>
+    <s-button @click="onMessage('warning')">
+        跳出警示信息
+    </s-button>
+    <s-button @click="onMessage('error')">
+        跳出错误信息
     </s-button>
   </div>
 </template>
@@ -263,6 +274,9 @@ const inputValidator = (value: string | number)=>{
   margin:0 5px;
 }
 .exhibition{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   margin-bottom: 20px
 }
 /* card 测试css */

@@ -4,12 +4,12 @@
         class="scene-button"
         :class="[
             `scene-button-${type}`,
+            `scene-button-${theme}`
         ]" 
-        :style="{color: theme,padding: paddingSize}"
+        :style="styleObj"
         :disabled="disabled"
         :type='nativeType'
         @click="handleClick"
-            
         >
         <span class="scene-button-icon-slot" v-if="icon">
             <slot name="icon"></slot>
@@ -19,8 +19,10 @@
 </template>
 
 <script lang='ts'>
-import {defineComponent, ref, onMounted, computed} from 'vue'
+import {defineComponent, ref, onMounted, computed, reactive} from 'vue'
 import {buttonProps, buttonEmits } from './button'
+import '../../styles/global.css'
+import {ThemeColorMap} from '../../core/constants/constants'
 
 export default defineComponent({
     name:'s-button',
@@ -29,6 +31,23 @@ export default defineComponent({
     setup(props,{emit,attrs,slots,expose}){
         // 获取根节点 必须放在全局作用域中，不能放在onMount中:模板引用只有在组件渲染完成后生效
         const root = ref<HTMLInputElement>();
+        // size决定着缩放比例
+        let scaleSize = computed(()=>{
+            switch(props.size){
+                case 'default':
+                    return ['8px 16px','16px'];
+                case 'large':
+                    return ['10px 20px','14px'];
+                case 'small':
+                    return ['4px 8px','12px']
+            }
+        })
+        // style对象
+        let styleObj = reactive({
+            padding: scaleSize.value![0],
+            fontSize: scaleSize.value![1],
+            color: props.type === 'text'?ThemeColorMap.get(props.theme):'white'
+        })
         // 组件原生click事件回调函数
         const handleClick = (evt: MouseEvent) => {
             emit('click', evt)// 触发父组件注册的原生click事件
@@ -36,21 +55,9 @@ export default defineComponent({
         // icon插槽
         const icon = slots.icon;
 
-        // size决定着padding
-        let paddingSize = computed(()=>{
-            switch(props.size){
-                case 'default':
-                    return '8px 16px';
-                case 'large':
-                    return '12px 24px';
-                case 'small':
-                    return '5px 10px'
-            }
-        })
-
         return{
             root,
-            paddingSize,
+            styleObj,
             icon,
             handleClick,
         }
@@ -60,29 +67,53 @@ export default defineComponent({
 
 <style scoped>
 .scene-button{
-    background: white;
-    color:black;
-    border:1px solid;
-    border-radius: 4px;
-    font-size: 14px;
+    border:var(--scene-border-size) solid;
+    border-radius: var(--scene-border-radius);
 
+    font-size: var(--scene-font-size);
+    font-family: var(--scene-font-family);
+    letter-spacing: var(--scene-letter-spacing);
+
+    padding: 8px 16px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
 }
+/* 不同的主题 */
+.scene-button-main{
+    border-color: var(--scene-theme-color-main);
+    background: var(--scene-theme-color-main);
+}
+.scene-button-info{
+    border-color: var(--scene-theme-color-info);
+    background: var(--scene-theme-color-info);
+}
+.scene-button-success{
+    border-color: var(--scene-theme-color-success);
+    background: var(--scene-theme-color-success);
+}
+.scene-button-warning{
+    border-color: var(--scene-theme-color-warning);
+    background: var(--scene-theme-color-warning);
+}
+.scene-button-error{
+    border-color: var(--scene-theme-color-error);
+    background: var(--scene-theme-color-error);
+}
 .scene-button:disabled{
-    border:#C0C4CC 1px solid;
-    color: #C0C4CC;
+    border: var(--scene-color-disabled) 1px solid;
+    color: var(--scene-color-disabled);
     /* 光标变化 */
     cursor: not-allowed; 
 }
 /* type=round */
 .scene-button-round{
-    border-radius: 20px;
+    border-radius: var(--scene-round-border-radius);
 }
 /* type=text */
 .scene-button-text{
     border: none;
+    background: var(--scene-color-white);
 }
 .scene-button-icon-slot{
     margin-right: 5px;

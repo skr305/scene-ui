@@ -1,5 +1,5 @@
 import { ComponentConstants } from "../../core/constants";
-import { DefaultColor, DefaultSize } from '../../core/constants/comp';
+import { DefaultColor, DefaultSize } from '../../core/constants/constants';
 import { isBoolean } from "../../core/lib/type-assert";
 
 export const checkBoxProps = {
@@ -8,7 +8,6 @@ export const checkBoxProps = {
         default: false,
         required: false
     },
-    
     theme: {
         type: String,
         default: DefaultColor,
@@ -17,7 +16,6 @@ export const checkBoxProps = {
             return ComponentConstants.StandardColorArr.includes(value)
         },
     },
-
     disabled: {
         type: Boolean,
         default: false,
@@ -30,13 +28,11 @@ export const checkBoxProps = {
         default: false,
         required: false
     },
-
     modelValue: {
         type: Boolean,
         default: false,
         required: false
     },
-
     size: {
         type: String,
         default: DefaultSize,
@@ -45,7 +41,6 @@ export const checkBoxProps = {
             return ComponentConstants.StandardSizeArr.includes(value)
         }
     },
-
     label: {
         type: String,
         default: "",
