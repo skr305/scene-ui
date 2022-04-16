@@ -40,7 +40,9 @@
     --scene-font-family: Avenir, Helvetica, Arial, sans-serif;
     --scene-font-color-dark: #2c3e50;
     --scene-font-color-light: #ffffff;
+    --scene-font-size-large: 18px;
     --scene-font-size: 14px;
+    --scene-font-size-small: 12px;
     --scene-letter-spacing: 1px;
     --scene-font-placeholder-color: var(--scene-color-Extra-dark-gray);
     /*

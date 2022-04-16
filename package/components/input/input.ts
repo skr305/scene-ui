@@ -20,7 +20,7 @@ export const inputProps = {
         type: String,
         default: 'input'
     },
-    width:{
+    width:{// 输入区域的宽度，不是整个组件的宽度
         type: Number,
         default: 200,
         validator(value: number){
@@ -38,6 +38,10 @@ export const inputProps = {
     clearable:{// 在type=text的情况下可用
         type: Boolean,
         default: true
+    },
+    center:{// input文本是否居中
+        type: Boolean,
+        default: false
     },
     validate:{
         type: Function,

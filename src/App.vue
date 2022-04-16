@@ -127,18 +127,22 @@ const inputValidator = (value: string | number)=>{
     </s-textarea>
   </div>
   <div class="exhibition">
-    <s-button size="default" theme="main" :disabled="booleanFalse" type="default" @click="print"/>
+    <s-button size="large" theme="main" :disabled="booleanFalse" type="default" @click="print">
+      button
+    </s-button>
     <s-button size="default" theme="info" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>
+      button
     </s-button>
     <s-button size="default" theme="success" :disabled="booleanFalse" type="text" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>
+      button
     </s-button>
-    <s-button size="large" theme="warning" :disabled="booleanFalse" type="round" @click="print">
+    <s-button  theme="warning" :disabled="booleanFalse" type="circle" @click="print">
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>
@@ -147,22 +151,27 @@ const inputValidator = (value: string | number)=>{
       <template v-slot:icon>
         <img src="/set_16.svg">
       </template>
+      button
     </s-button>
   </div>
   <div class="exhibition">
     <s-link :href="baidu" >default</s-link>
     <s-link :href="baidu" theme="warning">default</s-link>
   </div>
+
   <div class="exhibition">
-    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5"/>
+    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5" @change="print"/>
   </div>
+
   <!--<div class="exhibition">
     <paymentInputVue v-model="data.pwd"/>
-  </div>
-  <div class="exhibition">
-    <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="large" theme="red"></s-radio>
-    <s-radio v-model="num2" name="contact" label="email" :disabled="false" size="small"></s-radio>
   </div>-->
+  <div class="exhibition">
+    <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="small"></s-radio>
+    <s-radio v-model="num1" name="contact" label="name" :disabled="false" size="default"></s-radio>
+    <s-radio v-model="num2" name="contact" label="email" :disabled="true" size="large"></s-radio>
+      <s-radio v-model="num2" name="contact" label="email" :disabled="false" size="large"></s-radio>
+  </div>
   <div>
     <s-checkbox v-model="select" label="是否堂食" size="large"></s-checkbox>
     <s-checkbox v-model="select" theme="success"  label="是否堂食"></s-checkbox>

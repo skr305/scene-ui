@@ -6,7 +6,7 @@ export const buttonProps = {
         default: 'default',
         validator(value: string) {
             // 这个值必须与下列字符串中的其中一个相匹配
-            return ['default', 'round', 'text'].includes(value)
+            return ['default', 'round', 'text', 'circle'].includes(value)
         }
     },
     theme: {

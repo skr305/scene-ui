@@ -2,13 +2,6 @@ import { ComponentConstants } from '../../core/constants';
 import { isNumber } from "../../core/lib/type-assert"
 
 export const numberInputProps = {
-    theme: {
-        type: String,
-        default: 'black',
-        validator(value:ComponentConstants.StandardColor){
-            return ComponentConstants.StandardColorArr.includes(value)
-        },
-    },
     step: {
         type: Number,
         default: 1,
@@ -28,13 +21,6 @@ export const numberInputProps = {
     disabled: {
         type: Boolean,
         default: false,
-    },
-    size: {
-        type: String,
-        default: 'default',
-        validator(value: string) {
-            return ComponentConstants.StandardSizeArr.includes(value)
-        }
     },
     name: String,
     label: String,

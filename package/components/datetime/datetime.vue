@@ -262,6 +262,7 @@ export default defineComponent({
   box-sizing: border-box; 
   width: 240px;
   height: 32px;
+  padding-left: 5px;
   justify-content: space-between;
   align-items: center;
 }

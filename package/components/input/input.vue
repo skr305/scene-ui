@@ -14,10 +14,11 @@
                 :placeholder="placeholder"
                 :readonly="readonly"
                 :disabled="disabled"
+                :style="{'text-align':center===true?'center':'initial'}"
                 @input="updateValue"
                 @focus="handleFocus"
                 @blur="handleBlur"/>
-            <div class="scene-input-main-plugin">
+            <div class="scene-input-main-plugin" v-if="(clearable && type==='text') || type==='password'">
                 <div class="scene-input-main-plugin-clear" v-if="clearable && type==='text'">
                   <close12 @click="updateValue(null,'')" />  
                 </div>
@@ -56,7 +57,8 @@ export default defineComponent({
 
     // 组件的内置数据
     const data = reactive({
-        inputValue : ref<string | number>(''),// 展示不加密的内置input的v-model值
+        // 为什么要设置inputValue，否则当用户输入时会直接修改v-model绑定的modelValue，props is readonly
+        inputValue : ref<string | number>(props.modelValue!),// 展示不加密的内置input的v-model值
         isEncrypt: true,// 控制展示加密还是不加密
         // 内置input的类型
         inputType: computed(()=>{
@@ -71,7 +73,7 @@ export default defineComponent({
     })
     
     /**
-     * 更新props.modelValue
+     * 更新props.modelValue与内置input的值
      */
     function updateValue(event:InputEvent, newVal?: string | number){
         let oldVal = props.modelValue!
@@ -100,6 +102,12 @@ export default defineComponent({
                 data.inputValue = oldVal
             }
                 
+        }else{
+            // 修改props的modelValue
+            emit("update:modelValue",target); 
+            // 修改展示的modelValue
+            data.inputValue = target
+            emit('change',target,oldVal)
         }
     }
 
@@ -143,9 +151,9 @@ export default defineComponent({
         if(tipDiv !== undefined){
             tipDiv.style.right = '-'+tipDiv.scrollWidth+'px'
             if(data.isWarning)
-                tipDiv.style.color = 'red'
+                tipDiv.style.color = '#d50000'
             else
-                tipDiv.style.color = 'green'
+                tipDiv.style.color = '#00c853'
         }
             
     })
@@ -199,7 +207,7 @@ export default defineComponent({
 }
 .scene-input-main{
     height: 30px;
-    width: 230px;
+    /* width: 230px; */
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -2,13 +2,6 @@ import { ComponentConstants } from '../../core/constants';
 import {isString ,isNumber, isBoolean} from "../../core/lib/type-assert"
 
 export const radioProps = {
-    theme: {
-        type: String,
-        default: 'black',
-        validator(value:ComponentConstants.StandardColor){
-            return ComponentConstants.StandardColorArr.includes(value)
-        },
-    },
     modelValue:{//单选框绑定的值
         type:[String,Number,Boolean],
         required: true,
@@ -25,10 +18,6 @@ export const radioProps = {
         type: Boolean,
         default: false
     },
-    border:{//是否显示边框
-        type: Boolean,
-        default: false
-    },
     size:{//Radio 的尺寸
         type: String,
         default: 'default',
@@ -36,7 +25,6 @@ export const radioProps = {
             return ComponentConstants.StandardSizeArr.includes(value)
         }
     },
-    
 }
 
 export const radioEmits = {

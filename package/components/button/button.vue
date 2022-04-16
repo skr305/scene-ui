@@ -14,7 +14,7 @@
         <span class="scene-button-icon-slot" v-if="icon">
             <slot name="icon"></slot>
         </span>
-        <slot>button</slot><!-- 备用内容，默认插槽  -->
+        <slot v-if="type !== 'circle'"></slot><!-- 备用内容，默认插槽  -->
     </button>
 </template>
 
@@ -35,19 +35,25 @@ export default defineComponent({
         let scaleSize = computed(()=>{
             switch(props.size){
                 case 'default':
-                    return ['8px 16px','16px'];
+                    return ['8px 16px','14px'];
                 case 'large':
-                    return ['10px 20px','14px'];
+                    return ['10px 20px','18px'];
                 case 'small':
-                    return ['4px 8px','12px']
+                    return ['4px 8px','10px']
             }
         })
         // style对象
-        let styleObj = reactive({
+        let styleObj = reactive<{
+            padding?: string,
+            fontSize: string,
+            color: string | undefined,
+        }>({
             padding: scaleSize.value![0],
             fontSize: scaleSize.value![1],
             color: props.type === 'text'?ThemeColorMap.get(props.theme):'white'
         })
+        if(props.type=== 'circle')
+            delete styleObj.padding
         // 组件原生click事件回调函数
         const handleClick = (evt: MouseEvent) => {
             emit('click', evt)// 触发父组件注册的原生click事件
@@ -74,7 +80,7 @@ export default defineComponent({
     font-family: var(--scene-font-family);
     letter-spacing: var(--scene-letter-spacing);
 
-    padding: 8px 16px;
+    /* padding: 8px 16px; */
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -108,7 +114,12 @@ export default defineComponent({
 }
 /* type=round */
 .scene-button-round{
-    border-radius: var(--scene-round-border-radius);
+    border-radius: var(--scene-round-border-radius)
+}
+/* type=circle */
+.scene-button-circle{
+    padding: 5px;
+    border-radius: 50%;
 }
 /* type=text */
 .scene-button-text{
@@ -116,9 +127,11 @@ export default defineComponent({
     background: var(--scene-color-white);
 }
 .scene-button-icon-slot{
-    margin-right: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.scene-button-icon-slot-text{
+    margin-left: 5px;
 }
 </style>
