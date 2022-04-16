@@ -1,7 +1,7 @@
 {
   "name": "scene-ui",
   "private": false,
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "a ui library",
   "keywords": ["ui", "front-end", "vue", "ts", "component", "lib", "starter", "vite", "toolkit"],
   "scripts": {
