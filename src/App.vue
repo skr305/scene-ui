@@ -17,7 +17,8 @@ import sDialog from '../package/components/dialog/dialog.vue'
 import sDatetime from '../package/components/datetime/datetime.vue'
 import message, { SceneMessageStyleType }  from '../package/components/message';
 import {SceneLoading} from '../package/components/loading/loading'
-
+import sLoginReg from '../package/components/scene/login-reg/s-login-reg.vue'
+import sPaper from '../package/components/paper/s-paper.vue';
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -37,7 +38,7 @@ const baidu = ref('https://www.baidu.com')
 const emptyStr = ref('')
 const emptyStr1 = ref('')
 const emptyStr2 = ref('')
-const print = (...args: any[])=>{
+const print = (...args: any[] ) => {
   console.log(...args)
 }
 const date1 = ref(new Date('2022-01-2'))
@@ -51,7 +52,7 @@ watch( text, () => {
   console.log( "on text change", text.value );
 } )
 
-const select = ref( false );
+const select = ref( true );
 watch( select, () => {
   console.log( select.value );
 } )
@@ -100,6 +101,13 @@ const inputValidator = (value: string | number)=>{
   else
     return [true, 'success!']
 }
+
+const fakeOnLogin = () => new Promise( r => setTimeout( () => r( { done: true } ), 1000 ) );
+const fakeOnReg = () => new Promise( r => setTimeout( () => r( { done: true } ), 1000 ) );
+const fakeLoginSuc = () => {
+  console.log( "GOOD JOB JOSON" );
+};
+
 
 </script>
 
@@ -185,14 +193,20 @@ const inputValidator = (value: string | number)=>{
     <s-checkbox-button theme="success">变色</s-checkbox-button>
     <s-checkbox-button theme="main" disabled>Disabled</s-checkbox-button>
     <s-checkbox-group v-model="checkLabels">
+      <template>
         <s-checkbox-button label="两广"></s-checkbox-button>
-        <s-checkbox-button label="大同"></s-checkbox-button>
-        <s-checkbox-button label="武汉"></s-checkbox-button>
+          <s-checkbox-button label="大同"></s-checkbox-button>
+          <s-checkbox-button label="武汉"></s-checkbox-button>
+      </template>
+        
     </s-checkbox-group>
     <s-checkbox-group v-model="checkLabels">
-        <s-checkbox label="两广"></s-checkbox>
+    <template>
+      <s-checkbox label="两广"></s-checkbox>
         <s-checkbox label="大同"></s-checkbox>
         <s-checkbox label="武汉"></s-checkbox>
+    </template>
+        
     </s-checkbox-group>
   </div>
   <div class="exhibition">
@@ -262,6 +276,21 @@ const inputValidator = (value: string | number)=>{
     <s-button @click="onMessage('error')">
         跳出错误信息
     </s-button>
+  </div>
+  <div>
+    <s-login-reg 
+    :onLogin="fakeOnLogin"
+    :onReg="fakeOnReg"
+    :onLoginSuc="fakeLoginSuc"
+    LoginTitle='登录'
+    RegTitle="注册"
+    RegSubmitTip="点击注册">
+    
+    </s-login-reg>
+  </div>
+
+  <div>
+    <s-paper label="你好"></s-paper>
   </div>
 </template>
 

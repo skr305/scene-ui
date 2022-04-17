@@ -60,5 +60,6 @@ export const checkBoxBtnProps = {
 };
 
 export const checkBoxBtnEmits = {
-    change: isBoolean
+    change: isBoolean,
+    "update:modelValue": isBoolean
 };
