@@ -35,7 +35,7 @@ export default defineComponent( {
     emits: checkBoxEmits,
     props: checkBoxProps,
     setup( props, ctx ) {
-        const groupContext = inject<CheckGroupContextType>( CHECK_GROUP_CONTEXT );
+        const groupContext: CheckGroupContextType | null = inject<CheckGroupContextType>( CHECK_GROUP_CONTEXT );
         const current = ref( false );
         {
             const updateWithLabels = ( labels: string[] ) => {
@@ -44,7 +44,8 @@ export default defineComponent( {
             //init for current and pushToDeps
             if( !groupContext ) {
                 // 没有注入上下文的情况下 以checked提供的为准
-                current.value = props.checked;
+                // 如果没有checked 就以modelValue提供的为准
+                current.value = props.checked || props.modelValue;
             } else {
                 updateWithLabels( groupContext.groupLabels );
                 groupContext.pushToDeps( updateWithLabels );
@@ -68,6 +69,8 @@ export default defineComponent( {
             }
             current.value = !current.value;
             ctx.emit( "change", current.value );
+            ctx.emit( "update:modelValue", current.value );
+            
             if( groupContext ) {
                 if( props.label ) {
                     const groupLabels = groupContext.groupLabels;

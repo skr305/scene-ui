@@ -1,10 +1,20 @@
-import AppResponse from '../../../core/lib/app-response';
+import { Ref } from "vue";
 export interface ChatProps {
-    sendMes ?: ( chatID: string, content: string ) => Promise< AppResponse< { done: boolean } > >;
-    recieveMes ?: ( chatID: string ) => Promise< AppResponse< { content: string, isMe: boolean } > >;
-    
-    myNick ?: string;
-    yourNick ?: string;
-    // need base property
-    chatID: string;
+    chatID: string,
+    send : ( p:{ chatID: string, message: string } ) => Promise< { done: boolean } >
+    recieve ?: ( p: { chatID: string } ) => Promise< { message: string } >
+
+    // default is false
+    // update your send-message when server notify you send-done
+    updateAfterSendDone ?: boolean;
+};
+export interface ChatBindings {
+    messageRecords: Ref< Array< ChatMessage > >;
+    inputed: Ref< string >;
+    onSend: () => Promise<any>;
+};
+export type ChatMessage = {
+    // default: true
+    isMe ?: boolean;
+    content: string;
 };
