@@ -21,13 +21,13 @@
         >   
             <div v-if="showTags" class="scene-select-multiple-tag">
                 <span>{{selectedItems[selectedItems.length-1]}}</span>
-                <img src="/close_12_1.svg" @click.stop="handleDelete($event)" title="close">
+                <s-icon name="x-circle" @click.stop="handleDelete($event)" title="close"/>
             </div>
             <div v-if="showTags" class="scene-select-multiple-count">
                 <span>+{{selectedItems.length}}/{{multipleLimit}}</span>
             </div>
         </div>
-        <img id="scene-select-icon" src="/down.svg" title="down">
+        <s-icon name="chevron-down" :size="16" id="scene-select-icon" title="down" />
             <!-- 选择器的隐藏部分 -->
         <div class="scene-select-dropdown-arrow"></div>
         <div class="scene-select-dropdown-menu">
@@ -47,13 +47,13 @@
 import {computed, defineComponent, nextTick, onMounted, reactive, ref, toRefs} from 'vue'
 import {selectProps, selectEmits} from './select'
 import sScrollbar from '../scrollbar/scrollbar.vue'
-
+import sIcon from '../icon/icon.vue'
 
 export default defineComponent({
   name:'scene-select',
   props:selectProps,
   emits:selectEmits,
-  components:{sScrollbar},
+  components:{sScrollbar,sIcon},
   setup(props,{emit,attrs,slots,expose}){
     
     // 选择器的选择区域 html引用
@@ -276,6 +276,9 @@ export default defineComponent({
     width: 20px; /** 22px - 4px */
     height: 30px; /** 32px -4px  */
     transition: transform 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* 选择器的箭头 */
 .scene-select-dropdown-arrow{

@@ -15,7 +15,7 @@
               <div v-if="$slots.title || title" class="scene-dialog-title">
                   <slot name="title">
                     <div class="scene-dialog-default-title">
-                      <h3>{{title}}</h3><img @click="closeDialog(true)" src="/close_12_1.svg">
+                      <h3>{{title}}</h3><s-icon color="#aa00ff" name="x-circle-fill" @click="closeDialog(true)"></s-icon>
                     </div>
                   </slot>
               </div>
@@ -41,13 +41,14 @@
 import {defineComponent, onMounted, ref, watch} from 'vue'
 import {dialogProps, dialogEmits} from './dialog'
 import sButton from '../button/button.vue'
+import sIcon from '../icon/icon.vue'
 import '../../styles/global.css'
 
 export default defineComponent({
   name:'scene-dialog',
   props:dialogProps,
   emits:dialogEmits,
-  components:{sButton},
+  components:{sButton,sIcon},
   setup(props,{emit,attrs,slots,expose}){
     const mask = ref<HTMLElement>()
 

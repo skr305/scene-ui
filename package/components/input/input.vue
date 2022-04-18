@@ -20,11 +20,11 @@
                 @blur="handleBlur"/>
             <div class="scene-input-main-plugin" v-if="(clearable && type==='text') || type==='password'">
                 <div class="scene-input-main-plugin-clear" v-if="clearable && type==='text'">
-                  <close12 @click="updateValue(null,'')" />  
+                  <s-icon name="x-circle" color="#2c3e50" :size="12" @click="updateValue(null,'')" />  
                 </div>
                 <div class="scene-input-main-plugin-eye"  v-if="type==='password'">
-                  <eye12 v-if="isFocus && isEncrypt" @mousedown="showPassword($event,true)"/>  
-                  <eyeclose12 v-if="isFocus && !isEncrypt" @mousedown="showPassword($event,false)"/> 
+                  <s-icon name="eye" color="#2c3e50" :size="12" v-if="isFocus && isEncrypt" @mousedown="showPassword($event,true)"/>  
+                  <s-icon name="eye-slash" color="#2c3e50" :size="12" v-if="isFocus && !isEncrypt" @mousedown="showPassword($event,false)"/> 
                 </div>
             </div>
         </div>
@@ -40,16 +40,14 @@
 <script lang='ts'>
 import {computed, toRefs, defineComponent,onMounted,reactive,ref, onUpdated} from 'vue'
 import {inputProps, inputEmits} from './input'
+import sIcon from '../icon/icon.vue'
 import '../../styles/global.css'
 
-import Close12 from '../svg/close12.vue';
-import Eye12 from '../svg/eye12.vue';
-import Eyeclose12 from '../svg/eyeclose12.vue';
 export default defineComponent({
   name:'scene-input',
   props: inputProps,
   emits: inputEmits,
-  components: { Close12, Eye12, Eyeclose12 },
+  components: {sIcon},
   setup(props,{emit,attrs,slots,expose}){
     // 模板引用
     const input = ref<HTMLInputElement>()
