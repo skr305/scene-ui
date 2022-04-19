@@ -4,9 +4,9 @@ import paymentInputVue from '../package/components/payment/s-payment-input.vue';
 import sInput from '../package/components/input/input.vue'
 import sTextarea from '../package/components/textarea/textarea.vue'
 import sButton from '../package/components/button/button.vue';
-import sRadio from '../package/components/radio/radio.vue'
-import sNumberInput from '../package/components/number-input/number-input.vue'
-import sLink from '../package/components/link/link.vue'
+import sRadio from '../package/components/radio/radio.vue';
+import sNumberInput from '../package/components/number-input/number-input.vue';
+import sLink from '../package/components/link/link.vue';
 import sSelect from '../package/components/select/select.vue'
 import sScrollbar from '../package/components/scrollbar/scrollbar.vue'
 import sCheckbox from '../package/components/checkbox/checkbox.vue'
@@ -17,6 +17,10 @@ import sDialog from '../package/components/dialog/dialog.vue'
 import sDatetime from '../package/components/datetime/datetime.vue'
 import message, { SceneMessageStyleType }  from '../package/components/message';
 import {SceneLoading} from '../package/components/loading/loading'
+import sIcon from '../package/components/icon/icon.vue'
+
+// import { AlarmFill } from '../package/components/svg/test/alarm-fill'
+// import alarmFill from '../package/components/svg/test/alarm-fill.vue'
 import sLoginReg from '../package/components/scene/login-reg/s-login-reg.vue'
 import sChat from '../package/components/scene/chat/chat.vue'
 import sPaper from '../package/components/paper/s-paper.vue';
@@ -129,7 +133,7 @@ const fakeChatID = "245"
   <div class="exhibition">
     <s-input v-model="emptyStr" :disabled="false" @change="print(emptyStr)">
       <template #prefix>
-        <img src="/search_16.svg">
+        <s-icon name="search" color="#aa00ff" size="16px" />
       </template>
       <template #suffix>
         <span>.com</span>
@@ -137,7 +141,7 @@ const fakeChatID = "245"
     </s-input>
     <s-input v-model="emptyStr" type="password" :validate="inputValidator" :disabled="false" @change="print(emptyStr)">
       <template #prefix>
-        <img src="/search_16.svg">
+        <s-icon name="search" color="#aa00ff" size="16px" />
       </template>
       <template #suffix>
         <span>.com</span>
@@ -154,24 +158,24 @@ const fakeChatID = "245"
     </s-button>
     <s-button size="default" theme="info" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
-        <img src="/set_16.svg">
+        <s-icon name="gear-fill" color="white" size="16px" />
       </template>
       button
     </s-button>
     <s-button size="default" theme="success" :disabled="booleanFalse" type="text" @click="print">
       <template v-slot:icon>
-        <img src="/set_16.svg">
+        <s-icon name="gear-fill" color="white" size="16px" />
       </template>
       button
     </s-button>
     <s-button  theme="warning" :disabled="booleanFalse" type="circle" @click="print">
       <template v-slot:icon>
-        <img src="/set_16.svg">
+        <s-icon name="gear-fill" color="white" size="16px" />
       </template>
     </s-button>
     <s-button size="small" theme="error" :disabled="booleanFalse" type="default" @click="print">
       <template v-slot:icon>
-        <img src="/set_16.svg">
+        <s-icon name="gear-fill" color="white" size="16px" />
       </template>
       button
     </s-button>
