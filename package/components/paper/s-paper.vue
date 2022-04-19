@@ -34,6 +34,11 @@ const paperStyle = computed(() => {
 })
 
 </script>
+<script lang="ts">
+export default {
+    name: "s-paper"
+};
+</script>
 <style scoped>
 .__scene-paper {
     padding: 1em 2.5em;

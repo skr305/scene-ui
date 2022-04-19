@@ -1,7 +1,7 @@
 <template>
-    <div className="__scene-login-wrp">
-        <s-card ref="wrapperRef" shadow="hover" :style="{ padding: '2em 4em'}" >
-            <div v-if="inLoginPage">
+    <div :class="wrapperClasses">
+        <s-card ref="wrapperRef" shadow="hover" class="__scene-lg-card" :style="{ padding: '2em 4em' }">
+            <div v-if="inLoginPage" className="__scene-login-bar">
                 <div className="__scene-input-block __scene-title-block">
                      {{ props.LoginTitle || 'LOGIN' }}
                 </div>
@@ -26,7 +26,7 @@
                     </s-button>
                 </div>
             </div>
-            <div v-else>
+            <div className="__scene-reg-bar" v-else>
                 <div className="__scene-input-block __scene-title-block">
                     {{ props.RegTitle || 'REG' }}
                 </div>
@@ -58,7 +58,7 @@
                     </s-button>
                 </div>
             </div>
-            <s-checkbox v-model="inLoginPage" label="是否已注册" ></s-checkbox>
+            <s-checkbox label="是否已注册" @click="onSwitchMode" checked></s-checkbox>
         </s-card>
     </div>
 </template>
@@ -73,7 +73,7 @@ import SCheckbox from '../../checkbox/checkbox.vue';
 import Secret0 from '../../svg/secret0.vue';
 import User0 from '../../svg/user0.vue';
 import Name0 from '../../svg/name0.vue';
-import { ref, VNode } from 'vue';
+import { ref, VNode, nextTick } from 'vue';
 import message, { SceneMessageStyleType } from '../../message';
 
 export interface LoginRegProps {
@@ -196,12 +196,32 @@ const onReg = async () => {
         closeLoading();
     }
 }
+
+const wrapperClasses = ref<string[]>( [ '__scene-login-wrp' ] );
+const onSwitchMode = () => {
+    wrapperClasses.value.push( '__scene-login-changing' );
+    nextTick( () => {
+        
+        setTimeout( () => {
+            inLoginPage.value = !inLoginPage.value;
+            wrapperClasses.value.pop();
+        }, 300 );
+    } );
+    
+}
+</script>
+<script lang="ts">
+   export default {
+       name: "s-login-reg"
+   };
 </script>
 <style scoped>
     .__scene-login-wrp {
         max-width: 27em; 
         margin: 1.5em auto;
         border: 4px solid black; 
+
+        transition: .5s;
     }
      .__scene-input-block {
          margin: 2em auto;
@@ -224,5 +244,20 @@ const onReg = async () => {
      .__scene-login-wrp .__scene-login-submit-block .__scene-login-sumit-button {
           max-height: 3em;
           padding: 0.3em 5em !important;
+     }
+
+     .__scene-login-bar {
+         transition: 1s;
+     }
+
+     .__scene-lg-card {
+         transition: height 1s;
+     }
+
+     .__scene-login-changing {
+         /* height: 40em; */
+         /* height: 40em; */
+         opacity: 0;
+         transition: all .3s ease;
      }
 </style>

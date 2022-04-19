@@ -49,7 +49,7 @@ const scrollbarSize = (function() {
 })();
 
 export default defineComponent({
-  name:'',
+  name:'s-scrollbar',
   props:scrollbarProps,
   setup(props,{emit,attrs,slots,expose}){
     
@@ -131,7 +131,7 @@ export default defineComponent({
         const wrapEl = wrap.value;
         if (wrapEl) {
             let height = wrapEl.clientHeight / wrapEl.scrollHeight * 100;  // 整个warp的可视高度与warp包裹的div的高度的比值
-            if (height >= 100){
+            if ( !props.alwaysNeedY && height >= 100){
                 // 不需要滚动条
                 height = 0;
                 mustShowThumb.y = false;
@@ -140,7 +140,7 @@ export default defineComponent({
             thumbStyle.y.transform = `translateY(${wrapEl.scrollTop / wrapEl.scrollHeight * wrapEl.clientHeight}px)`;
 
             let width = (wrapEl.clientWidth / wrapEl.scrollWidth) * 100;  // 整个warp的可视宽度与warp包裹的div的宽度的比值
-            if (width >= 100){
+            if (!props.alwaysNeedX && width >= 100){
                 // 不需要滚动条
                 width = 0;
                 mustShowThumb.x = false;
