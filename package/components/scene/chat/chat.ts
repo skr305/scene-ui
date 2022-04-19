@@ -2,7 +2,7 @@ import { Ref } from "vue";
 export interface ChatProps {
     chatID: string,
     send : ( p:{ chatID: string, message: string } ) => Promise< { done: boolean } >
-    recieve ?: ( p: { chatID: string } ) => Promise< { message: string } >
+    receive ?: ( p: { chatID: string } ) => Promise< ChatMessage >
 
     // default is false
     // update your send-message when server notify you send-done
@@ -14,7 +14,6 @@ export interface ChatBindings {
     onSend: () => Promise<any>;
 };
 export type ChatMessage = {
-    // default: true
     isMe ?: boolean;
     content: string;
 };

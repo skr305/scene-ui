@@ -197,6 +197,11 @@ const onReg = async () => {
     }
 }
 </script>
+<script lang="ts">
+   export default {
+       name: "s-login-reg"
+   };
+</script>
 <style scoped>
     .__scene-login-wrp {
         max-width: 27em; 

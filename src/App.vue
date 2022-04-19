@@ -18,6 +18,7 @@ import sDatetime from '../package/components/datetime/datetime.vue'
 import message, { SceneMessageStyleType }  from '../package/components/message';
 import {SceneLoading} from '../package/components/loading/loading'
 import sLoginReg from '../package/components/scene/login-reg/s-login-reg.vue'
+import sChat from '../package/components/scene/chat/chat.vue'
 import sPaper from '../package/components/paper/s-paper.vue';
 
 const booleanTrue = ref(true)
@@ -108,7 +109,20 @@ const fakeLoginSuc = () => {
   console.log( "GOOD JOB JOSON" );
 };
 
-
+const fakeChatSend = () => new Promise( r => r( { done: true } ) );
+let count = 0;
+const fakeChatRecv = () => new Promise( r => {
+  if( count++ >= 2 ) {
+    return;
+  }
+   r(  [ 
+    { content: "dog" } ,
+    { content: "eff" },
+    { content: "doufu" },
+    { content: "gougou" }
+  ] ) 
+} );
+const fakeChatID = "245"
 </script>
 
 <template>
@@ -291,6 +305,14 @@ const fakeLoginSuc = () => {
 
   <div>
     <s-paper label="你好"></s-paper>
+  </div>
+  <div>
+    <s-chat 
+    :chatID="fakeChatID"
+    :send="fakeChatSend"
+    :receive="fakeChatRecv"
+    >
+    </s-chat>
   </div>
 </template>
 

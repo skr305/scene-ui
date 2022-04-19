@@ -31,7 +31,7 @@
             <!-- 选择器的隐藏部分 -->
         <div class="scene-select-dropdown-arrow"></div>
         <div class="scene-select-dropdown-menu">
-            <s-scrollbar :width="214" :height="180">
+            <s-scrollbar :width="214" :height="180" :alwaysNeedY="true">
                 <div ref="menu" >
                    <div v-for="(option,index) of options" :key="index" class="scene-select-dropdown-menu-option" :tabindex="-1">
                         <!-- 作用域插槽，对外暴露 option 与 index -->
