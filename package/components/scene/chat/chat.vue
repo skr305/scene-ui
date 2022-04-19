@@ -1,9 +1,11 @@
 <template>
     <div className="__scene-chat-wrp">
         <s-card class="__scene-chat" :style="{ overflowX: 'hidden' }">
-            <div className="__scene-chat-inner-wrp" :ref="">
-                <s-scrollbar :alwaysNeedY="true" :width="400" :height="400">
-                    <div className="__scene-chat-records">
+            <div className="__scene-chat-inner-wrp" >
+                <s-scrollbar :alwaysNeedY="true" :width="480" :height="400"
+                ref="scrollRef">
+                    <div className="__scene-chat-records"
+                    ref="recordsRef">
                         <div 
                         v-for="( r, i ) in messageRecords"
                         :key=" '__record-no.' + i "
@@ -20,7 +22,8 @@
                 </s-scrollbar>
                 <div className="__scene-chat-sender">
                     <s-input v-model="inputed" :width="350"
-                    placeholder="input something"></s-input>
+                    placeholder="input something" 
+                    ref="inputRef"></s-input>
                     <div className="__scene-chat-submit-wrp">
                         <s-button class="__scene-chat-submit" @click="onSend"> send </s-button>
                     </div> 
@@ -36,7 +39,7 @@ import SCard  from '../../card/card.vue';
 import SPaper from '../../paper/s-paper.vue';
 import SInput from '../../input/input.vue';
 import SScrollbar from '../../scrollbar/scrollbar.vue';
-import { ref, onUnmounted } from 'vue';
+import { ref, onUnmounted, nextTick } from 'vue';
 
 export interface ChatProps {
     chatID: string,
@@ -59,6 +62,7 @@ const inputed = ref( "" );
 
 const scrollRef = ref(null);
 const recordsRef = ref(null);
+const inputRef = ref( null );
 
 let receiver = null;
 const onSend = async () => {
@@ -71,10 +75,21 @@ const onSend = async () => {
             messageRecords.value.push( { isMe: true, content: inputed.value } );
             await props.send( message );
         }
-        inputed.value = "";
+        
+
         // const distance = recordsRef.
         // // 滑倒最底下
-        // scrollRef.value.moveTo (  , 'Y' );
+        nextTick( () => {
+            scrollRef.value.moveTo ( recordsRef.value.clientHeight + 61 , 'Y' );
+        } )
+        // clear
+        inputed.value = "23";
+        inputRef.value.updateValue( null, "" );
+        // // this logic always make sense
+        // nextTick( () => {
+        //    inputRef.value.$el.querySelector( "input" ).value = ""
+        // } );
+        
     } catch( error ) {
         console.warn( ` something error in send message
         ...:scene-ui@0.2.0/chat ` );
@@ -137,7 +152,7 @@ onUnmounted(() => {
     /* height: 400px; */
     /* min-height: 300px; */
 
-    width: 400px;
+    width: 480px;
 
     margin: 0 auto;
 
@@ -148,10 +163,10 @@ onUnmounted(() => {
 }
 
 .__scene-chat-me {
-    float: left;
+    float: right;
 }
 .__scene-chat-you {
-    float: right;
+    float: left;
 }
 .__scene-chat-submit {
     font-size: 1.4em;
