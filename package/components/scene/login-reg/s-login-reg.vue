@@ -1,6 +1,6 @@
 <template>
     <div className="__scene-login-wrp">
-        <s-card ref="wrapperRef" shadow="hover" :style="{ padding: '2em 4em' }" >
+        <s-card ref="wrapperRef" shadow="hover" :style="{ padding: '2em 4em'}" >
             <div v-if="inLoginPage">
                 <div className="__scene-input-block __scene-title-block">
                      {{ props.LoginTitle || 'LOGIN' }}
@@ -78,7 +78,7 @@ import message, { SceneMessageStyleType } from '../../message';
 
 export interface LoginRegProps {
     onLogin:( p: { userID: string, pwd: string } ) => Promise< { done: boolean } >
-    onReg: ( p: { userID: string, userNick, pwd: string } ) => Promise< { done: boolean } >
+    onReg: ( p: { userID: string, userNick: any, pwd: string } ) => Promise< { done: boolean } >
     onLoginSuc ?: ( userID: string ) => any,
     onRegSuc ?: ( userID: string ) => any,
     onLoginFail ?: ( userID: string ) => any,
@@ -130,7 +130,7 @@ const REG_ERROR = {
 };
 const onLogin = async () => {
     const { open: openLoading, close: closeLoading } = SceneLoading.service({
-        target: ( wrapperRef.value as VNode ),
+        target: ( wrapperRef.value as unknown as VNode ),
         fullScreen: true,
         text: 'loading...',
         onClose: () => {}
@@ -164,7 +164,7 @@ const onLogin = async () => {
 }
 const onReg = async () => {
     const { open: openLoading, close: closeLoading } = SceneLoading.service({
-        target: ( wrapperRef.value as VNode ),
+        target: ( wrapperRef.value as unknown as VNode ),
         fullScreen: true,
         text: 'loading...',
         onClose: () => {}
