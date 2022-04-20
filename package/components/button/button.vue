@@ -71,7 +71,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style>
 .scene-button{
     border:var(--scene-border-size) solid;
     border-radius: var(--scene-border-radius);

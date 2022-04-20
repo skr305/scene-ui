@@ -81,7 +81,7 @@ const buttonProps = {
 const buttonEmits = {
   click: (evt) => evt instanceof MouseEvent
 };
-var button_vue_vue_type_style_index_0_scoped_true_lang = "";
+var button_vue_vue_type_style_index_0_lang = "";
 var _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -142,12 +142,12 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
   }, [
     _ctx.icon ? (openBlock(), createElementBlock("span", _hoisted_2$f, [
-      renderSlot(_ctx.$slots, "icon", {}, void 0, true)
+      renderSlot(_ctx.$slots, "icon")
     ])) : createCommentVNode("", true),
-    _ctx.type !== "circle" ? renderSlot(_ctx.$slots, "default", { key: 1 }, void 0, true) : createCommentVNode("", true)
+    _ctx.type !== "circle" ? renderSlot(_ctx.$slots, "default", { key: 1 }) : createCommentVNode("", true)
   ], 14, _hoisted_1$i);
 }
-var sButton = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$i], ["__scopeId", "data-v-289b9892"]]);
+var sButton = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$i]]);
 const scrollbarProps = {
   width: {
     type: Number,

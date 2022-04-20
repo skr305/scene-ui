@@ -17,3 +17,7 @@ export declare const DefaultSize = "default";
  * 标准大小的数组形式
  */
 export declare const StandardSizeArr: string[];
+/**
+ * 信息面板的可选类型
+ */
+export declare const InfoPanelType: string[];
