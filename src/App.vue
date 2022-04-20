@@ -238,6 +238,7 @@ const fakeChatID = "245"
       <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
     </s-card>
   </div>
+  
   <div class="exhibition">
     <s-datetime v-model="date1" name="start"></s-datetime>
   </div>

@@ -24,7 +24,15 @@ export declare const inputProps: {
         type: BooleanConstructor;
         default: boolean;
     };
+    readonly: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     clearable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    center: {
         type: BooleanConstructor;
         default: boolean;
     };

@@ -98,8 +98,9 @@ function createLoadingComponent(options: loadingProps = defaultLoadingProps){
                     // document.body.scrollTop与document.documentElement.scrollTop同时只会有一个值生效。
                     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
                     let scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft
-                    data.loadingMountElement.style.top = `${scrollTop - parseInt(document.body.style.marginTop)}px`
-                    data.loadingMountElement.style.left = `${scrollLeft - parseInt(document.body.style.marginLeft)}px`
+                    let bodyStyle:CSSStyleDeclaration = window.getComputedStyle(document.body)
+                    data.loadingMountElement.style.top = `${scrollTop - parseInt(bodyStyle.marginTop)}px`
+                    data.loadingMountElement.style.left = `${scrollLeft - parseInt(bodyStyle.marginLeft)}px`
                     data.loadingMountElement.style.width = '100vw'
                     data.loadingMountElement.style.height = '100vh'
                 }

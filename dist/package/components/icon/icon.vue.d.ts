@@ -1,30 +1,27 @@
+import { CSSProperties } from 'vue';
 declare const _sfc_main: import("vue").DefineComponent<{
-    header: {
+    name: {
         type: StringConstructor;
     };
-    shadow: {
-        type: StringConstructor;
-        default: string;
-        validator(val: string): boolean;
+    size: {
+        type: (StringConstructor | NumberConstructor)[];
+        validate(value: string | number): boolean;
     };
-    bodyStyle: {
-        type: ObjectConstructor;
+    color: {
+        type: StringConstructor;
     };
 }, {
-    el: import("vue").Ref<HTMLElement | undefined>;
+    style: import("vue").ComputedRef<CSSProperties>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    header: {
+    name: {
         type: StringConstructor;
     };
-    shadow: {
+    size: {
+        type: (StringConstructor | NumberConstructor)[];
+        validate(value: string | number): boolean;
+    };
+    color: {
         type: StringConstructor;
-        default: string;
-        validator(val: string): boolean;
     };
-    bodyStyle: {
-        type: ObjectConstructor;
-    };
-}>>, {
-    shadow: string;
-}>;
+}>>, {}>;
 export default _sfc_main;

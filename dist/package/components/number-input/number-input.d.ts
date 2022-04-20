@@ -1,10 +1,4 @@
-import { ComponentConstants } from '../../core/constants';
 export declare const numberInputProps: {
-    theme: {
-        type: StringConstructor;
-        default: string;
-        validator(value: ComponentConstants.StandardColor): boolean;
-    };
     step: {
         type: NumberConstructor;
         default: number;
@@ -24,11 +18,6 @@ export declare const numberInputProps: {
     disabled: {
         type: BooleanConstructor;
         default: boolean;
-    };
-    size: {
-        type: StringConstructor;
-        default: string;
-        validator(value: string): boolean;
     };
     name: StringConstructor;
     label: StringConstructor;

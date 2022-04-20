@@ -1,10 +1,11 @@
 /**
- * 标准颜色
+ * 标准主题色
  */
-export declare type StandardColor = "red" | "yellow" | "blue" | "purple" | "black" | "smokewhite";
-export declare const DefaultColor = "black";
+export declare type StandardColor = "main" | "info" | "success" | "warning" | "error";
+export declare const DefaultColor = "main";
+export declare const ThemeColorMap: Map<string, string>;
 /**
- * 标准颜色的数组形式
+ * 标准主题色的数组形式
  */
 export declare const StandardColorArr: string[];
 /**

@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     type: {
         type: StringConstructor;
         default: string;
@@ -7,7 +7,7 @@ declare const _default: import("vue").DefineComponent<{
     theme: {
         type: StringConstructor;
         default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
     };
     size: {
         type: StringConstructor;
@@ -25,7 +25,11 @@ declare const _default: import("vue").DefineComponent<{
     };
 }, {
     root: import("vue").Ref<HTMLInputElement | undefined>;
-    paddingSize: import("vue").ComputedRef<"8px 16px" | "12px 24px" | "5px 10px" | undefined>;
+    styleObj: {
+        padding?: string | undefined;
+        fontSize: string;
+        color: string | undefined;
+    };
     icon: import("vue").Slot | undefined;
     handleClick: (evt: MouseEvent) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
@@ -39,7 +43,7 @@ declare const _default: import("vue").DefineComponent<{
     theme: {
         type: StringConstructor;
         default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
     };
     size: {
         type: StringConstructor;
@@ -64,4 +68,4 @@ declare const _default: import("vue").DefineComponent<{
     disabled: boolean;
     nativeType: string;
 }>;
-export default _default;
+export default _sfc_main;

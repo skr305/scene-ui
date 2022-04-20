@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: {
         type: BooleanConstructor;
         required: boolean;
@@ -20,9 +20,6 @@ declare const _default: import("vue").DefineComponent<{
     };
     closeOnClickModal: {
         type: BooleanConstructor;
-        /**
-         *  关闭对话框，isTrigger控制该函数是否触发
-         */
         default: boolean;
     };
 }, {
@@ -55,9 +52,6 @@ declare const _default: import("vue").DefineComponent<{
     };
     closeOnClickModal: {
         type: BooleanConstructor;
-        /**
-         *  关闭对话框，isTrigger控制该函数是否触发
-         */
         default: boolean;
     };
 }>> & {
@@ -69,4 +63,4 @@ declare const _default: import("vue").DefineComponent<{
     lockScroll: boolean;
     closeOnClickModal: boolean;
 }>;
-export default _default;
+export default _sfc_main;

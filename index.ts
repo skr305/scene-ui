@@ -17,5 +17,7 @@ export { default as SRadio } from './package/components/radio/radio.vue';
 export { default as SScrollbar } from './package/components/scrollbar/scrollbar.vue';
 export { default as SSelect } from './package/components/select/select.vue';
 export { default as STextarea } from './package/components/textarea/textarea.vue';
+export { default as SPaper } from './package/components/paper/s-paper.vue';
+export { default as SLoginReg } from './package/components/scene/login-reg/s-login-reg.vue';
 /**  T: todo scene include: login chat and payment need */
 

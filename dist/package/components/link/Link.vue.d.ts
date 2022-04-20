@@ -1,5 +1,4 @@
-import { ComponentConstants } from '../../core/constants';
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     href: {
         type: StringConstructor;
         default: string;
@@ -7,7 +6,7 @@ declare const _default: import("vue").DefineComponent<{
     theme: {
         type: StringConstructor;
         default: string;
-        validator(value: ComponentConstants.StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
     };
     underline: {
         type: BooleanConstructor;
@@ -18,6 +17,7 @@ declare const _default: import("vue").DefineComponent<{
         default: boolean;
     };
 }, {
+    fontColor: string | undefined;
     handleClick: (event: MouseEvent) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     click: (evt: MouseEvent) => boolean;
@@ -29,7 +29,7 @@ declare const _default: import("vue").DefineComponent<{
     theme: {
         type: StringConstructor;
         default: string;
-        validator(value: ComponentConstants.StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
     };
     underline: {
         type: BooleanConstructor;
@@ -47,4 +47,4 @@ declare const _default: import("vue").DefineComponent<{
     href: string;
     underline: boolean;
 }>;
-export default _default;
+export default _sfc_main;

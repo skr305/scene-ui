@@ -1,9 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
-    theme: {
-        type: StringConstructor;
-        default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
-    };
+declare const _sfc_main: import("vue").DefineComponent<{
     step: {
         type: NumberConstructor;
         default: number;
@@ -24,21 +19,16 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-    size: {
-        type: StringConstructor;
-        default: string;
-        validator(value: string): boolean;
-    };
     name: StringConstructor;
     label: StringConstructor;
 }, {
-    input: import("vue").Ref<HTMLInputElement | undefined>;
+    input: import("vue").Ref<any>;
     increase: () => void;
     decrease: () => void;
-    handleInput: (event: InputEvent) => void;
+    handleInput: (inputVal: number) => void;
     handleFocus: (event: MouseEvent) => void;
     handleBlur: (event: MouseEvent) => void;
-    handleInputChange: (event: Event) => void;
+    handleInputChange: (newVal: number, oldVal: number) => void;
     focus: () => void;
     blur: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
@@ -48,11 +38,6 @@ declare const _default: import("vue").DefineComponent<{
     input: (val: number) => boolean;
     'update:modelValue': (val: number | undefined) => boolean;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    theme: {
-        type: StringConstructor;
-        default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
-    };
     step: {
         type: NumberConstructor;
         default: number;
@@ -73,26 +58,19 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-    size: {
-        type: StringConstructor;
-        default: string;
-        validator(value: string): boolean;
-    };
     name: StringConstructor;
     label: StringConstructor;
 }>> & {
     onChange?: ((cur: number, prev: number) => any) | undefined;
+    "onUpdate:modelValue"?: ((val: number | undefined) => any) | undefined;
     onBlur?: ((e: FocusEvent) => any) | undefined;
     onFocus?: ((e: FocusEvent) => any) | undefined;
-    "onUpdate:modelValue"?: ((val: number | undefined) => any) | undefined;
     onInput?: ((val: number) => any) | undefined;
 }, {
-    theme: string;
-    size: string;
     disabled: boolean;
     modelValue: number;
     max: number;
     min: number;
     step: number;
 }>;
-export default _default;
+export default _sfc_main;

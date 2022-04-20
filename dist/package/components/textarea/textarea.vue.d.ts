@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     name: {
         type: StringConstructor;
     };
@@ -16,6 +16,9 @@ declare const _default: import("vue").DefineComponent<{
         validator(value: number): boolean;
     };
     height: {
+        /**
+         * 更新props.modelValue
+         */
         type: NumberConstructor;
         default: number;
         validator(value: number): boolean;
@@ -57,6 +60,9 @@ declare const _default: import("vue").DefineComponent<{
         validator(value: number): boolean;
     };
     height: {
+        /**
+         * 更新props.modelValue
+         */
         type: NumberConstructor;
         default: number;
         validator(value: number): boolean;
@@ -67,13 +73,13 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>> & {
     onChange?: ((newVal: string, oldVal: string) => any) | undefined;
+    "onUpdate:modelValue"?: ((val: string) => any) | undefined;
     onBlur?: ((e: FocusEvent) => any) | undefined;
     onFocus?: ((e: FocusEvent) => any) | undefined;
-    "onUpdate:modelValue"?: ((val: string) => any) | undefined;
     onInput?: ((val: string) => any) | undefined;
 }, {
     width: number;
     height: number;
     placeholder: string;
 }>;
-export default _default;
+export default _sfc_main;
