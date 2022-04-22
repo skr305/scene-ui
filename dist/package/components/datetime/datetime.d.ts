@@ -1,3 +1,4 @@
+import { ComponentConstants } from "../../core/constants";
 export declare const datetimeProps: {
     modelValue: {
         type: DateConstructor;
@@ -10,6 +11,12 @@ export declare const datetimeProps: {
     };
     placeholder: {
         type: StringConstructor;
+    };
+    theme: {
+        type: StringConstructor;
+        default: string;
+        required: boolean;
+        validator(value: ComponentConstants.StandardColor): boolean;
     };
 };
 export declare const datetimeEmits: {

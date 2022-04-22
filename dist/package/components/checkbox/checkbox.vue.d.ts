@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     checked: {
         type: BooleanConstructor;
         default: boolean;
@@ -8,7 +8,7 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
         required: boolean;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
     };
     disabled: {
         type: BooleanConstructor;
@@ -29,7 +29,7 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
         required: boolean;
-        validator(value: import("../../core/constants/comp").StandardSize): boolean;
+        validator(value: import("../../core/constants/constants").StandardSize): boolean;
     };
     label: {
         type: StringConstructor;
@@ -38,7 +38,7 @@ declare const _default: import("vue").DefineComponent<{
     };
 }, {
     current: import("vue").Ref<boolean>;
-    checkboxClass: import("vue").ComputedRef<"checkbox-scene-disabled" | "checkbox-scene-checked" | "checkbox-scene-unchecked">;
+    checkboxClass: import("vue").ComputedRef<string>;
     SizeMap: {
         large: string;
         default: string;
@@ -50,9 +50,11 @@ declare const _default: import("vue").DefineComponent<{
         small: string;
     };
     checkboxSign: import("vue").ComputedRef<"" | "✳️" | "✅">;
+    themeBorderColor: import("vue").ComputedRef<string | undefined>;
     onChange: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     change: typeof import("../../core/lib/type-assert").isBoolean;
+    "update:modelValue": typeof import("../../core/lib/type-assert").isBoolean;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     checked: {
         type: BooleanConstructor;
@@ -63,7 +65,7 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
         required: boolean;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
     };
     disabled: {
         type: BooleanConstructor;
@@ -84,7 +86,7 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
         required: boolean;
-        validator(value: import("../../core/constants/comp").StandardSize): boolean;
+        validator(value: import("../../core/constants/constants").StandardSize): boolean;
     };
     label: {
         type: StringConstructor;
@@ -93,6 +95,7 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>> & {
     onChange?: ((value: any) => any) | undefined;
+    "onUpdate:modelValue"?: ((value: any) => any) | undefined;
 }, {
     theme: string;
     size: string;
@@ -102,4 +105,4 @@ declare const _default: import("vue").DefineComponent<{
     label: string;
     unsure: boolean;
 }>;
-export default _default;
+export default _sfc_main;

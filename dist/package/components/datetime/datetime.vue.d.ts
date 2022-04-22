@@ -3,7 +3,7 @@ import { DateObject, createDate } from '../../core/lib/date';
  * 修改modelValue的七种模式
  */
 declare type modelType = 'year' | 'month' | 'date' | 'hour' | 'minute' | 'second' | 'Date';
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: {
         type: DateConstructor;
         required: boolean;
@@ -15,6 +15,12 @@ declare const _default: import("vue").DefineComponent<{
     };
     placeholder: {
         type: StringConstructor;
+    };
+    theme: {
+        type: StringConstructor;
+        default: string;
+        required: boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
     };
 }, {
     hours: import("vue").Ref<HTMLElement | undefined>;
@@ -48,12 +54,19 @@ declare const _default: import("vue").DefineComponent<{
     placeholder: {
         type: StringConstructor;
     };
+    theme: {
+        type: StringConstructor;
+        default: string;
+        required: boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
+    };
 }>> & {
     onChange?: ((newVal: Date, oldVal: Date) => any) | undefined;
+    "onUpdate:modelValue"?: ((val: Date) => any) | undefined;
     onBlur?: ((e: FocusEvent) => any) | undefined;
     onFocus?: ((e: FocusEvent) => any) | undefined;
-    "onUpdate:modelValue"?: ((val: Date) => any) | undefined;
 }, {
+    theme: string;
     modelValue: Date;
 }>;
-export default _default;
+export default _sfc_main;

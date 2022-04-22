@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     type: {
         type: StringConstructor;
         default: string;
@@ -24,7 +24,15 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    readonly: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     clearable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    center: {
         type: BooleanConstructor;
         default: boolean;
     };
@@ -79,7 +87,15 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    readonly: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     clearable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    center: {
         type: BooleanConstructor;
         default: boolean;
     };
@@ -89,16 +105,18 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>> & {
     onChange?: ((newVal: string | number, oldVal: string | number) => any) | undefined;
+    "onUpdate:modelValue"?: ((val: string | number) => any) | undefined;
     onBlur?: ((e: FocusEvent) => any) | undefined;
     onFocus?: ((e: FocusEvent) => any) | undefined;
-    "onUpdate:modelValue"?: ((val: string | number) => any) | undefined;
     onInput?: ((val: string | number) => any) | undefined;
 }, {
     type: string;
     disabled: boolean;
     width: number;
-    placeholder: string;
-    clearable: boolean;
     validate: Function;
+    placeholder: string;
+    readonly: boolean;
+    clearable: boolean;
+    center: boolean;
 }>;
-export default _default;
+export default _sfc_main;

@@ -1,7 +1,6 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     width: {
         type: NumberConstructor;
-        /** 根据不同的浏览器计算滚动条的厚度 */
         required: boolean;
     };
     height: {
@@ -15,7 +14,17 @@ declare const _default: import("vue").DefineComponent<{
     theme: {
         type: StringConstructor;
         default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
+    };
+    alwaysNeedY: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: boolean;
+    };
+    alwaysNeedX: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: boolean;
     };
     clickUpdateDelay: {
         type: NumberConstructor;
@@ -39,7 +48,7 @@ declare const _default: import("vue").DefineComponent<{
             bottom: string;
             transform: string;
             borderRadius: string;
-            backgroundColor: string;
+            backgroundColor: string | undefined;
         };
         y: {
             padding: string;
@@ -49,7 +58,7 @@ declare const _default: import("vue").DefineComponent<{
             right: string;
             transform: string;
             borderRadius: string;
-            backgroundColor: string;
+            backgroundColor: string | undefined;
         };
     };
     showThumb: {
@@ -63,7 +72,6 @@ declare const _default: import("vue").DefineComponent<{
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     width: {
         type: NumberConstructor;
-        /** 根据不同的浏览器计算滚动条的厚度 */
         required: boolean;
     };
     height: {
@@ -77,7 +85,17 @@ declare const _default: import("vue").DefineComponent<{
     theme: {
         type: StringConstructor;
         default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
+        validator(value: import("../../core/constants/constants").StandardColor): boolean;
+    };
+    alwaysNeedY: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: boolean;
+    };
+    alwaysNeedX: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: boolean;
     };
     clickUpdateDelay: {
         type: NumberConstructor;
@@ -86,6 +104,8 @@ declare const _default: import("vue").DefineComponent<{
 }>>, {
     theme: string;
     thumbSize: number;
+    alwaysNeedY: boolean;
+    alwaysNeedX: boolean;
     clickUpdateDelay: number;
 }>;
-export default _default;
+export default _sfc_main;

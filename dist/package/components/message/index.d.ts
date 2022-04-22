@@ -1,4 +1,4 @@
-export declare type SceneMessageStyleType = "info" | "suc" | "error" | "warn";
+export declare type SceneMessageStyleType = "info" | "success" | "error" | "warning";
 export interface MessageInvokeParams {
     type?: SceneMessageStyleType;
     duration?: number;

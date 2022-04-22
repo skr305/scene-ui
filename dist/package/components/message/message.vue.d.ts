@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     type: {
         type: StringConstructor;
         required: boolean;
@@ -22,7 +22,7 @@ declare const _default: import("vue").DefineComponent<{
 }, {
     onOpen: () => void;
     onClose: () => void;
-    contentClass: import("vue").ComputedRef<any>;
+    contentClass: import("vue").ComputedRef<string>;
     visibled: import("vue").Ref<boolean>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     type: {
@@ -48,4 +48,4 @@ declare const _default: import("vue").DefineComponent<{
 }>>, {
     showCloseButton: boolean;
 }>;
-export default _default;
+export default _sfc_main;

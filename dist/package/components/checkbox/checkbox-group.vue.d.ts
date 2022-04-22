@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: {
         type: ArrayConstructor;
         default: boolean;
@@ -19,4 +19,4 @@ declare const _default: import("vue").DefineComponent<{
 }, {
     modelValue: unknown[];
 }>;
-export default _default;
+export default _sfc_main;

@@ -1,12 +1,6 @@
-import { ComponentConstants } from '../../core/constants';
 export declare const selectProps: {
-    theme: {
-        type: StringConstructor;
-        default: string;
-        validator(value: ComponentConstants.StandardColor): boolean;
-    };
     modelValue: {
-        type: (StringConstructor | BooleanConstructor | ArrayConstructor | NumberConstructor)[];
+        type: (BooleanConstructor | StringConstructor | ArrayConstructor | NumberConstructor)[];
         required: boolean;
     };
     options: {

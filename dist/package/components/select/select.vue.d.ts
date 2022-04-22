@@ -1,11 +1,6 @@
-declare const _default: import("vue").DefineComponent<{
-    theme: {
-        type: StringConstructor;
-        default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
-    };
+declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: {
-        type: (StringConstructor | BooleanConstructor | ArrayConstructor | NumberConstructor)[];
+        type: (BooleanConstructor | StringConstructor | ArrayConstructor | NumberConstructor)[];
         required: boolean;
     };
     options: {
@@ -58,13 +53,8 @@ declare const _default: import("vue").DefineComponent<{
     focus: (e: FocusEvent) => boolean;
     'update:modelValue': (val: string | string[]) => boolean;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    theme: {
-        type: StringConstructor;
-        default: string;
-        validator(value: import("../../core/constants/comp").StandardColor): boolean;
-    };
     modelValue: {
-        type: (StringConstructor | BooleanConstructor | ArrayConstructor | NumberConstructor)[];
+        type: (BooleanConstructor | StringConstructor | ArrayConstructor | NumberConstructor)[];
         required: boolean;
     };
     options: {
@@ -103,11 +93,10 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>> & {
     onChange?: ((val: string) => any) | undefined;
+    "onUpdate:modelValue"?: ((val: string | string[]) => any) | undefined;
     onBlur?: ((e: FocusEvent) => any) | undefined;
     onFocus?: ((e: FocusEvent) => any) | undefined;
-    "onUpdate:modelValue"?: ((val: string | string[]) => any) | undefined;
 }, {
-    theme: string;
     disabled: boolean;
     placeholder: string;
     multiple: boolean;
@@ -115,4 +104,4 @@ declare const _default: import("vue").DefineComponent<{
     multipleLimit: number;
     collapseTags: boolean;
 }>;
-export default _default;
+export default _sfc_main;

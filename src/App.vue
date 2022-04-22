@@ -24,6 +24,8 @@ import sIcon from '../package/components/icon/icon.vue'
 import sLoginReg from '../package/components/scene/login-reg/s-login-reg.vue'
 import sChat from '../package/components/scene/chat/chat.vue'
 import sPaper from '../package/components/paper/s-paper.vue';
+import sSessionList from '../package/components/scene/session/s-session-list.vue';
+import sSearchPanel from '../package/components/scene/search/s-search-panel.vue';
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -97,7 +99,7 @@ const onGlobalLoading = () =>{
     }
   })
   loadingInstance1.open()
-  setTimeout(loadingInstance1.close,5000)
+  setTimeout(loadingInstance1.close,100000)
 }
 
 const inputValidator = (value: string | number)=>{
@@ -126,7 +128,18 @@ const fakeChatRecv = () => new Promise( r => {
     { content: "gougou" }
   ] ) 
 } );
-const fakeChatID = "245"
+const fakeChatID = "245";
+
+
+const fakeSessionList = [
+  { title: "北镇府", id: "0noob" },
+  { title: "岐山府", id: "1dog" },
+  { title: "安庆府", id: "2" }
+];
+const fakeOnTouchSession = ( id: string ) => {
+  alert( id );
+  console.log( id );
+};
 </script>
 
 <template>
@@ -317,6 +330,18 @@ const fakeChatID = "245"
     :receive="fakeChatRecv"
     >
     </s-chat>
+  </div>
+  <div>
+    <s-session-list
+    :metas="fakeSessionList"
+    :onTouch="fakeOnTouchSession">
+    </s-session-list>
+  </div>
+
+  <div>
+    <s-search-panel
+    :onSearch="() => {}">
+    </s-search-panel>
   </div>
 </template>
 

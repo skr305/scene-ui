@@ -1,12 +1,6 @@
-import { ComponentConstants } from '../../core/constants';
 export declare const radioProps: {
-    theme: {
-        type: StringConstructor;
-        default: string;
-        validator(value: ComponentConstants.StandardColor): boolean;
-    };
     modelValue: {
-        type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
+        type: (BooleanConstructor | StringConstructor | NumberConstructor)[];
         required: boolean;
     };
     name: {
@@ -18,10 +12,6 @@ export declare const radioProps: {
         required: boolean;
     };
     disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    border: {
         type: BooleanConstructor;
         default: boolean;
     };
