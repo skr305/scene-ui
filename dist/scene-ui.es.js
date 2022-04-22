@@ -81,7 +81,7 @@ const buttonProps = {
 const buttonEmits = {
   click: (evt) => evt instanceof MouseEvent
 };
-var button_vue_vue_type_style_index_0_scoped_true_lang = "";
+var button_vue_vue_type_style_index_0_lang = "";
 var _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -142,12 +142,12 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
   }, [
     _ctx.icon ? (openBlock(), createElementBlock("span", _hoisted_2$f, [
-      renderSlot(_ctx.$slots, "icon", {}, void 0, true)
+      renderSlot(_ctx.$slots, "icon")
     ])) : createCommentVNode("", true),
-    _ctx.type !== "circle" ? renderSlot(_ctx.$slots, "default", { key: 1 }, void 0, true) : createCommentVNode("", true)
+    _ctx.type !== "circle" ? renderSlot(_ctx.$slots, "default", { key: 1 }) : createCommentVNode("", true)
   ], 14, _hoisted_1$i);
 }
-var sButton = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$i], ["__scopeId", "data-v-5d2984e4"]]);
+var sButton = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$i]]);
 const scrollbarProps = {
   width: {
     type: Number,
@@ -409,7 +409,11 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     })
   ], 36);
 }
+<<<<<<< HEAD
 var sScrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$h], ["__scopeId", "data-v-76e517b7"]]);
+=======
+var sScrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$h], ["__scopeId", "data-v-bdcdb116"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 const iconProps = {
   name: {
     type: String
@@ -689,7 +693,11 @@ const _sfc_main$i = defineComponent({
     };
   }
 });
+<<<<<<< HEAD
 const _withScopeId$1 = (n) => (pushScopeId("data-v-ef12beb6"), n = n(), popScopeId(), n);
+=======
+const _withScopeId$1 = (n) => (pushScopeId("data-v-400c4a28"), n = n(), popScopeId(), n);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 const _hoisted_1$h = { class: "scene-datetime" };
 const _hoisted_2$e = { class: "scene-datetime-input" };
 const _hoisted_3$a = { key: 0 };
@@ -922,7 +930,11 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     })
   ]);
 }
+<<<<<<< HEAD
 var datetime = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$f], ["__scopeId", "data-v-ef12beb6"]]);
+=======
+var datetime = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$f], ["__scopeId", "data-v-400c4a28"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 const cardProps = {
   header: {
     type: String
@@ -983,7 +995,11 @@ function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     ], 4)
   ], 512);
 }
+<<<<<<< HEAD
 var SCard = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$e], ["__scopeId", "data-v-ae71400a"]]);
+=======
+var SCard = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$e], ["__scopeId", "data-v-f7b3a506"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 function isString(value) {
   return typeof value === "string" ? true : false;
 }
@@ -1543,7 +1559,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     }, 8, ["onBeforeEnter", "onAfterEnter", "onBeforeLeave", "onAfterLeave"])
   ]);
 }
-var dialog = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$a], ["__scopeId", "data-v-aba60e86"]]);
+var dialog = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$a], ["__scopeId", "data-v-30d7d2a0"]]);
 const inputProps = {
   type: {
     type: String,
@@ -1782,7 +1798,11 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     }, toDisplayString(_ctx.warningInfo), 513)) : createCommentVNode("", true)
   ], 8, _hoisted_1$b);
 }
+<<<<<<< HEAD
 var sInput = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$9], ["__scopeId", "data-v-57a69fe8"]]);
+=======
+var sInput = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$9], ["__scopeId", "data-v-aae1b7b8"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 const linkProps = {
   href: { type: String, default: "" },
   theme: {
@@ -1845,7 +1865,7 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     ])) : createCommentVNode("", true)
   ], 14, _hoisted_1$a);
 }
-var link = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$8], ["__scopeId", "data-v-2d4455f0"]]);
+var link = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$8], ["__scopeId", "data-v-22a4ad9e"]]);
 var loading = "";
 let loadingInstance = null;
 const defaultLoadingProps = {
@@ -1897,8 +1917,9 @@ function createLoadingComponent(options = defaultLoadingProps) {
           data.originalOverflow = parent.style.overflow;
           let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
           let scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
-          data.loadingMountElement.style.top = `${scrollTop}px`;
-          data.loadingMountElement.style.left = `${scrollLeft}px`;
+          let bodyStyle = window.getComputedStyle(document.body);
+          data.loadingMountElement.style.top = `${scrollTop - parseInt(bodyStyle.marginTop)}px`;
+          data.loadingMountElement.style.left = `${scrollLeft - parseInt(bodyStyle.marginLeft)}px`;
           data.loadingMountElement.style.width = "100vw";
           data.loadingMountElement.style.height = "100vh";
           console.warn(data.loadingMountElement.style.top, data.loadingMountElement.style.left);
@@ -2247,7 +2268,11 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     }, 8, ["name", "modelValue", "disabled", "onBlur", "onFocus", "onInput", "onChange"])
   ]);
 }
+<<<<<<< HEAD
 var numberInput = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$6], ["__scopeId", "data-v-386d0fb8"]]);
+=======
+var numberInput = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$6], ["__scopeId", "data-v-10dc9026"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 var sPaymentInput_vue_vue_type_style_index_0_scoped_true_lang = "";
 const _hoisted_1$7 = { className: "payment-input-251-w" };
 const _hoisted_2$6 = ["disabled", "onKeydown", "id", "onUpdate:modelValue"];
@@ -2404,7 +2429,11 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     createElementVNode("label", null, toDisplayString(_ctx.label), 1)
   ], 2);
 }
+<<<<<<< HEAD
 var radio = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$5], ["__scopeId", "data-v-a2bfc358"]]);
+=======
+var radio = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$5], ["__scopeId", "data-v-ca6f3378"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 const selectProps = {
   modelValue: {
     type: [String, Number, Boolean, Array],
@@ -2590,7 +2619,11 @@ const _sfc_main$6 = defineComponent({
     };
   }
 });
+<<<<<<< HEAD
 const _withScopeId = (n) => (pushScopeId("data-v-ef42c37c"), n = n(), popScopeId(), n);
+=======
+const _withScopeId = (n) => (pushScopeId("data-v-cdd6ea82"), n = n(), popScopeId(), n);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 const _hoisted_1$5 = ["disabled", "multiple", "multiple-limit", "collapseTags"];
 const _hoisted_2$5 = ["name", "placeholder"];
 const _hoisted_3$5 = {
@@ -2678,7 +2711,11 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 8, _hoisted_1$5);
 }
+<<<<<<< HEAD
 var select = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$4], ["__scopeId", "data-v-ef42c37c"]]);
+=======
+var select = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$4], ["__scopeId", "data-v-cdd6ea82"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 const textareaProps = {
   name: {
     type: String
@@ -2797,7 +2834,11 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     _ctx.isFocus ? (openBlock(), createElementBlock("span", _hoisted_3$4, toDisplayString(_ctx.inputValue.length) + "/" + toDisplayString(_ctx.maxLength === void 0 ? "" : _ctx.maxLength), 1)) : createCommentVNode("", true)
   ]);
 }
+<<<<<<< HEAD
 var textarea = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$3], ["__scopeId", "data-v-2edb4a43"]]);
+=======
+var textarea = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$3], ["__scopeId", "data-v-3a59a146"]]);
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 var sPaper_vue_vue_type_style_index_0_scoped_true_lang = "";
 const __default__$1 = {
   name: "s-paper"

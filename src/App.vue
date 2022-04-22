@@ -19,13 +19,15 @@ import message, { SceneMessageStyleType }  from '../package/components/message';
 import {SceneLoading} from '../package/components/loading/loading'
 import sIcon from '../package/components/icon/icon.vue'
 
-// import { AlarmFill } from '../package/components/svg/test/alarm-fill'
-// import alarmFill from '../package/components/svg/test/alarm-fill.vue'
 import sLoginReg from '../package/components/scene/login-reg/s-login-reg.vue'
 import sChat from '../package/components/scene/chat/chat.vue'
 import sPaper from '../package/components/paper/s-paper.vue';
+<<<<<<< HEAD
 import sSessionList from '../package/components/scene/session/s-session-list.vue';
 import sSearchPanel from '../package/components/scene/search/s-search-panel.vue';
+=======
+import sInfoPanel from '../package/components/scene/info-panel/info-panel.vue'
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -251,6 +253,7 @@ const fakeOnTouchSession = ( id: string ) => {
       <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
     </s-card>
   </div>
+  
   <div class="exhibition">
     <s-datetime v-model="date1" name="start"></s-datetime>
   </div>
@@ -308,7 +311,7 @@ const fakeOnTouchSession = ( id: string ) => {
         跳出错误信息
     </s-button>
   </div>
-  <div>
+  <div class="exhibition">
     <s-login-reg 
     :onLogin="fakeOnLogin"
     :onReg="fakeOnReg"
@@ -320,10 +323,10 @@ const fakeOnTouchSession = ( id: string ) => {
     </s-login-reg>
   </div>
 
-  <div>
+  <div class="exhibition">
     <s-paper label="你好"></s-paper>
   </div>
-  <div>
+  <div class="exhibition">
     <s-chat 
     :chatID="fakeChatID"
     :send="fakeChatSend"
@@ -331,6 +334,7 @@ const fakeOnTouchSession = ( id: string ) => {
     >
     </s-chat>
   </div>
+<<<<<<< HEAD
   <div>
     <s-session-list
     :metas="fakeSessionList"
@@ -342,6 +346,53 @@ const fakeOnTouchSession = ( id: string ) => {
     <s-search-panel
     :onSearch="() => {}">
     </s-search-panel>
+=======
+
+  <div class="exhibition">
+    <s-info-panel 
+      :width="300"
+      :height="300"
+      type="github" 
+      title="scene-ui" 
+      :subTitles="['synopsis','stars','forks','language list']" 
+      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css']"
+    >
+      <template #default><s-icon name="star" color="#ffab00" size="24px" /></template>
+    </s-info-panel>
+    <s-info-panel 
+      :width="300"
+      :height="300"
+      theme="success"
+      type="github" 
+      title="scene-ui" 
+      :subTitles="['synopsis','stars','forks','language list']" 
+      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css']"
+    >
+      <template #default><s-icon name="star" color="#ffab00" size="24px" /></template>
+    </s-info-panel>
+        <s-info-panel 
+      :width="300"
+      :height="300"
+      theme="warning"
+      type="github" 
+      title="scene-ui" 
+      :subTitles="['synopsis','stars','forks','language list','address']" 
+      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css','https://github.com/FTZ-Noob/scene-ui']"
+    >
+      <template #default><s-icon name="star" color="#ffab00" size="24px" /></template>
+    </s-info-panel>
+    <s-info-panel 
+      :width="300"
+      :height="300"
+      theme="error"
+      type="info" 
+      title="scene-ui" 
+      :subTitles="['synopsis','stars','forks','language list']" 
+      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css']"
+    >
+      <template #default><s-icon name="star-fill" color="#ffab00" size="24px" /></template>
+    </s-info-panel>
+>>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
   </div>
 </template>
 
@@ -352,7 +403,6 @@ const fakeOnTouchSession = ( id: string ) => {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   height: 2000px;
 }
@@ -363,7 +413,7 @@ const fakeOnTouchSession = ( id: string ) => {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px
+  margin-bottom: 20px;
 }
 /* card 测试css */
 .square{

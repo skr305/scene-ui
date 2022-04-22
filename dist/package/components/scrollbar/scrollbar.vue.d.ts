@@ -6,7 +6,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     height: {
         type: NumberConstructor;
         required: boolean;
-    };
+    }; /** 根据不同的浏览器计算滚动条的厚度 */
     thumbSize: {
         type: NumberConstructor;
         default: number;
@@ -77,7 +77,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     height: {
         type: NumberConstructor;
         required: boolean;
-    };
+    }; /** 根据不同的浏览器计算滚动条的厚度 */
     thumbSize: {
         type: NumberConstructor;
         default: number;

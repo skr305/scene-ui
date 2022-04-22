@@ -34,3 +34,9 @@ export const DefaultSize = "default";
  */
 export const StandardSizeArr = ['default', 'small', 'large']
 
+
+/**
+ * 信息面板的可选类型
+ */
+export const InfoPanelType = ['info','github']
+

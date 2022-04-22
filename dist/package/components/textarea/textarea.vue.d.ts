@@ -16,6 +16,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         validator(value: number): boolean;
     };
     height: {
+        /**
+         * 更新props.modelValue
+         */
         type: NumberConstructor;
         default: number;
         validator(value: number): boolean;
@@ -57,6 +60,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         validator(value: number): boolean;
     };
     height: {
+        /**
+         * 更新props.modelValue
+         */
         type: NumberConstructor;
         default: number;
         validator(value: number): boolean;
