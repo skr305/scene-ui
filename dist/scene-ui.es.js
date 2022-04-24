@@ -2994,7 +2994,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues
         } else {
           message(LOGIN_SUC);
           if (props.onLoginSuc) {
-            props.onLoginSuc(regUserID.value);
+            props.onLoginSuc(loginUserID.value);
           }
         }
       } catch (error) {
@@ -3178,7 +3178,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues
     };
   }
 }));
-var sLoginReg = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-070b9520"]]);
+var sLoginReg = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-40ebbcb5"]]);
 var chat_vue_vue_type_style_index_0_lang = "";
 const _hoisted_1$4 = { className: "__scene-chat-wrp" };
 const _hoisted_2$4 = { className: "__scene-chat-inner-wrp" };

@@ -148,7 +148,7 @@ const onLogin = async () => {
         } else {
             message( LOGIN_SUC );
             if( props.onLoginSuc ) {
-                props.onLoginSuc( regUserID.value );
+                props.onLoginSuc( loginUserID.value );
             }
         }
     } catch( error ) {
