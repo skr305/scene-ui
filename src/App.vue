@@ -22,12 +22,11 @@ import sIcon from '../package/components/icon/icon.vue'
 import sLoginReg from '../package/components/scene/login-reg/s-login-reg.vue'
 import sChat from '../package/components/scene/chat/chat.vue'
 import sPaper from '../package/components/paper/s-paper.vue';
-<<<<<<< HEAD
+
 import sSessionList from '../package/components/scene/session/s-session-list.vue';
 import sSearchPanel from '../package/components/scene/search/s-search-panel.vue';
-=======
 import sInfoPanel from '../package/components/scene/info-panel/info-panel.vue'
->>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
+
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
@@ -330,23 +329,9 @@ const fakeOnTouchSession = ( id: string ) => {
     <s-chat 
     :chatID="fakeChatID"
     :send="fakeChatSend"
-    :receive="fakeChatRecv"
-    >
+    :receive="fakeChatRecv">
     </s-chat>
   </div>
-<<<<<<< HEAD
-  <div>
-    <s-session-list
-    :metas="fakeSessionList"
-    :onTouch="fakeOnTouchSession">
-    </s-session-list>
-  </div>
-
-  <div>
-    <s-search-panel
-    :onSearch="() => {}">
-    </s-search-panel>
-=======
 
   <div class="exhibition">
     <s-info-panel 
@@ -392,7 +377,6 @@ const fakeOnTouchSession = ( id: string ) => {
     >
       <template #default><s-icon name="star-fill" color="#ffab00" size="24px" /></template>
     </s-info-panel>
->>>>>>> 2e0f2daca8a4313f67a48640074311ab6f09ed2f
   </div>
 </template>
 

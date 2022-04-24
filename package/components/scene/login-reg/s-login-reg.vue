@@ -137,7 +137,7 @@ const onLogin = async () => {
     });
     try {
         openLoading();
-        const done = ( await props.onLogin( { 
+        const { done } = ( await props.onLogin( { 
             userID: loginUserID.value, 
             pwd: loginPwd.value  } ) );
         if( !done ) {
@@ -171,7 +171,7 @@ const onReg = async () => {
     });
     try {
         openLoading();
-        const done = ( await props.onReg( { 
+        const { done } = ( await props.onReg( { 
             userID: regUserID.value, 
             userNick: regUserNick.value, 
             pwd: regPwd.value } ) );
