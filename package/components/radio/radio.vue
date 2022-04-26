@@ -10,8 +10,9 @@
       :name="name" 
       :value="modelValue" 
       :disabled="disabled"
+      @click="handleClick"
       @change="handleChange"
-      checked
+      :checked="label === modelValue"
     />
     <label>
       {{label}}
@@ -37,8 +38,14 @@ export default defineComponent({
           emit('change',props.modelValue)
     }
 
+    const handleClick = ()=>{
+      if(props.label !== undefined)
+        emit('update:modelValue',props.label)
+    }
+
     return {
-      handleChange
+      handleChange,
+      handleClick
     }
   }
 })

@@ -89,7 +89,7 @@ function createLoadingComponent(options: loadingProps = defaultLoadingProps){
                 let parent: HTMLElement = document.querySelector(data.target as string)
                 // 关闭滚轮的默认行为——页面锁定
                 parent.addEventListener("wheel", preventDefaultFunc, {passive:false});
-                console.log(parent,document.body, data.fullScreen, parent === document.body);
+                // console.log(parent,document.body, data.fullScreen, parent === document.body);
                 // 如果是全屏loading
                 if(document.body === parent && data.fullScreen){
                     
@@ -105,7 +105,6 @@ function createLoadingComponent(options: loadingProps = defaultLoadingProps){
                     data.loadingMountElement.style.left = `${scrollLeft - parseInt(bodyStyle.marginLeft)}px`
                     data.loadingMountElement.style.width = '100vw'
                     data.loadingMountElement.style.height = '100vh'
-                    console.warn(data.loadingMountElement.style.top,data.loadingMountElement.style.left);
                 }
                 parent.style.overflow = 'hidden'
                 parent.style.position = 'relative'      // 设置为absolute布局的子元素的相对元素

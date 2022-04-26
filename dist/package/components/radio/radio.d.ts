@@ -23,4 +23,5 @@ export declare const radioProps: {
 };
 export declare const radioEmits: {
     change: (val: string | number | boolean) => boolean;
+    'update:modelValue': (val: string | number | boolean) => boolean;
 };

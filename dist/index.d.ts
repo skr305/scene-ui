@@ -18,6 +18,7 @@ export { default as STextarea } from './package/components/textarea/textarea.vue
 export { default as SPaper } from './package/components/paper/s-paper.vue';
 export { default as SLoginReg } from './package/components/scene/login-reg/s-login-reg.vue';
 export { default as SChat } from './package/components/scene/chat/chat.vue';
+export { default as SInfoPanel } from './package/components/scene/info-panel/info-panel.vue';
 export { default as SSession } from './package/components/scene/session/s-session.vue';
 export { default as SSessionList } from './package/components/scene/session/s-session-list.vue';
 export { default as SSearchPanel } from './package/components/scene/search/s-search-panel.vue';

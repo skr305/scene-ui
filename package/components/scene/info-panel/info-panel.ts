@@ -33,14 +33,11 @@ export const infoPanelProps = {
             return ComponentConstants.InfoPanelType.includes(value)
         },
     },
-    title:{
+    title:{// panel的标题
         type: String,
-        required: true
     },
-    subTitles:{
-        type: Array,
-    },
-    subInfos:{
-        type: Array,
+    info:{// panel展示的主要信息
+        type: Object,
+        default:{}
     }
 }

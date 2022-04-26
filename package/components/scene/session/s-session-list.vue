@@ -1,5 +1,4 @@
 <template>
-
     <div className="__scene-session-list-wrp">
         <div className="__scene-session-list-inner-wrp">
             <div className="__scene-session-list-block" v-for="( s, i ) in metas" 

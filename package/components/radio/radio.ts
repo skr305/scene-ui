@@ -30,4 +30,5 @@ export const radioProps = {
 export const radioEmits = {
     // onchange函数的验证函数
     change: (val: string | number | boolean) => isString(val) || isNumber(val) || isBoolean(val),
+    'update:modelValue': (val: string | number | boolean) => isString(val) || isNumber(val) || isBoolean(val),
 }

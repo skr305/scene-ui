@@ -1,5 +1,4 @@
 <template>
-
     <div className="__scene-search-panel-wrp">
         <div className="__scene-search-panel-inner-wrp">
             <div className="__scene-search-input">
@@ -38,6 +37,7 @@ interface SearchPanelPropsType {
 };
 const props = withDefaults( defineProps<SearchPanelPropsType>(), {} );
 const key = ref( "" );
+
 
 const search = () => {
     if( props.onSearch ) {

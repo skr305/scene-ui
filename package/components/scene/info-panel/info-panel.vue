@@ -15,18 +15,21 @@
                     size="24px" :name="type==='info'?'info-square-fill':type"
                     :color="themeColor"
                 ></s-icon>
-                <div class="scene-infoPanel-title" :style="{color:themeColor}">{{title}}</div>
+                <div class="scene-infoPanel-title" :style="{color:themeColor}">{{info.hasOwnProperty(title)?info[title]:'Title'}}</div>
             </div>
             <slot></slot>
         </div>
-        <div class="scene-infoPanel-info" v-for="(subTitle,index) in subTitles" :key="index">
-            <div class="scene-infoPanel-subtitle">
-                {{subTitle}}
+        <template v-for="(value,key,index) in info" :key="index">
+            <div class="scene-infoPanel-info" v-if="key!==title">
+                <div class="scene-infoPanel-subtitle">
+                    {{key}}
+                </div>
+                <div class="scene-infoPanel-subinfo">
+                    {{Array.isArray(value)?value.join(' '):value}}
+                </div>
             </div>
-            <div class="scene-infoPanel-subinfo">
-                {{subInfos[index]}}
-            </div>
-        </div>
+        </template>
+        
     </s-card>
 </template>
 

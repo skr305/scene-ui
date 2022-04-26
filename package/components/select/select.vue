@@ -35,7 +35,7 @@
                 <div ref="menu" >
                    <div v-for="(option,index) of options" :key="index" class="scene-select-dropdown-menu-option" :tabindex="-1">
                         <!-- 作用域插槽，对外暴露 option 与 index -->
-                        <slot :option="option" :index="index"></slot>
+                        {{option}}
                     </div> 
                 </div>
             </s-scrollbar>

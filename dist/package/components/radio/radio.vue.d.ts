@@ -22,8 +22,10 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     handleChange: (evt: MouseEvent) => void;
+    handleClick: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     change: (val: string | number | boolean) => boolean;
+    'update:modelValue': (val: string | number | boolean) => boolean;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     modelValue: {
         type: (BooleanConstructor | StringConstructor | NumberConstructor)[];
@@ -48,6 +50,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }>> & {
     onChange?: ((val: string | number | boolean) => any) | undefined;
+    "onUpdate:modelValue"?: ((val: string | number | boolean) => any) | undefined;
 }, {
     size: string;
     disabled: boolean;

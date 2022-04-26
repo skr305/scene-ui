@@ -51,7 +51,6 @@ export default defineComponent({
   components:{sButton,sIcon},
   setup(props,{emit,attrs,slots,expose}){
     const mask = ref<HTMLElement>()
-
     const container = ref<HTMLElement>()
 
     /**
@@ -90,12 +89,15 @@ export default defineComponent({
     // 为什么不在onMount里进行DOM操作？ dialog在组件挂载完成时v-if=false，此时是没有渲染的，无法进行模板引用
     watch(mask,(newMask,oldMask)=>{
       if(newMask){// 打开对话框
+        mask.value!.style.background = 'rgba(0, 0, 0, 0.5)';
         // 设置宽度
         container.value!.style.minWidth = (props.width + 40) + 'px'
         // 设置滚动锁定
         if(props.lockScroll)
           window.addEventListener("wheel", preventDefaultFunc, {passive:false});
-          
+        if(!props.modal){
+          mask.value!.style.background = 'transparent'
+        }
       }else{// 关闭对话框
         // 解除滚动锁定 
         if(props.lockScroll)

@@ -30,7 +30,7 @@ import sInfoPanel from '../package/components/scene/info-panel/info-panel.vue'
 
 const booleanTrue = ref(true)
 const booleanFalse = ref(false)
-const str = ref('input')
+const str = ref('phone')
 const num1 = ref(8)
 const num2 = ref(9)
 const arr = reactive([1,2,3,4,5,6,7,8,9])
@@ -142,6 +142,14 @@ const fakeOnTouchSession = ( id: string ) => {
   alert( id );
   console.log( id );
 };
+
+const githubObj = {
+  name:"scene-ui",
+  synopsis:'a scene-drived ui lib for a more quickly frontend!!!!!!!!!',
+  stars:'100',
+  forks:'100',
+  languageList:['java','vue','ts','java','vue','ts','java','vue','ts','java','vue','ts']
+}
 </script>
 
 <template>
@@ -208,10 +216,9 @@ const fakeOnTouchSession = ( id: string ) => {
     <paymentInputVue v-model="data.pwd"/>
   </div>-->
   <div class="exhibition">
-    <s-radio v-model="num1" name="contact" label="phone" :disabled="false" size="small"></s-radio>
-    <s-radio v-model="num1" name="contact" label="name" :disabled="false" size="default"></s-radio>
-    <s-radio v-model="num2" name="contact" label="email" :disabled="true" size="large"></s-radio>
-      <s-radio v-model="num2" name="contact" label="email" :disabled="false" size="large"></s-radio>
+    <s-radio v-model="str" name="contact" label="phone" :disabled="false" size="small" @change="print" ></s-radio>
+    <s-radio v-model="str" name="contact" label="name" :disabled="false" size="default" @change="print"></s-radio>
+    <s-radio v-model="str" name="contact" label="email" :disabled="false" size="large" @change="print"></s-radio>
   </div>
   <div>
     <s-checkbox v-model="select" label="是否堂食" size="large"></s-checkbox>
@@ -228,10 +235,9 @@ const fakeOnTouchSession = ( id: string ) => {
     <s-checkbox-group v-model="checkLabels">
       <template>
         <s-checkbox-button label="两广"></s-checkbox-button>
-          <s-checkbox-button label="大同"></s-checkbox-button>
-          <s-checkbox-button label="武汉"></s-checkbox-button>
+        <s-checkbox-button label="大同"></s-checkbox-button>
+        <s-checkbox-button label="武汉"></s-checkbox-button>
       </template>
-        
     </s-checkbox-group>
     <s-checkbox-group v-model="checkLabels">
     <template>
@@ -262,11 +268,12 @@ const fakeOnTouchSession = ( id: string ) => {
     <s-button @click="booleanFalse = true">Show Modal</s-button>
     <s-dialog v-model="booleanFalse" 
       title="title" 
-      :modal="booleanFalse" 
+      :modal="true" 
       @open="print"
       @opened="print"
       @close="print" 
       @closed="print"
+      :lockScroll="true"
     >
       <s-card id="card2" shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
         <template #header>
@@ -339,9 +346,8 @@ const fakeOnTouchSession = ( id: string ) => {
       :width="300"
       :height="300"
       type="github" 
-      title="scene-ui" 
-      :subTitles="['synopsis','stars','forks','language list']" 
-      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css']"
+      title="name" 
+      :info="githubObj"
     >
       <template #default><s-icon name="star" color="#ffab00" size="24px" /></template>
     </s-info-panel>
@@ -350,20 +356,18 @@ const fakeOnTouchSession = ( id: string ) => {
       :height="300"
       theme="success"
       type="github" 
-      title="scene-ui" 
-      :subTitles="['synopsis','stars','forks','language list']" 
-      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css']"
+      title="name" 
+      :info="githubObj"
     >
       <template #default><s-icon name="star" color="#ffab00" size="24px" /></template>
     </s-info-panel>
-        <s-info-panel 
+    <s-info-panel 
       :width="300"
       :height="300"
       theme="warning"
       type="github" 
-      title="scene-ui" 
-      :subTitles="['synopsis','stars','forks','language list','address']" 
-      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css','https://github.com/FTZ-Noob/scene-ui']"
+      title="name" 
+      :info="githubObj"
     >
       <template #default><s-icon name="star" color="#ffab00" size="24px" /></template>
     </s-info-panel>
@@ -372,9 +376,8 @@ const fakeOnTouchSession = ( id: string ) => {
       :height="300"
       theme="error"
       type="info" 
-      title="scene-ui" 
-      :subTitles="['synopsis','stars','forks','language list']" 
-      :subInfos="['a scene-drived ui lib for a more quickly frontend!!!!!!!!!','100','100','Vue TypeScript html JavaScript css']"
+      title="name" 
+      :info="githubObj"
     >
       <template #default><s-icon name="star-fill" color="#ffab00" size="24px" /></template>
     </s-info-panel>
