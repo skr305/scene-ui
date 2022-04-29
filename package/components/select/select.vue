@@ -33,7 +33,10 @@
         <div class="scene-select-dropdown-menu">
             <s-scrollbar :width="214" :height="180" :alwaysNeedY="true">
                 <div ref="menu" >
-                   <div v-for="(option,index) of options" :key="index" class="scene-select-dropdown-menu-option" :tabindex="-1">
+                    <div v-if="options.length === 0" class="scene-select-no-options">
+                        No Options!
+                    </div>
+                    <div v-for="(option,index) of options" :key="index" class="scene-select-dropdown-menu-option" :tabindex="-1" @mousedown="handleSelect(option,index,$event)">
                         <!-- 作用域插槽，对外暴露 option 与 index -->
                         {{option}}
                     </div> 
@@ -44,7 +47,7 @@
 </template>
 
 <script lang='ts'>
-import {computed, defineComponent, nextTick, onMounted, reactive, ref, toRefs} from 'vue'
+import {computed, defineComponent, nextTick, onMounted, onUpdated, reactive, ref, toRefs} from 'vue'
 import {selectProps, selectEmits} from './select'
 import sScrollbar from '../scrollbar/scrollbar.vue'
 import sIcon from '../icon/icon.vue'
@@ -127,76 +130,60 @@ export default defineComponent({
         selectedItems.value.pop()
     }
 
+    /**
+     * 处理点击选项的选择事件，分为单选情况与多选情况
+     * 传入 选项字符串，index，mousedown事件本身
+     */
+    const handleSelect = (option: string,index: number,e: Event)=>{
+        let curOptionString:string = option // 当前选项的字符串形式
+         // 对于不同的点击事件绑定不同的click函数
+        if(props.multiple){
+            // 存在选项 并且 没有禁用项或该项不是禁用项
+            if(props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[index])){
+                // 是否已被选中？
+                if(selectedItems.value.includes(curOptionString)){
+                    clearSelectSign(index)              // 清楚该项的样式
+                    handleClick(curOptionString,true)   // 移除该选项
+                    emit('change',curOptionString)      // 触发onChange
+                }else{
+                    // 没有被选中过
+                    // 当前选择数小于限制
+                    if(selectedCount.value < props.multipleLimit){
+                        setSelectSign(index)                    // 给当前选项div设置selected 
+                        handleClick(curOptionString,true,index) // 添加该选项
+                        emit('change',curOptionString)          // 触发onChange
+                    }  
+                }
+            }
+            e.preventDefault()//此事件没有被显式处理，它默认的动作也不应该照常执行。-->不失去焦点
+        }else{
+            // 单选
+            if(props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[index])){
+                // 清除所有div上的selected attribute
+                clearSelectSign()
+                // 给当前选项div设置selected 
+                setSelectSign(index)
+                // 添加该选项
+                handleClick(curOptionString,false,index)
+                emit('change',curOptionString)
+            }  
+        }  
+    }
     
-    // 给选项div添加click监听器，设置disabled样式
+    //挂载时，设置disabled样式。
     onMounted(()=>{
         // 每一个选项的div集合
         let optionColleaction: HTMLCollection = menu.value!.children //非空断言
-            
-        if(optionColleaction.length > 0 ){
-            // 存在选项 给每个选项注册click监听器
-            for(let i=0;i<optionColleaction?.length;i++){
-                let curOptionString:string = props.options![i] as string // 当前选项的字符串形式
-                // 对于不同的点击事件绑定不同的click函数
-                if(props.multiple){
-                    //每个选项的div 绑定点击事件，点击时切换v-model值
-                    optionColleaction.item(i)?.addEventListener('mousedown',(e:Event)=>{
-                        // 存在选项 并且 没有禁用项或该项不是禁用项
-                        if(props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[i])){
-                            // 是否已被选中？
-                            if(selectedItems.value.includes(curOptionString)){
-                                // 清楚该项的样式
-                                clearSelectSign(i)
-                                // 移除该选项
-                                handleClick(curOptionString,true)
-                                emit('change',curOptionString)
-                            }else{// 没有被选中过
-                                // 当前选择数小于限制
-                                if(selectedCount.value < props.multipleLimit){
-                                    // 给当前选项div设置selected 
-                                    setSelectSign(i)
-                                    // 添加该选项
-                                    handleClick(curOptionString,true,i)
-                                    emit('change',curOptionString)
-                                }  
-                            }
-                        }
-                        e.preventDefault()//此事件没有被显式处理，它默认的动作也不应该照常执行。-->不失去焦点
-                    })
-                }else{
-                    //每个选项的div 绑定点击事件，点击时切换v-model值
-                    optionColleaction.item(i)?.addEventListener('mousedown',(e:Event)=>{
-                        if(props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[i])){
-                            // 清除所有div上的selected attribute
-                            clearSelectSign()
-                            // 给当前选项div设置selected 
-                            setSelectSign(i)
-                            // 添加该选项
-                            handleClick(curOptionString,false,i)
-                            emit('change',curOptionString)
-                        }  
-                    })
-                }        
-            }
-            // 检查disabledOptions
-            if(props.disabledOptions.length > 0){
-                // 需要给某些项选设置disabled属性
-                props.disabledOptions.forEach((item,index)=>{
-                    if(item)// 设置样式
-                        optionColleaction.item(index)?.setAttribute('disabled','true')     
-                })
-            }
-        }else{
-            // 不存在选项
-            let text = document.createTextNode('No Options!')
-            let div = document.createElement('div')
-            div.setAttribute('class','scene-select-no-options')
-            div.appendChild(text)
-            menu.value?.appendChild(div)
+        // 检查disabledOptions
+        if(props.disabledOptions.length > 0){
+            // 需要给某些项选设置disabled属性
+            props.disabledOptions.forEach((item,index)=>{
+                if(item)// 设置样式
+                    optionColleaction.item(index)?.setAttribute('disabled','true')     
+            })
         }
     })
     
-
     // 触发外层绑定Focus事件
     const handleFocus = (event: MouseEvent) => {
         // isOpen.value = true
@@ -225,7 +212,8 @@ export default defineComponent({
         blur,
         handleFocus,
         handleBlur,
-        handleDelete
+        handleDelete,
+        handleSelect
     }
   }
 })
@@ -320,7 +308,7 @@ export default defineComponent({
 /* 选择器具体的选项 */
 .scene-select-dropdown-menu-option{
     width: 194px;
-    height: 38px;
+    height: 36px;
     padding: 0 10px;
     display: flex;
     justify-content: flex-start;
@@ -360,7 +348,7 @@ export default defineComponent({
 /* 没有选项时的提示 */
 .scene-select-no-options{
     width: calc(100% - 20px);
-    min-height: 100%;
+    height: 180px;
     padding: 0 10px;
     display: flex;
     justify-content: center;

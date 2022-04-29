@@ -14,10 +14,6 @@ export const linkProps = {
         default: true,
     },
     disabled: { type: Boolean, default: false },
-    // icon: {
-    //     type: iconPropType,
-    //     default: '',
-    // },
 }
 
 export const linkEmits = {

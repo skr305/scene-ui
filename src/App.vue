@@ -40,7 +40,6 @@ const options = ref([
   'option3',
   'option4',
   'option5',
-  'option6'
 ])
 const baidu = ref('https://www.baidu.com')
 const emptyStr = ref('')
@@ -175,6 +174,7 @@ const githubObj = {
     <s-textarea v-model="emptyStr1" :width="300" :height="300" :maxLength="30" @change="print(emptyStr1)">
     </s-textarea>
   </div>
+
   <div class="exhibition">
     <s-button size="large" theme="main" :disabled="booleanFalse" type="default" @click="print">
       button
@@ -203,6 +203,7 @@ const githubObj = {
       button
     </s-button>
   </div>
+
   <div class="exhibition">
     <s-link :href="baidu" >default</s-link>
     <s-link :href="baidu" theme="warning">default</s-link>
@@ -249,7 +250,7 @@ const githubObj = {
     </s-checkbox-group>
   </div>
   <div class="exhibition">
-    <s-card ref="card1" id="card" shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
+    <s-card ref="card1" header="title" id="card" shadow="hover" :body-style="{padding:'10px',display:'flex',flexDirection:'column'}" class="square">
       <template #header>
         <div class="card-header">
           <span>Card Name</span>

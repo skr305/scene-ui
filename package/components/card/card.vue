@@ -25,7 +25,6 @@ export default defineComponent({
 
     onMounted(()=>{
       let card: HTMLElement = el.value!;
-
       // 对不同的卡片出现时机设置不同的阴影效果
       if(shadowTime === 'always')
         card.style.boxShadow = "0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08)"
@@ -61,7 +60,7 @@ export default defineComponent({
   box-shadow: var(--scene-box-shadow)
 }
 .scene-card-head{
-  padding: 20px;
+  padding: 10px 20px;
   border-bottom: var(--scene-border-inner-size) solid var(--scene-color-light-gray);
   box-sizing: border-box;
   flex-grow: 0; /** 不占据剩余空间 */

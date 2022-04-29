@@ -47,6 +47,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     handleFocus: (event: MouseEvent) => void;
     handleBlur: (event: MouseEvent) => void;
     handleDelete: (e: Event) => void;
+    handleSelect: (option: string, index: number, e: Event) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     change: (val: string) => boolean;
     blur: (e: FocusEvent) => boolean;

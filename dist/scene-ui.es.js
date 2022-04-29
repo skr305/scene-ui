@@ -698,8 +698,8 @@ const _hoisted_4$7 = /* @__PURE__ */ _withScopeId$2(() => /* @__PURE__ */ create
 const _hoisted_5$6 = { class: "scene-datetime-calendar" };
 const _hoisted_6$4 = { class: "scene-datetime-calendar-header" };
 const _hoisted_7$4 = { style: { "margin-right": "20px" } };
-const _hoisted_8$3 = { style: { "margin-right": "20px" } };
-const _hoisted_9$1 = { class: "scene-datetime-calendar-body" };
+const _hoisted_8$4 = { style: { "margin-right": "20px" } };
+const _hoisted_9$2 = { class: "scene-datetime-calendar-body" };
 const _hoisted_10$1 = { class: "scene-datetime-calendar-body-date" };
 const _hoisted_11 = { class: "scene-datetime-calendar-body-date-table" };
 const _hoisted_12 = /* @__PURE__ */ _withScopeId$2(() => /* @__PURE__ */ createElementVNode("div", { class: "scene-datetime-calendar-body-date-thead" }, [
@@ -781,7 +781,7 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
                 ]),
                 createElementVNode("div", null, [
                   createElementVNode("span", _hoisted_7$4, toDisplayString(_ctx.modelValue.getFullYear()), 1),
-                  createElementVNode("span", _hoisted_8$3, toDisplayString(_ctx.englishMonthName), 1)
+                  createElementVNode("span", _hoisted_8$4, toDisplayString(_ctx.englishMonthName), 1)
                 ]),
                 createElementVNode("div", null, [
                   createVNode(_component_s_icon, {
@@ -795,7 +795,7 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
                   })
                 ])
               ]),
-              createElementVNode("div", _hoisted_9$1, [
+              createElementVNode("div", _hoisted_9$2, [
                 createElementVNode("div", _hoisted_10$1, [
                   createElementVNode("div", _hoisted_11, [
                     _hoisted_12,
@@ -984,7 +984,7 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     ], 4)
   ], 512);
 }
-var sCard = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$g], ["__scopeId", "data-v-f7b3a506"]]);
+var sCard = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$g], ["__scopeId", "data-v-e7c6ef1a"]]);
 function isString(value) {
   return typeof value === "string" ? true : false;
 }
@@ -1452,9 +1452,13 @@ const _sfc_main$j = defineComponent({
     }
     watch(mask, (newMask, oldMask) => {
       if (newMask) {
+        mask.value.style.background = "rgba(0, 0, 0, 0.5)";
         container.value.style.minWidth = props.width + 40 + "px";
         if (props.lockScroll)
           window.addEventListener("wheel", preventDefaultFunc, { passive: false });
+        if (!props.modal) {
+          mask.value.style.background = "transparent";
+        }
       } else {
         if (props.lockScroll)
           window.removeEventListener("wheel", preventDefaultFunc);
@@ -1484,7 +1488,7 @@ const _hoisted_4$6 = { class: "scene-dialog-body" };
 const _hoisted_5$5 = /* @__PURE__ */ createTextVNode("a short message");
 const _hoisted_6$3 = { class: "scene-dialog-footer" };
 const _hoisted_7$3 = { class: "scene-dialog-default-footer" };
-const _hoisted_8$2 = /* @__PURE__ */ createTextVNode("OK");
+const _hoisted_8$3 = /* @__PURE__ */ createTextVNode("OK");
 function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_s_icon = resolveComponent("s-icon");
   const _component_s_button = resolveComponent("s-button");
@@ -1530,7 +1534,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
                     onClick: _cache[1] || (_cache[1] = ($event) => _ctx.closeDialog(true))
                   }, {
                     default: withCtx(() => [
-                      _hoisted_8$2
+                      _hoisted_8$3
                     ]),
                     _: 1
                   })
@@ -1544,7 +1548,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     }, 8, ["onBeforeEnter", "onAfterEnter", "onBeforeLeave", "onAfterLeave"])
   ]);
 }
-var dialog = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$c], ["__scopeId", "data-v-30d7d2a0"]]);
+var dialog = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$c], ["__scopeId", "data-v-3e98731b"]]);
 const inputProps = {
   type: {
     type: String,
@@ -1715,7 +1719,7 @@ const _hoisted_7$2 = {
   key: 1,
   class: "scene-input-main-plugin-eye"
 };
-const _hoisted_8$1 = {
+const _hoisted_8$2 = {
   key: 1,
   class: "scene-input-slot"
 };
@@ -1773,7 +1777,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
         ])) : createCommentVNode("", true)
       ])) : createCommentVNode("", true)
     ]),
-    _ctx.$slots.suffix ? (openBlock(), createElementBlock("div", _hoisted_8$1, [
+    _ctx.$slots.suffix ? (openBlock(), createElementBlock("div", _hoisted_8$2, [
       renderSlot(_ctx.$slots, "suffix", {}, void 0, true)
     ])) : createCommentVNode("", true),
     _ctx.validate !== void 0 ? (openBlock(), createElementBlock("div", {
@@ -1892,7 +1896,6 @@ function createLoadingComponent(options = defaultLoadingProps) {
       } else {
         let parent = document.querySelector(data.target);
         parent.addEventListener("wheel", preventDefaultFunc, { passive: false });
-        console.log(parent, document.body, data.fullScreen, parent === document.body);
         if (document.body === parent && data.fullScreen) {
           data.originalPosition = parent.style.position;
           data.originalOverflow = parent.style.overflow;
@@ -1903,7 +1906,6 @@ function createLoadingComponent(options = defaultLoadingProps) {
           data.loadingMountElement.style.left = `${scrollLeft - parseInt(bodyStyle.marginLeft)}px`;
           data.loadingMountElement.style.width = "100vw";
           data.loadingMountElement.style.height = "100vh";
-          console.warn(data.loadingMountElement.style.top, data.loadingMountElement.style.left);
         }
         parent.style.overflow = "hidden";
         parent.style.position = "relative";
@@ -2522,53 +2524,40 @@ const _sfc_main$c = defineComponent({
       clearSelectSign(selectedItemsIndex.value.pop());
       selectedItems.value.pop();
     };
-    onMounted(() => {
-      var _a, _b, _c;
-      let optionColleaction = menu.value.children;
-      if (optionColleaction.length > 0) {
-        for (let i = 0; i < (optionColleaction == null ? void 0 : optionColleaction.length); i++) {
-          let curOptionString = props.options[i];
-          if (props.multiple) {
-            (_a = optionColleaction.item(i)) == null ? void 0 : _a.addEventListener("mousedown", (e) => {
-              if (props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[i])) {
-                if (selectedItems.value.includes(curOptionString)) {
-                  clearSelectSign(i);
-                  handleClick(curOptionString, true);
-                  emit("change", curOptionString);
-                } else {
-                  if (selectedCount.value < props.multipleLimit) {
-                    setSelectSign(i);
-                    handleClick(curOptionString, true, i);
-                    emit("change", curOptionString);
-                  }
-                }
-              }
-              e.preventDefault();
-            });
+    const handleSelect = (option, index, e) => {
+      let curOptionString = option;
+      if (props.multiple) {
+        if (props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[index])) {
+          if (selectedItems.value.includes(curOptionString)) {
+            clearSelectSign(index);
+            handleClick(curOptionString, true);
+            emit("change", curOptionString);
           } else {
-            (_b = optionColleaction.item(i)) == null ? void 0 : _b.addEventListener("mousedown", (e) => {
-              if (props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[i])) {
-                clearSelectSign();
-                setSelectSign(i);
-                handleClick(curOptionString, false, i);
-                emit("change", curOptionString);
-              }
-            });
+            if (selectedCount.value < props.multipleLimit) {
+              setSelectSign(index);
+              handleClick(curOptionString, true, index);
+              emit("change", curOptionString);
+            }
           }
         }
-        if (props.disabledOptions.length > 0) {
-          props.disabledOptions.forEach((item, index) => {
-            var _a2;
-            if (item)
-              (_a2 = optionColleaction.item(index)) == null ? void 0 : _a2.setAttribute("disabled", "true");
-          });
-        }
+        e.preventDefault();
       } else {
-        let text = document.createTextNode("No Options!");
-        let div = document.createElement("div");
-        div.setAttribute("class", "scene-select-no-options");
-        div.appendChild(text);
-        (_c = menu.value) == null ? void 0 : _c.appendChild(div);
+        if (props.options && (props.disabledOptions.length === 0 || !props.disabledOptions[index])) {
+          clearSelectSign();
+          setSelectSign(index);
+          handleClick(curOptionString, false, index);
+          emit("change", curOptionString);
+        }
+      }
+    };
+    onMounted(() => {
+      let optionColleaction = menu.value.children;
+      if (props.disabledOptions.length > 0) {
+        props.disabledOptions.forEach((item, index) => {
+          var _a;
+          if (item)
+            (_a = optionColleaction.item(index)) == null ? void 0 : _a.setAttribute("disabled", "true");
+        });
       }
     });
     const handleFocus = (event) => {
@@ -2594,11 +2583,12 @@ const _sfc_main$c = defineComponent({
       blur,
       handleFocus,
       handleBlur,
-      handleDelete
+      handleDelete,
+      handleSelect
     };
   }
 });
-const _withScopeId$1 = (n) => (pushScopeId("data-v-140b0ff9"), n = n(), popScopeId(), n);
+const _withScopeId$1 = (n) => (pushScopeId("data-v-4e6cb697"), n = n(), popScopeId(), n);
 const _hoisted_1$b = ["disabled", "multiple", "multiple-limit", "collapseTags"];
 const _hoisted_2$b = ["name", "placeholder"];
 const _hoisted_3$a = {
@@ -2612,6 +2602,11 @@ const _hoisted_4$4 = {
 const _hoisted_5$3 = /* @__PURE__ */ _withScopeId$1(() => /* @__PURE__ */ createElementVNode("div", { class: "scene-select-dropdown-arrow" }, null, -1));
 const _hoisted_6$1 = { class: "scene-select-dropdown-menu" };
 const _hoisted_7$1 = { ref: "menu" };
+const _hoisted_8$1 = {
+  key: 0,
+  class: "scene-select-no-options"
+};
+const _hoisted_9$1 = ["onMousedown"];
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_s_icon = resolveComponent("s-icon");
   const _component_s_scrollbar = resolveComponent("s-scrollbar");
@@ -2667,12 +2662,14 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         default: withCtx(() => [
           createElementVNode("div", _hoisted_7$1, [
+            _ctx.options.length === 0 ? (openBlock(), createElementBlock("div", _hoisted_8$1, " No Options! ")) : createCommentVNode("", true),
             (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.options, (option, index) => {
               return openBlock(), createElementBlock("div", {
                 key: index,
                 class: "scene-select-dropdown-menu-option",
-                tabindex: -1
-              }, toDisplayString(option), 1);
+                tabindex: -1,
+                onMousedown: ($event) => _ctx.handleSelect(option, index, $event)
+              }, toDisplayString(option), 41, _hoisted_9$1);
             }), 128))
           ], 512)
         ]),
@@ -2681,7 +2678,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 8, _hoisted_1$b);
 }
-var select = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$6], ["__scopeId", "data-v-140b0ff9"]]);
+var select = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$6], ["__scopeId", "data-v-4e6cb697"]]);
 const textareaProps = {
   name: {
     type: String
@@ -3408,7 +3405,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         return openBlock(), createElementBlock(Fragment, { key: index }, [
           key !== _ctx.title ? (openBlock(), createElementBlock("div", _hoisted_3$3, [
             createElementVNode("div", _hoisted_4$1, toDisplayString(key), 1),
-            createElementVNode("div", _hoisted_5, toDisplayString(value), 1)
+            createElementVNode("div", _hoisted_5, toDisplayString(Array.isArray(value) ? value.join(" ") : value), 1)
           ])) : createCommentVNode("", true)
         ], 64);
       }), 128))
@@ -3416,7 +3413,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["bodyStyle"]);
 }
-var infoPanel = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$1], ["__scopeId", "data-v-da633672"]]);
+var infoPanel = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$1], ["__scopeId", "data-v-1e30674c"]]);
 var sSession_vue_vue_type_style_index_0_scoped_true_lang = "";
 const _withScopeId = (n) => (pushScopeId("data-v-0ee809c4"), n = n(), popScopeId(), n);
 const _hoisted_1$3 = { className: "__scene-session-inner-wrp" };
@@ -3562,4 +3559,4 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
   }
 }));
 var sSearchPanel = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-27223c6b"]]);
-export { sButton as SButton, sCard as SCard, _sfc_main$5 as SChat, SCheckbox, checkboxButton as SCheckboxButton, checkboxGroup as SCheckboxGroup, datetime as SDatetime, dialog as SDialog, infoPanel as SInfoPanel, sInput as SInput, link as SLink, sLoginReg as SLoginReg, numberInput as SNumberInput, SPaper, sPaymentInput as SPaymentInput, radio as SRadio, SScrollbar, sSearchPanel as SSearchPanel, select as SSelect, SSession, sSessionList as SSessionList, textarea as STextarea, SceneLoading, message as SceneMessage };
+export { sButton as SButton, sCard as SCard, _sfc_main$5 as SChat, SCheckbox, checkboxButton as SCheckboxButton, checkboxGroup as SCheckboxGroup, datetime as SDatetime, dialog as SDialog, sIcon as SIcon, infoPanel as SInfoPanel, sInput as SInput, link as SLink, sLoginReg as SLoginReg, numberInput as SNumberInput, SPaper, sPaymentInput as SPaymentInput, radio as SRadio, SScrollbar, sSearchPanel as SSearchPanel, select as SSelect, SSession, sSessionList as SSessionList, textarea as STextarea, SceneLoading, message as SceneMessage };

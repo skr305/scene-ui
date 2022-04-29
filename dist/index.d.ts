@@ -7,6 +7,7 @@ export { default as SCheckboxGroup } from './package/components/checkbox/checkbo
 export { default as SDialog } from './package/components/dialog/dialog.vue';
 export { default as SInput } from './package/components/input/input.vue';
 export { default as SLink } from './package/components/link/link.vue';
+export { default as SIcon } from './package/components/icon/icon.vue';
 export { SceneLoading } from './package/components/loading/loading';
 export { default as SceneMessage } from './package/components/message';
 export { default as SNumberInput } from './package/components/number-input/number-input.vue';
