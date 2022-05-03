@@ -16,7 +16,6 @@ export declare const infoPanelProps: {
     type: {
         type: StringConstructor;
         default: string;
-        validator(value: string): boolean;
     };
     title: {
         type: StringConstructor;

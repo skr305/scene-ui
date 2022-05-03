@@ -44,7 +44,6 @@ const ThemeColorMap = /* @__PURE__ */ new Map([
 const StandardColorArr = ["main", "info", "success", "warning", "error"];
 const DefaultSize = "default";
 const StandardSizeArr = ["default", "small", "large"];
-const InfoPanelType = ["info", "github"];
 const buttonProps = {
   type: {
     type: String,
@@ -410,7 +409,7 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     })
   ], 36);
 }
-var SScrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$j], ["__scopeId", "data-v-bdcdb116"]]);
+var SScrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$j], ["__scopeId", "data-v-2c4a2249"]]);
 const iconProps = {
   name: {
     type: String
@@ -456,8 +455,7 @@ var sIcon = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$i]]
 const datetimeProps = {
   modelValue: {
     type: Date,
-    required: true,
-    default: new Date()
+    required: true
   },
   name: {
     type: String,
@@ -690,7 +688,7 @@ const _sfc_main$o = defineComponent({
     };
   }
 });
-const _withScopeId$2 = (n) => (pushScopeId("data-v-400c4a28"), n = n(), popScopeId(), n);
+const _withScopeId$2 = (n) => (pushScopeId("data-v-0dd0fbd8"), n = n(), popScopeId(), n);
 const _hoisted_1$n = { class: "scene-datetime" };
 const _hoisted_2$k = { class: "scene-datetime-input" };
 const _hoisted_3$f = { key: 0 };
@@ -923,7 +921,7 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     })
   ]);
 }
-var datetime = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$h], ["__scopeId", "data-v-400c4a28"]]);
+var datetime = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$h], ["__scopeId", "data-v-0dd0fbd8"]]);
 const cardProps = {
   header: {
     type: String
@@ -1548,7 +1546,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     }, 8, ["onBeforeEnter", "onAfterEnter", "onBeforeLeave", "onAfterLeave"])
   ]);
 }
-var dialog = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$c], ["__scopeId", "data-v-3e98731b"]]);
+var dialog = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$c], ["__scopeId", "data-v-6a188d94"]]);
 const inputProps = {
   type: {
     type: String,
@@ -1752,12 +1750,13 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
       ]),
       _ctx.clearable && _ctx.type === "text" || _ctx.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_5$4, [
         _ctx.clearable && _ctx.type === "text" ? (openBlock(), createElementBlock("div", _hoisted_6$2, [
-          createVNode(_component_s_icon, {
+          _ctx.inputValue !== "" ? (openBlock(), createBlock(_component_s_icon, {
+            key: 0,
             name: "x-circle",
             color: "#2c3e50",
             size: 12,
             onClick: _cache[4] || (_cache[4] = ($event) => _ctx.updateValue(null, ""))
-          })
+          })) : createCommentVNode("", true)
         ])) : createCommentVNode("", true),
         _ctx.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_7$2, [
           _ctx.isFocus && _ctx.isEncrypt ? (openBlock(), createBlock(_component_s_icon, {
@@ -1787,7 +1786,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     }, toDisplayString(_ctx.warningInfo), 513)) : createCommentVNode("", true)
   ], 8, _hoisted_1$h);
 }
-var sInput = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$b], ["__scopeId", "data-v-aae1b7b8"]]);
+var sInput = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$b], ["__scopeId", "data-v-82c6ecaa"]]);
 const linkProps = {
   href: { type: String, default: "" },
   theme: {
@@ -2251,7 +2250,7 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     }, 8, ["name", "modelValue", "disabled", "onBlur", "onFocus", "onInput", "onChange"])
   ]);
 }
-var numberInput = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$8], ["__scopeId", "data-v-10dc9026"]]);
+var numberInput = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$8], ["__scopeId", "data-v-611eefbc"]]);
 var sPaymentInput_vue_vue_type_style_index_0_scoped_true_lang = "";
 const _hoisted_1$d = { className: "payment-input-251-w" };
 const _hoisted_2$c = ["disabled", "onKeydown", "id", "onUpdate:modelValue"];
@@ -2414,7 +2413,7 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     createElementVNode("label", null, toDisplayString(_ctx.label), 1)
   ], 2);
 }
-var radio = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$7], ["__scopeId", "data-v-2497dab5"]]);
+var radio = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$7], ["__scopeId", "data-v-97a3f380"]]);
 const selectProps = {
   modelValue: {
     type: [String, Number, Boolean, Array],
@@ -2797,7 +2796,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     _ctx.isFocus ? (openBlock(), createElementBlock("span", _hoisted_3$9, toDisplayString(_ctx.inputValue.length) + "/" + toDisplayString(_ctx.maxLength === void 0 ? "" : _ctx.maxLength), 1)) : createCommentVNode("", true)
   ]);
 }
-var textarea = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$5], ["__scopeId", "data-v-3a59a146"]]);
+var textarea = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$5], ["__scopeId", "data-v-23877dfd"]]);
 var sPaper_vue_vue_type_style_index_0_scoped_true_lang = "";
 const __default__$4 = {
   name: "s-paper"
@@ -3335,10 +3334,7 @@ const infoPanelProps = {
   },
   type: {
     type: String,
-    default: "info",
-    validator(value) {
-      return InfoPanelType.includes(value);
-    }
+    default: "info-square-fill"
   },
   title: {
     type: String
@@ -3391,7 +3387,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode(_component_s_icon, {
             class: "scene-infoPanel-icon",
             size: "24px",
-            name: _ctx.type === "info" ? "info-square-fill" : _ctx.type,
+            name: _ctx.type,
             color: _ctx.themeColor
           }, null, 8, ["name", "color"]),
           createElementVNode("div", {
@@ -3413,7 +3409,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["bodyStyle"]);
 }
-var infoPanel = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$1], ["__scopeId", "data-v-1e30674c"]]);
+var infoPanel = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$1], ["__scopeId", "data-v-e3372904"]]);
 var sSession_vue_vue_type_style_index_0_scoped_true_lang = "";
 const _withScopeId = (n) => (pushScopeId("data-v-0ee809c4"), n = n(), popScopeId(), n);
 const _hoisted_1$3 = { className: "__scene-session-inner-wrp" };

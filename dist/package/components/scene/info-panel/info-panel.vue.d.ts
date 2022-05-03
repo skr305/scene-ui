@@ -16,7 +16,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     type: {
         type: StringConstructor;
         default: string;
-        validator(value: string): boolean;
     };
     title: {
         type: StringConstructor;
@@ -44,7 +43,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     type: {
         type: StringConstructor;
         default: string;
-        validator(value: string): boolean;
     };
     title: {
         type: StringConstructor;

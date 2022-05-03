@@ -3,7 +3,6 @@ export declare const datetimeProps: {
     modelValue: {
         type: DateConstructor;
         required: boolean;
-        default: Date;
     };
     name: {
         type: StringConstructor;

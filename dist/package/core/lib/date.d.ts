@@ -35,7 +35,7 @@ export declare function getYearMonthDateHourMinuteSecond(date: Date): number[];
  */
 export declare function createDate(year: number, month: number, date: number, hour?: number | undefined, minute?: number | undefined, second?: number | undefined): Date;
 /**
- * 根据一个date对象获取 日期显示器一页的天数
+ * 根据一个date对象获取 日期显示器一页的日期
  * @param date
  * @returns 日数组
  */

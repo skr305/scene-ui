@@ -1,7 +1,7 @@
 {
   "name": "scene-ui",
   "private": false,
-  "version": "0.4.25",
+  "version": "0.5.1",
   "description": "a ui library",
   "keywords": ["ui", "front-end", "vue", "ts", "component", "lib", "starter", "vite", "toolkit"],
   "scripts": {
@@ -9,7 +9,6 @@
     "build": "vue-tsc --noEmit && vite build",
     "build:lib": "vite build --config ./build/vite.lib.config.ts",
     "preview": "vite preview",
-    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "b-comp": "vite build --config build/comp.config.ts"
   },

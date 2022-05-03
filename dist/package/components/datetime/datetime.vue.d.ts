@@ -7,7 +7,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: {
         type: DateConstructor;
         required: boolean;
-        default: Date;
     };
     name: {
         type: StringConstructor;
@@ -45,7 +44,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: {
         type: DateConstructor;
         required: boolean;
-        default: Date;
     };
     name: {
         type: StringConstructor;
@@ -67,6 +65,5 @@ declare const _sfc_main: import("vue").DefineComponent<{
     onFocus?: ((e: FocusEvent) => any) | undefined;
 }, {
     theme: string;
-    modelValue: Date;
 }>;
 export default _sfc_main;
