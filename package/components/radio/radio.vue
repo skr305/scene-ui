@@ -55,6 +55,7 @@ export default defineComponent({
 .scene-radio{
   display: inline-flex;
   position: relative;
+  margin: 2px 5px;
 }
 /* size=default */
 .scene-radio-default input[type="radio"]{
@@ -64,7 +65,7 @@ export default defineComponent({
   margin: 0;
   opacity: 0;
   top: 6px;
-  left: -8px;
+  left: -4px;
   z-index: var(--scene-index-heighter);
 }
 .scene-radio-default label:before{
@@ -77,7 +78,7 @@ export default defineComponent({
   border: 1px solid var(--scene-border-color-dark);
   background: white;
   top: 5px;
-  left: -9px;
+  left: -4px;
   cursor: pointer;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
@@ -96,7 +97,7 @@ export default defineComponent({
   margin: 0;
   opacity: 0;
   top: 5px;
-  left: -7px;
+  left: -4px;
   z-index: var(--scene-index-heighter);
 }
 .scene-radio-small label:before{
@@ -109,7 +110,7 @@ export default defineComponent({
   border: 1px solid var(--scene-border-color-dark);
   background: white;
   top: 4px;
-  left: -8px;
+  left: -4px;
   cursor: pointer;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
@@ -128,7 +129,7 @@ export default defineComponent({
   margin: 0;
   opacity: 0;
   top: 7px;
-  left: -8px;
+  left: -4px;
   z-index: var(--scene-index-heighter);
 }
 .scene-radio-large label:before{
@@ -141,7 +142,7 @@ export default defineComponent({
   border: 1px solid var(--scene-border-color-dark);
   background: white;
   top: 6px;
-  left: -9px;
+  left: -4px;
   cursor: pointer;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
@@ -161,7 +162,7 @@ export default defineComponent({
 .scene-radio input[type="radio"]:focus + label:before{
   border-color: var(--scene-theme-color-main);
 }
-/* 选中时圆圈样式 */
+/* 选中时文本样式 */
 .scene-radio input[type="radio"]:checked + label{
   color: var(--scene-theme-color-main);
 }

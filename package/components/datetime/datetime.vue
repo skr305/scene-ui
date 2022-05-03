@@ -1,14 +1,17 @@
 <template>
       <div class="scene-datetime">
+        <!-- 日期选择器的输入框 -->
         <div class="scene-datetime-input">
           <s-icon color="#aa00ff" name="calendar2"></s-icon>
           <input v-model="datetimeTemplate" @focus="calendarControl(true)" id="scene-datetime-input-input" type="text" readonly/>
         </div>
+        <!-- 日期选择器的下拉菜单 -->
         <Transition name="scene-datetime">
           <KeepAlive>
             <div v-if="showCalendar">
               <div class="scene-datetime-arrow"></div>
               <div class="scene-datetime-calendar">
+                <!-- 菜单头部：显示年月日及切换年月的按钮 -->
                 <div class="scene-datetime-calendar-header">
                     <div>
                       <s-icon style="margin-right:5px" name="chevron-double-left" @click="updateDatetime('year',modelValue.getFullYear()-1)"/>
@@ -24,8 +27,10 @@
                       <s-icon style="margin-left:5px" name="chevron-double-right" @click="updateDatetime('year',modelValue.getFullYear()+1)"/>
                     </div>
                 </div>
+                <!-- 菜单主体 -->
                 <div class="scene-datetime-calendar-body">
                   <div class="scene-datetime-calendar-body-date">
+                    <!-- 日期表 -->
                     <div class="scene-datetime-calendar-body-date-table">
                       <div class="scene-datetime-calendar-body-date-thead">
                           <div class="scene-datetime-calendar-body-date-headcell"><strong>Mon</strong></div>
@@ -49,6 +54,7 @@
                       </div>
                     </div>
                   </div>
+                  <!-- 时间表 -->
                   <div class="scene-datetime-calendar-body-time">
                     <strong class="scene-datetime-calendar-body-time-label">Hour</strong>
                     <strong class="scene-datetime-calendar-body-time-label">Minute</strong>
@@ -70,6 +76,7 @@
                     </s-scrollbar>
                   </div>
                 </div>
+                <!-- 菜单尾部，确认按钮等 -->
                 <div class="scene-datetime-calendar-footer">
                   <div>
                     <s-button size="small" type="text" theme="info" @click="updateDatetime('Date',new Date())">now</s-button>
@@ -134,39 +141,39 @@ export default defineComponent({
       for(let i=0;i<24;i++){
         hourDivCollection?.item(i)!.removeAttribute('is-selected')
       }
-      hourDivCollection?.item(props.modelValue.getHours() as number)!.setAttribute('is-selected','true')
-      hourScrollbar.value!.moveTo(props.modelValue.getHours() as number * 33,'Y')     // 调用滚动条内部的方法，自动滚动使得当前时间块到顶部
+      hourDivCollection?.item(props.modelValue!.getHours() as number)!.setAttribute('is-selected','true')
+      hourScrollbar.value!.moveTo(props.modelValue!.getHours() as number * 33,'Y')     // 调用滚动条内部的方法，自动滚动使得当前时间块到顶部
 
       for(let i=0;i<60;i++){
         minuteDivCollection?.item(i)?.removeAttribute('is-selected')
         secondDivCollection?.item(i)!.removeAttribute('is-selected')
       }
-      minuteDivCollection?.item(props.modelValue.getMinutes() as number)?.setAttribute('is-selected','true')
-      minuteScrollbar.value!.moveTo(props.modelValue.getMinutes() as number * 33,'Y') // 调用滚动条内部的方法，自动滚动使得当前时间块到顶部
-      secondDivCollection?.item(props.modelValue.getSeconds() as number)!.setAttribute('is-selected','true')
-      secondScrollbar.value!.moveTo(props.modelValue.getSeconds() as number * 33,'Y') // 调用滚动条内部的方法，自动滚动使得当前时间块到顶部
+      minuteDivCollection?.item(props.modelValue!.getMinutes() as number)?.setAttribute('is-selected','true')
+      minuteScrollbar.value!.moveTo(props.modelValue!.getMinutes() as number * 33,'Y') // 调用滚动条内部的方法，自动滚动使得当前时间块到顶部
+      secondDivCollection?.item(props.modelValue!.getSeconds() as number)!.setAttribute('is-selected','true')
+      secondScrollbar.value!.moveTo(props.modelValue!.getSeconds() as number * 33,'Y') // 调用滚动条内部的方法，自动滚动使得当前时间块到顶部
     }
 
     // 显示在input中的日期
-    let datetimeTemplate = computed(()=>`${props.modelValue.getFullYear()}-${props.modelValue.getMonth()+1}-${props.modelValue.getDate()} ${props.modelValue.getHours()}:${props.modelValue.getMinutes()}:${props.modelValue.getSeconds()}`)
+    let datetimeTemplate = computed(()=>`${props.modelValue!.getFullYear()}-${props.modelValue!.getMonth()+1}-${props.modelValue!.getDate()} ${props.modelValue!.getHours()}:${props.modelValue!.getMinutes()}:${props.modelValue!.getSeconds()}`)
     // 当前显示的英文月份
     const englishMonthName = computed(()=>{
-      return englishMonths.get((props.modelValue.getMonth()+1).toString())
+      return englishMonths.get((props.modelValue!.getMonth()+1).toString())
     })
     // 当前显示的日历中的日期
-    let screenArray = computed(()=>turnTo2dArray<DateObject>(getFullScreen(props.modelValue),6,7))
+    let screenArray = computed(()=>turnTo2dArray<DateObject>(getFullScreen(props.modelValue!),6,7))
 
     /**
      * 修改v-model 绑定的日期时间(有7种修改模式),
      * 这里不能用 Date()自带的set函数，否则监听不到响应式的变化
      */
     function updateDatetime(model: modelType, value: number | Date){
-      let oldDate = new Date(props.modelValue) // 未修改的日期时间
-      let [year,month,date,hour,minute,second] = getYearMonthDateHourMinuteSecond(props.modelValue)
+      let oldDate = new Date(props.modelValue!) // 未修改的日期时间
+      let [year,month,date,hour,minute,second] = getYearMonthDateHourMinuteSecond(props.modelValue!)
       switch(model){
         case 'year':
           emit('update:modelValue',createDate(value as number,month,date,hour,minute,second))
-          emit('change',props.modelValue,oldDate)
+          emit('change',props.modelValue!,oldDate)
           break
         case 'month':
           if(value === 0)
@@ -181,27 +188,27 @@ export default defineComponent({
             else
               emit('update:modelValue',createDate(year,value as number,date,hour,minute,second))
           }
-          emit('change',props.modelValue,oldDate)
+          emit('change',props.modelValue!,oldDate)
           break
         case 'date':
           emit('update:modelValue',createDate(year,month,value as number,hour,minute,second))
-          emit('change',props.modelValue,oldDate)
+          emit('change',props.modelValue!,oldDate)
           break
         case 'hour':
           emit('update:modelValue',createDate(year,month,date,value as number,minute,second))
-          emit('change',props.modelValue,oldDate)
+          emit('change',props.modelValue!,oldDate)
           break
         case 'minute':
           emit('update:modelValue',createDate(year,month,date,hour,value as number,second))
-          emit('change',props.modelValue,oldDate)
+          emit('change',props.modelValue!,oldDate)
           break
         case 'second':
           emit('update:modelValue',createDate(year,month,date,hour,minute,value as number))
-          emit('change',props.modelValue,oldDate)
+          emit('change',props.modelValue!,oldDate)
           break
         case 'Date': 
           emit('update:modelValue', value as Date)
-          emit('change',props.modelValue,oldDate)
+          emit('change',props.modelValue!,oldDate)
           break
       }
       nextTick(()=>{

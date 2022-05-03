@@ -28,10 +28,7 @@ export const infoPanelProps = {
     },
     type: {
         type: String,
-        default: 'info',
-        validator(value: string){
-            return ComponentConstants.InfoPanelType.includes(value)
-        },
+        default: 'info-square-fill',
     },
     title:{// panel的标题
         type: String,

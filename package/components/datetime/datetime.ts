@@ -5,7 +5,6 @@ export const datetimeProps = {
     modelValue:{
         type: Date,
         required: true,
-        default: new Date()
     },
     name:{//随表单一起提交的原生的name属性
         type: String,

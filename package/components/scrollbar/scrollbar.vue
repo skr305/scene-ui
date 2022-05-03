@@ -212,7 +212,7 @@ export default defineComponent({
     }
 
     /**
-     * 控制 滚动包裹的元素自动移动 distance px的距离，实现滚动条的移动
+     * 控制滚动包裹的元素自动移动 distance px的距离，实现滚动条的移动
      */
     function moveTo(distance: number,direction: 'Y'|'X'){
         const wrapEl = wrap.value!;

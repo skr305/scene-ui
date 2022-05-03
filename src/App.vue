@@ -210,13 +210,13 @@ const githubObj = {
   </div>
 
   <div class="exhibition">
-    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5" @change="print"/>
+    <s-number-input v-model='num1' name='count' :max="10" :min="-2" :step="0.5" @input="print" @change="print"/>
   </div>
 
   <!--<div class="exhibition">
     <paymentInputVue v-model="data.pwd"/>
   </div>-->
-  <div class="exhibition">
+  <div class="exhibition1">
     <s-radio v-model="str" name="contact" label="phone" :disabled="false" size="small" @change="print" ></s-radio>
     <s-radio v-model="str" name="contact" label="name" :disabled="false" size="default" @change="print"></s-radio>
     <s-radio v-model="str" name="contact" label="email" :disabled="false" size="large" @change="print"></s-radio>

@@ -115,7 +115,7 @@ export function createDate(year: number, month: number, date: number, hour?: num
 
 
 /**
- * 根据一个date对象获取 日期显示器一页的天数
+ * 根据一个date对象获取 日期显示器一页的日期
  * @param date 
  * @returns 日数组
  */

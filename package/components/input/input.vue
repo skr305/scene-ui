@@ -20,7 +20,7 @@
                 @blur="handleBlur"/>
             <div class="scene-input-main-plugin" v-if="(clearable && type==='text') || type==='password'">
                 <div class="scene-input-main-plugin-clear" v-if="clearable && type==='text'">
-                  <s-icon name="x-circle" color="#2c3e50" :size="12" @click="updateValue(null,'')" />  
+                  <s-icon v-if="inputValue!==''" name="x-circle" color="#2c3e50" :size="12" @click="updateValue(null,'')" />  
                 </div>
                 <div class="scene-input-main-plugin-eye"  v-if="type==='password'">
                   <s-icon name="eye" color="#2c3e50" :size="12" v-if="isFocus && isEncrypt" @mousedown="showPassword($event,true)"/>  
@@ -255,6 +255,18 @@ input::-ms-reveal{display:none;}
     padding: 9px 4px;
     width: 12px;
     height: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 删除按钮 */
+.scene-input-main-plugin-clear{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 密码框的可视按钮 */
+.scene-input-main-plugin-eye{
     display: flex;
     justify-content: center;
     align-items: center;

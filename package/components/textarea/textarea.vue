@@ -38,7 +38,7 @@ export default defineComponent({
      */
     function updateValue(event:InputEvent, newVal?: string){
         let oldVal = props.modelValue!
-        let target;
+        let target: string;
         if(newVal === undefined){// 用户直接输入
             target = (event.target as HTMLInputElement).value;
             emit('input',target)

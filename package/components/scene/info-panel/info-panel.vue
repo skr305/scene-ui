@@ -12,7 +12,7 @@
         <div class="scene-infoPanel-header">
             <div class="scene-infoPenal-header-left">
                 <s-icon class="scene-infoPanel-icon" 
-                    size="24px" :name="type==='info'?'info-square-fill':type"
+                    size="24px" :name="type"
                     :color="themeColor"
                 ></s-icon>
                 <div class="scene-infoPanel-title" :style="{color:themeColor}">{{info.hasOwnProperty(title)?info[title]:'Title'}}</div>

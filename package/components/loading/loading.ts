@@ -5,9 +5,6 @@ import {
     Transition,
     vShow,
     withDirectives,
-    App,
-    isProxy,
-    VNodeChild,
     VNode,
   } from 'vue'
 import { loadingProps, loadingData } from "./type";
@@ -49,8 +46,8 @@ function createLoadingComponent(options: loadingProps = defaultLoadingProps){
         loadingVM: null,            // loading 组件的vm实例
         loadingMountElement: null,  // loading 组件vm实例挂载的div，是target的child
         visible: false,             // loading 组件的可见性
-        originalPosition: '',
-        originalOverflow: ''
+        originalPosition: '',       // target原始的css position值
+        originalOverflow: ''        // target原始的css overflow值
     })
 
     
@@ -92,7 +89,6 @@ function createLoadingComponent(options: loadingProps = defaultLoadingProps){
                 // console.log(parent,document.body, data.fullScreen, parent === document.body);
                 // 如果是全屏loading
                 if(document.body === parent && data.fullScreen){
-                    
                     // 保存target的position值与overflow值
                     data.originalPosition = parent.style.position
                     data.originalOverflow = parent.style.overflow

@@ -22,13 +22,11 @@ export const scrollbarProps = {
             return ComponentConstants.StandardColorArr.includes(value)
         },
     },
-
     alwaysNeedY: {
         type: Boolean,
         default: false,
         required: false
     },
-
     alwaysNeedX: {
         type: Boolean,
         default: false,
