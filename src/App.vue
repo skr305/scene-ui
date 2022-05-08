@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, watch, ref } from 'vue';
-import paymentInputVue from '../package/components/payment/s-payment-input.vue';
+import paymentInputVue from '../package/components/scene/payment/s-payment-input.vue';
 import sInput from '../package/components/input/input.vue'
 import sTextarea from '../package/components/textarea/textarea.vue'
 import sButton from '../package/components/button/button.vue';

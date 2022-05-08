@@ -1,8 +1,10 @@
 # Scene-UI:A simple ui-component-lib with simple style
 
+🎉🎉 Congratulations on the official **v1.0** release
+
 The scene-ui component library is an **open source component library** maintained by the students of the School of Software of ShanDong University.
 
-**Now a total of 15 basic components, 3 scene components, and 2 ui-method components can be used.**
+**Now a total of 15 basic components, 6 scene components, and 2 ui-method components can be used.**
 
 Main technology stack:  Vue3+TypeScript
 
@@ -10,7 +12,7 @@ Features:
 
 * out-of-the-box,
 * scene components
-*  low-code development platform（not available）
+* low-code development platform（not available）
 
 Our website: https://sunburst7.github.io/scene-ui/
 

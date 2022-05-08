@@ -1,4 +1,4 @@
-import { ComponentConstants } from '../../core/constants';
+import { ComponentConstants } from '../../../core/constants';
 export interface PaymentInputProps {
     theme?: ComponentConstants.StandardColor;
     disabled?: boolean;

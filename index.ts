@@ -12,7 +12,7 @@ export { default as SIcon} from './package/components/icon/icon.vue';
 export { SceneLoading } from './package/components/loading/loading';
 export { default as SceneMessage } from './package/components/message';
 export { default as SNumberInput } from './package/components/number-input/number-input.vue';
-export { default as SPaymentInput } from './package/components/payment/s-payment-input.vue';
+export { default as SPaymentInput } from './package/components/scene/payment/s-payment-input.vue';
 export { default as SRadio } from './package/components/radio/radio.vue';
 export { default as SScrollbar } from './package/components/scrollbar/scrollbar.vue';
 export { default as SSelect } from './package/components/select/select.vue';
